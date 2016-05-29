@@ -1,0 +1,2 @@
+crypt:
+	g++ crypt.cpp

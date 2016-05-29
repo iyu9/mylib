@@ -1,0 +1,2 @@
+map:
+	g++ map.cpp

@@ -1,0 +1,2 @@
+sandbox:
+	g++ sandbox.cpp

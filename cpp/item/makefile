@@ -1,0 +1,2 @@
+item:
+	g++ item.cpp

@@ -1,0 +1,2 @@
+adv:
+	g++ adv.cpp

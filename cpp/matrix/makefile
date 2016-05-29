@@ -1,0 +1,2 @@
+matrix:
+	g++ matrix.cpp

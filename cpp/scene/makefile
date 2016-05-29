@@ -1,0 +1,2 @@
+scene:
+	g++ scene.cpp

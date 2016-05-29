@@ -1,0 +1,2 @@
+quaternio:
+	g++ quaternion.cpp

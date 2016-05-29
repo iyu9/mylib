@@ -1,0 +1,2 @@
+rand:
+	g++ random.cpp

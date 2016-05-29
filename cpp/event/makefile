@@ -1,0 +1,2 @@
+event:
+	g++ event.cpp
