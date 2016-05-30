@@ -39,7 +39,7 @@ int main() {
     printf("%d, %s\n", n, buf);
 
     //送信してみる
-    send(sock, toSendText, strlen(toSendText)+1, 0);
+    //send(sock, toSendText, strlen(toSendText)+1, 0);
 
     close(sock);
 

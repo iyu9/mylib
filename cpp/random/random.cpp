@@ -1,6 +1,5 @@
 #include "random.h"
 
-//constructors
 ran::ran() {
 	srand((unsigned)time(NULL));
 }
@@ -9,7 +8,6 @@ ran::~ran() {
 			
 }
 
-//functions
 int ran::value() {
 	return rand();
 }
@@ -22,10 +20,13 @@ float ran::per() {
 	return ((float)rand() / (float)RAND_MAX);
 }
 
+/**/
 int main() {
 	ran* r;
 	std::cout << r->max() << std::endl;
 	std::cout << r->value() << std::endl;
-	std::cout << r->per() << std::endl;
+	for(int i=0; i < 100; i++) {
+		std::cout << r->per() << std::endl;
+	}
 	return 0;
 }
