@@ -1,0 +1,2 @@
+physics:
+	g++ physics.cpp
