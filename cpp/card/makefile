@@ -1,0 +1,2 @@
+card:
+	g++ card.cpp
