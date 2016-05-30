@@ -16,6 +16,8 @@ int main() {
     char buf[32];
     int n;
 
+    char *toSendText = "This is a test";
+
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock < 0) {
         perror("socket");
@@ -35,6 +37,9 @@ int main() {
     n = read(sock, buf, sizeof(buf));
 
     printf("%d, %s\n", n, buf);
+
+    //送信してみる
+    send(sock, toSendText, strlen(toSendText)+1, 0);
 
     close(sock);
 
