@@ -1,5 +1,7 @@
 #include "../common/common.h"
+
 #include "../chrono/chrono.cpp"
+#include "../vector/vector3.cpp"
 
 class Graphics {
 	private:
