@@ -13,6 +13,8 @@ float pos_x = 0;
 float pos_y = 0;
 float pos_z = 0;
 
+float time_d = 0;
+
 Vector3* pos;
 chrono* chr;
 
@@ -110,28 +112,34 @@ void idle() {
 }
 
 void display() {
-	r = 100 * chr->get_delta();
+	//common delta
+	float delta = chr->get_delta();
+	time_d += delta;
 
-	if(r > 360) {
-		r = 0;
+	if(time_d < (1.0 / 60.0)) {
+		return;
+	}else {
+		time_d = 0;
 	}
 
-  pos->x += chr->get_delta();
-
-  if(pos->x > 10) {
-    pos->x = -10;
-  }
+	pos->x += 4 * delta;
+ 
+	if(pos->x > 4) {
+		pos->x = -4;
+	}
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glRotatef(r, 0, 1, 0);
+	//glRotatef(r, 0, 1, 0);
 	//LINE_LOOP, QUADS, POLYGON etc
 	DrawCube(1.0, pos->x, pos->y, pos->z);	
 	DrawLine(0, 0, 0, 0);
+/*
 	std::ostringstream stream;
 	stream << r;
 	std::string res = stream.str();
 	DrawString(-0.8, 0.8, res);
+*/
 	glutSwapBuffers();
 };
 
