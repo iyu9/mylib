@@ -53,7 +53,7 @@ GLdouble color[][3] = {
 void DrawLine(float x1, float y1, float x2, float y2);
 void DrawString(float x, float y, std::string const& str);
 void DrawRect(float x, float y, float width, float height);
-void DrawCube(float size, float x, float y, float z);
+void DrawCube(float size_x, float size_y, float size_z, float x, float y, float z);
 
 //constructors
 Graphics::Graphics(){		
@@ -132,7 +132,7 @@ void display() {
 
 	//glRotatef(r, 0, 1, 0);
 	//LINE_LOOP, QUADS, POLYGON etc
-	DrawCube(1.0, pos->x, pos->y, pos->z);	
+	DrawCube(1.0, 0.25, 0.25, pos->x, pos->y, pos->z);	
 	DrawLine(0, 0, 0, 0);
 /*
 	std::ostringstream stream;
@@ -189,7 +189,7 @@ void DrawString(float x, float y, std::string const& str) {
 	}
 }
 
-void DrawCube(float size, float x, float y, float z) {
+void DrawCube(float scale_x, float scale_y, float scale_z, float x, float y, float z) {
 	int face[][4] = {
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
@@ -211,14 +211,14 @@ GLdouble vertex[][3] = {
 };
 */
   //re-valueset
-  vertex[0][0] = -size + x; vertex[0][1] = -size + y;  vertex[0][2] = -size + z;
-  vertex[1][0] = size + x;  vertex[1][1] = -size + y;  vertex[1][2] = -size + z;
-  vertex[2][0] = size + x;  vertex[2][1] = size + y;   vertex[2][2] = -size + z;
-  vertex[3][0] = -size + x; vertex[3][1] = size + y;   vertex[3][2] = -size + z;
-  vertex[4][0] = -size + x; vertex[4][1] = -size + y;  vertex[4][2] =  size + z;
-  vertex[5][0] = size + x;  vertex[5][1] = -size + y;  vertex[5][2] =  size + z;
-  vertex[6][0] = size + x;  vertex[6][1] = size + y;   vertex[6][2] =  size + z;
-  vertex[7][0] = -size + x; vertex[7][1] = size + y;   vertex[7][2] =  size + z;
+  vertex[0][0] = -scale_x + x; vertex[0][1] = -scale_y + y;  vertex[0][2] = -scale_z + z;
+  vertex[1][0] = scale_x + x;  vertex[1][1] = -scale_y + y;  vertex[1][2] = -scale_z + z;
+  vertex[2][0] = scale_x + x;  vertex[2][1] = scale_y + y;   vertex[2][2] = -scale_z + z;
+  vertex[3][0] = -scale_x + x; vertex[3][1] = scale_y + y;   vertex[3][2] = -scale_z + z;
+  vertex[4][0] = -scale_x + x; vertex[4][1] = -scale_y + y;  vertex[4][2] =  scale_z + z;
+  vertex[5][0] = scale_x + x;  vertex[5][1] = -scale_y + y;  vertex[5][2] =  scale_z + z;
+  vertex[6][0] = scale_x + x;  vertex[6][1] = scale_y + y;   vertex[6][2] =  scale_z + z;
+  vertex[7][0] = -scale_x + x; vertex[7][1] = scale_y + y;   vertex[7][2] =  scale_z + z;
 
   //render
 	glBegin(GL_QUADS);
