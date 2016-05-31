@@ -9,14 +9,11 @@
 
 //global declaration
 float r = 0;
-float pos_x = 0;
-float pos_y = 0;
-float pos_z = 0;
-
 float time_d = 0;
 
 Vector3* pos;
 chrono* chr;
+Vector3* scale;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -53,13 +50,16 @@ GLdouble color[][3] = {
 void DrawLine(float x1, float y1, float x2, float y2);
 void DrawString(float x, float y, std::string const& str);
 void DrawRect(float x, float y, float width, float height);
-void DrawCube(float size_x, float size_y, float size_z, float x, float y, float z);
+
+//3d
+void DrawCube(Vector3 scale, Vector3 pos);
 
 //constructors
 Graphics::Graphics(){		
 	r = 0;
   chr = new chrono();
   pos = new Vector3();
+  scale = new Vector3(0.5, 1, 0.5);
 }
 
 Graphics::~Graphics(){
@@ -132,7 +132,7 @@ void display() {
 
 	//glRotatef(r, 0, 1, 0);
 	//LINE_LOOP, QUADS, POLYGON etc
-	DrawCube(1.0, 0.25, 0.25, pos->x, pos->y, pos->z);	
+	DrawCube(*scale, *pos);	
 	DrawLine(0, 0, 0, 0);
 /*
 	std::ostringstream stream;
@@ -189,7 +189,7 @@ void DrawString(float x, float y, std::string const& str) {
 	}
 }
 
-void DrawCube(float scale_x, float scale_y, float scale_z, float x, float y, float z) {
+void DrawCube(Vector3 scale, Vector3 pos) {
 	int face[][4] = {
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
@@ -198,8 +198,9 @@ void DrawCube(float scale_x, float scale_y, float scale_z, float x, float y, flo
 		{4, 5, 1, 0},
 		{3, 2, 6, 7}
 	};
-/*
-GLdouble vertex[][3] = {
+
+	/*
+	GLdouble vertex[][3] = {
 	{0, 0, 0},
 	{1, 0, 0},
 	{1, 1, 0},
@@ -208,19 +209,20 @@ GLdouble vertex[][3] = {
 	{1, 0, 1},
 	{1, 1, 1},
 	{0, 1, 1}
-};
-*/
-  //re-valueset
-  vertex[0][0] = -scale_x + x; vertex[0][1] = -scale_y + y;  vertex[0][2] = -scale_z + z;
-  vertex[1][0] = scale_x + x;  vertex[1][1] = -scale_y + y;  vertex[1][2] = -scale_z + z;
-  vertex[2][0] = scale_x + x;  vertex[2][1] = scale_y + y;   vertex[2][2] = -scale_z + z;
-  vertex[3][0] = -scale_x + x; vertex[3][1] = scale_y + y;   vertex[3][2] = -scale_z + z;
-  vertex[4][0] = -scale_x + x; vertex[4][1] = -scale_y + y;  vertex[4][2] =  scale_z + z;
-  vertex[5][0] = scale_x + x;  vertex[5][1] = -scale_y + y;  vertex[5][2] =  scale_z + z;
-  vertex[6][0] = scale_x + x;  vertex[6][1] = scale_y + y;   vertex[6][2] =  scale_z + z;
-  vertex[7][0] = -scale_x + x; vertex[7][1] = scale_y + y;   vertex[7][2] =  scale_z + z;
+	};
+	*/
+	
+	//re-valueset
+	vertex[0][0] = -scale.x + pos.x; vertex[0][1] = -scale.y + pos.y; vertex[0][2] = -scale.z + pos.z;
+	vertex[1][0] =  scale.x + pos.x; vertex[1][1] = -scale.y + pos.y; vertex[1][2] = -scale.z + pos.z;
+	vertex[2][0] =  scale.x + pos.x; vertex[2][1] =  scale.y + pos.y; vertex[2][2] = -scale.z + pos.z;
+	vertex[3][0] = -scale.x + pos.x; vertex[3][1] =  scale.y + pos.y; vertex[3][2] = -scale.z + pos.z;
+	vertex[4][0] = -scale.x + pos.x; vertex[4][1] = -scale.y + pos.y; vertex[4][2] =  scale.z + pos.z;
+	vertex[5][0] =  scale.x + pos.x; vertex[5][1] = -scale.y + pos.y; vertex[5][2] =  scale.z + pos.z;
+	vertex[6][0] =  scale.x + pos.x; vertex[6][1] =  scale.y + pos.y; vertex[6][2] =  scale.z + pos.z;
+	vertex[7][0] = -scale.x + pos.x; vertex[7][1] =  scale.y + pos.y; vertex[7][2] =  scale.z + pos.z;
 
-  //render
+    //render
 	glBegin(GL_QUADS);
 	for (int j = 0; j < 6; ++j) {
 		glColor3dv(color[j]);
