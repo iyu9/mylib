@@ -40,7 +40,7 @@ Vector2* Vector2::operator/(float f) {
 	return v;
 }
 
-/*unit-test begin*/
+/*
 #include <iostream>
 int main () {
 	
@@ -51,4 +51,4 @@ int main () {
 	delete(b);
 	return 0;		
 }
-/*unit-test end*/
+*/

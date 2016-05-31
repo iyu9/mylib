@@ -46,8 +46,7 @@ Vector3* Vector3::operator /(float f) {
 	return v;
 }
 
-/*unit-test*/
-#include <iostream>
+/*
 int main() {
 	
 	Vector3* a = new Vector3(12, 3, 4);
@@ -57,4 +56,4 @@ int main() {
 	delete(b);
 	return 0;		
 }
-/**/
+*/
