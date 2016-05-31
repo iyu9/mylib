@@ -20,7 +20,7 @@ float ran::per() {
 	return ((float)rand() / (float)RAND_MAX);
 }
 
-/**/
+/*
 int main() {
 	ran* r;
 	std::cout << r->max() << std::endl;
@@ -30,3 +30,4 @@ int main() {
 	}
 	return 0;
 }
+*/

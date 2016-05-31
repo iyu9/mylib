@@ -65,6 +65,17 @@ Graphics::Graphics(){
 Graphics::~Graphics(){
 }
 
+void switch_camera() {		
+	glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
+	gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+	/*
+	glViewport(0, 0, 300, 300);
+	glLoadIdentity();
+	gluPerspective(0.0, (double)300 / (double)300, 1.0, 100.0);
+	gluLookAt(0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+	*/
+}
+
 void keyboard(unsigned char key, int x, int y)
 {
   switch (key) {
@@ -87,6 +98,10 @@ void keyboard(unsigned char key, int x, int y)
   case 'd':
 	  glTranslatef(0.1, 0, 0);
 	  pos->x++;
+	  break;
+
+  case 'c':
+  	  switch_camera();
 	  break;
 
   case 'q':
@@ -134,12 +149,12 @@ void display() {
 	//LINE_LOOP, QUADS, POLYGON etc
 	DrawCube(*scale, *pos);	
 	DrawLine(0, 0, 0, 0);
-/*
+
 	std::ostringstream stream;
 	stream << r;
 	std::string res = stream.str();
 	DrawString(-0.8, 0.8, res);
-*/
+
 	glutSwapBuffers();
 };
 

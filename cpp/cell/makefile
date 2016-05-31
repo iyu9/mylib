@@ -1,0 +1,2 @@
+cell:
+	g++ cell.cpp
