@@ -1,0 +1,2 @@
+chrono:
+	g++ chrono.cpp

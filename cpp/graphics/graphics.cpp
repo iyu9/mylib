@@ -1,13 +1,9 @@
 #include "graphics.h"
-#include <iostream>
-#include <string>
-#include <sstream>
+#include <sstream>  //for transf wchar
 #include <stdlib.h>	//for key input
 
-//with g_api opengl
 #include <GL/glut.h>
 
-//with g_api directx
 //#include <d3d9.h>
 //#include <d3dx9.h>
 
@@ -16,6 +12,8 @@ float r = 0;
 float pos_x = 0;
 float pos_y = 0;
 float pos_z = 0;
+
+chrono* chr;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -63,32 +61,30 @@ Graphics::~Graphics(){
 	r = 0;	
 }
 
-void Graphics::Render() {
-	//
-}
-
 void keyboard(unsigned char key, int x, int y)
 {
   switch (key) {
 
   case 'w':
-	pos_y++;
-	glTranslatef(0, 0.1, 0);
-	break;
+	  pos_y++;
+	  glTranslatef(0, 0.1, 0);
+	  break;
 
   case 's':
-	pos_y--;
-	glTranslatef(0, -0.1, 0);
-	break;
+	  pos_y--;
+	  glTranslatef(0, -0.1, 0);
+	  break;
 
   case 'a':
-	pos_x--;
-	glTranslatef(-0.1, 0, 0);
-	break;
+	  pos_x--;
+	  glTranslatef(-0.1, 0, 0);
+	  break;
+
   case 'd':
-	glTranslatef(0.1, 0, 0);
-	pos_x++;
-	break;
+	  glTranslatef(0.1, 0, 0);
+	  pos_x++;
+	  break;
+
   case 'q':
   case 'Q':
   case '\033':  /* '\033' は ESC の ASCII コード */
@@ -104,16 +100,15 @@ void resize(int w, int h) {
 	glLoadIdentity();
 	//glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 	gluPerspective(30.0, (double)w / (double)h, 1.0, 100.0);
-	//glTranslated(0.0, 0.0, -5.0);
 	gluLookAt(3.0, 4.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
-void idle(){
+void idle() {
 	glutPostRedisplay();
 }
 
 void display() {
-	r += 0.0001;
+	r += chr->get_delta();
 
 	if(r > 360) {
 		r = 0;
@@ -123,7 +118,7 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//LINE_LOOP, QUADS, POLYGON etc
 	DrawCube();	
-	//DrawLine(0,0,0,0);
+	DrawLine(0, 0, 0, 0);
 	std::ostringstream stream;
 	stream << r;
 	std::string res = stream.str();
@@ -131,21 +126,22 @@ void display() {
 	glutSwapBuffers();
 };
 
-//main methods
-void Graphics::Init() {
+//initialize once
+void Graphics::init() {
+  chr = new chrono();
+
 	state = 0;	
 	int argc = 1;
 
-	//graphics API
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(1000,680);
+	glutInitWindowSize(300,300);
 	glutInit(&argc, NULL);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
 	glutCreateWindow(NULL);
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
 	glutReshapeFunc(resize);
-	glClearColor(0, 0, 0 ,1);
+	glClearColor(0, 0, 0, 1);
 	glEnable(GL_DEPTH_TEST);
 	glutKeyboardFunc(keyboard);
 	glutMainLoop();
@@ -153,20 +149,18 @@ void Graphics::Init() {
 
 //helper draw methods
 void DrawLine(float x1, float y1, float x2, float y2) {
-	//draw graphics api
 	glBegin(GL_LINE_LOOP);
-	glVertex2d(-0.9,-0.9);	
-	glVertex2d(0.9,-0.9);
+	glVertex2d(x1, y1);	
+	glVertex2d(x2, y2);
 	glEnd();
 }
 
 void DrawRect(float x, float y, float width, float height) {
-	//draw graphics api
 	glBegin(GL_QUADS);
-	glVertex2d(-0.9,-0.9);	
-	glVertex2d(0.9,-0.9);
-	glVertex2d(0.9,0.9);
-	glVertex2d(-0.9,0.9);
+	glVertex2d(x,y);	
+	glVertex2d(x + width, y);
+	glVertex2d(x + width, y + height);
+	glVertex2d(x, y + height);
 	glEnd();
 }
 
@@ -199,11 +193,11 @@ void DrawCube() {
 	glEnd();
 }
 
-/*unit-test*/
+/**/
 int main() {
 	Graphics* gp = new Graphics();
-	gp->Init();
-	//delete(gp);	
+	gp->init();
+	
 	return 0;
 }
 /**/

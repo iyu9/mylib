@@ -1,17 +1,13 @@
-/*
- *	Graphics Manager Class
- *	@tomii
- */
+#include "../common/common.h"
+#include "../chrono/chrono.cpp"
+
 class Graphics {
 	private:
 		int state;
 
 	public:
-		//constructors
 		Graphics();
 		~Graphics();
 
-		//functions
-		void Init();
-		void Render();
+		void init();
 };
