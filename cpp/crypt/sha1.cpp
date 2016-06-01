@@ -268,7 +268,7 @@ std::string sha1(const std::string &string)
     checksum.update(string);
     return checksum.final();
 }
-
+/*
 #include <iostream>
 using namespace std;
  
@@ -277,3 +277,4 @@ int main(int argc, char *argv[])
     cout << "sha1('grape'):" << sha1("grape") << endl;
     return 0;
 }
+*/

@@ -5,8 +5,11 @@ crypt::crypt() {
 		
 }
 
-crypt::crypt(int type_, int hash_) {
-		
+crypt::crypt(int type, std::string value) {
+  //SHA-1
+	if(type == TYPE_SHA1) {
+    this->value = sha1(value); 
+  }	
 }
 
 crypt::~crypt() {
@@ -25,7 +28,9 @@ bool crypt::decode(std::string filename_) {
 /**/
 int main() {
 
-	crypt* crpt = new crypt();
+	crypt* crpt = new crypt(0, "test");
+  print("test: ");
+  print(crpt->value);
 
 	return 0;		
 }
