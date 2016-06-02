@@ -7,8 +7,13 @@ crypt::crypt() {
 
 crypt::crypt(int type, std::string value) {
   //SHA-1
-	if(type == TYPE_SHA1) {
+  if(type == TYPE_SHA1) {
     this->value = sha1(value); 
+  }
+
+  //AES
+  if(type == TYPE_AES) {
+    this->value = -1;
   }	
 }
 
