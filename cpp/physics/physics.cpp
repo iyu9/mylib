@@ -9,8 +9,15 @@ physics::~physics() {
 }
 
 Vector3 physics::update() {
+
+  //update time
+  t += 0.000001;
+
+  //update position
   pos.x += v.x * t;
-  pos.y += (v.y * t) - (0.5 * g * t * t);
+  if(pos.y > -100) {
+    pos.y += (v.y * t) - (0.5 * g * t * t);
+  }
   pos.z += v.y * t;
 
   return pos;
@@ -39,7 +46,8 @@ int main() {
   delete(p);
 
   while(1) {
-    p->update();
+    Vector3 pos = p->update();
+    std::cout << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
   }
 
   return 0;
