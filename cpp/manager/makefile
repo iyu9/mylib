@@ -1,2 +1,2 @@
-object_manager:
-	g++ object_manager.cpp
+obj_manager:
+	g++ obj_manager.cpp
