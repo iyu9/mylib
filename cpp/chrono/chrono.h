@@ -2,12 +2,13 @@
 
 class chrono {
 private:
-  float prev_time;
+  double prev_time;
+  clock_t prev_clock;
 
 public:
   chrono();
   ~chrono();
 
-  float get_sec();
-  float get_delta();
+  double get_sec();
+  double get_delta();
 };
