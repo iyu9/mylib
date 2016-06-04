@@ -13,6 +13,7 @@ float timer = 0;
 
 chrono* chr;
 graphics* g;
+vector3* pos;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -57,6 +58,7 @@ void DrawCube(vector3 scale, vector3 pos);
 graphics::graphics(){		
   r = 0;
   chr = new chrono();
+  pos = new vector3(0,0,0);
 }
 
 graphics::~graphics(){
@@ -231,13 +233,29 @@ void graphics::draw_object() {
 }
 
 //main method
-void graphics::render() {		
-	timer += chr->get_delta();
+void graphics::render() {
+	double delta = chr->get_delta();
+	timer += delta;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	g->draw_object();
 
+	//main	
+	//g->draw_object();
+
+	//for debug
+	pos->x += delta;
+	vector3 s(1,1,1);
+	DrawCube(*pos, s);
+		
+	std::ostringstream stream;
+	/*
+	stream << timer;
+	std::string str = stream.str();
+	DrawString(-0.8, 0.8, str);
+	*/
+	stream << delta;
+	std::string d_str = stream.str();
+	DrawString(-0.8, 1, d_str);
 	glutSwapBuffers();
 }
 
