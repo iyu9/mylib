@@ -1,15 +1,12 @@
-/*
- *	3-Dimentions-Vector
- *	tomii
- */
-class Vector3 {
+
+class vector3 {
 	public:
 	float x, y, z;	
 
-	Vector3();
-	Vector3(float x, float y, float z);
-	Vector3* operator + (Vector3* v);
-	Vector3* operator - (Vector3* v);
-	Vector3* operator * (float f);
-	Vector3* operator / (float f);
+	vector3();
+	vector3(float x, float y, float z);
+	vector3* operator + (vector3* v);
+	vector3* operator - (vector3* v);
+	vector3* operator * (float f);
+	vector3* operator / (float f);
 };
