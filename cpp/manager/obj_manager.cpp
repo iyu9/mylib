@@ -28,8 +28,12 @@ object* obj_manager::get_object(std::string name) {
 }
 
 void obj_manager::save() {
-	std::ofstream ofs("obj_data.txt");
+	std::ofstream ofs("data.txt");
 
+	//total
+	ofs << count << std::endl;
+
+	//info
 	for(int i=0; i<count; i++) {
 		ofs << i << std::endl;
 		ofs << obj[i]->name << std::endl;
@@ -43,11 +47,31 @@ void obj_manager::save() {
 }
 
 void obj_manager::load() {	
-	std::ifstream ifs("obj_data.txt");
+	std::ifstream ifs("data.txt");
+	int count;
+	std::string buffer;
 
-	for(int i=0; i<count; i++) {
-		//std::cout << obj[i]->pos.x << std::endl;
+	ifs >> count;
+	
+	for(int i = 0; i < count; i++) {
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;
+		ifs >> buffer;
+		std::cout << buffer << std::endl;	
 	}
+
 }
 
 /**/
@@ -58,6 +82,7 @@ int main() {
 
   omanager->add(o1);
   omanager->save();
+  omanager->load();
   return 0;
 }
 /**/
