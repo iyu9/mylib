@@ -1,5 +1,7 @@
 #include "../common/common.h"
-#include "../vector/vector3.cpp"
+
+//dependent::
+//#include "../vector/vector3.cpp"
 
 class object {
 private:

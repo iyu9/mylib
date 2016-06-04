@@ -38,10 +38,10 @@ object::~object() {
 
 }
 
-/**/
+/*
 int main() {
   object* o = new object();
 
   return 0;
 }
-/**/
+*/

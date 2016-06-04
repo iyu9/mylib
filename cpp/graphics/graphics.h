@@ -2,6 +2,7 @@
 
 #include "../chrono/chrono.cpp"
 #include "../vector/vector3.cpp"
+#include "../object/object.cpp"
 
 class graphics {
 	private:

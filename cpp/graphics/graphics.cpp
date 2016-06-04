@@ -274,8 +274,17 @@ int main() {
 	gp = new graphics();
 	vector3* v1 = new vector3(2, 0, 0);
 	vector3* v2 = new vector3(-2, 0, 0);
+	vector3* v3 = new vector3(0, 0, 2);
+	vector3* v4 = new vector3(0, 0, -2);
+	vector3* v5 = new vector3(0, 2, 0);
+	vector3* v6 = new vector3(0, -2, 0);
+
 	gp->create_object(0, *v1);
 	gp->create_object(0, *v2);
+	gp->create_object(0, *v3);
+	gp->create_object(0, *v4);
+	gp->create_object(0, *v5);
+	gp->create_object(0, *v6);
 	gp->init();
 	
 	return 0;
