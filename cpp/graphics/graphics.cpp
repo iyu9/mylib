@@ -9,13 +9,10 @@
 
 //global declaration
 float r = 0;
-float time_d = 0;
+float timer = 0;
 
-vector3* pos;
-vector3* scale;
 chrono* chr;
-
-graphics* gp;
+graphics* g;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -60,8 +57,6 @@ void DrawCube(vector3 scale, vector3 pos);
 graphics::graphics(){		
   r = 0;
   chr = new chrono();
-  pos = new vector3();
-  scale = new vector3(0.5, 1, 0.5);
 }
 
 graphics::~graphics(){
@@ -83,23 +78,27 @@ void keyboard(unsigned char key, int x, int y)
   switch (key) {
 
   case 'w':
-	  pos->y++;
 	  glTranslatef(0, 0.1, 0);
 	  break;
 
   case 's':
-	  pos->y--;
 	  glTranslatef(0, -0.1, 0);
 	  break;
 
   case 'a':
-	  pos->x--;
 	  glTranslatef(-0.1, 0, 0);
 	  break;
 
   case 'd':
 	  glTranslatef(0.1, 0, 0);
-	  pos->x++;
+	  break;
+
+  case 'z':
+	  glTranslatef(0, 0, 0.1);
+	  break;
+
+  case 'x':
+	  glTranslatef(0, 0, -0.1);
 	  break;
 
   case 'c':
@@ -218,7 +217,7 @@ void DrawCube(vector3 pos, vector3 scale) {
 }
 
 //regist render object
-void graphics::add_object(object obj) {
+void graphics::add_object(object* obj) {
 	obj_list[obj_length] = obj;
 	obj_length++;
 }
@@ -226,23 +225,37 @@ void graphics::add_object(object obj) {
 //draw registered render object
 void graphics::draw_object() {
 	for(int i = 0; i < obj_length; i++) {
-		object obj = obj_list[i];
+		object obj = *obj_list[i];
 		DrawCube(obj.pos, obj.scale);		
 	}	
 }
 
+//main method
 void graphics::render() {		
-	float delta = 0.001;//chr->get_delta();
-	time_d += delta;
+	timer += chr->get_delta();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gp->draw_object();
+	
+	g->draw_object();
+
 	glutSwapBuffers();
+}
+
+object* graphics::get_object(std::string name) {	
+	for(int i = 0; i < obj_length; i++) {
+		object* obj = obj_list[i];
+
+		if(obj->name == name) {
+			return obj_list[i];	
+		}
+	}	
+
+	return NULL;
 }
 
 /**/
 int main() {
-	gp = new graphics();
+	g = new graphics();
 	vector3* v1 = new vector3(2, 0, 0);
 	vector3* v2 = new vector3(-2, 0, 0);
 	vector3* v3 = new vector3(0, 0, 2);
@@ -251,6 +264,7 @@ int main() {
 
 	vector3* s1 = new vector3(1, 1, 1);
 	vector3* s2 = new vector3(10, 0.1, 10);
+	vector3* s3 = new vector3(100, 100, 100);
 
 	object* o1 = new object(*v1, *s1);
 	object* o2 = new object(*v2, *s1);
@@ -258,13 +272,16 @@ int main() {
 	object* o4 = new object(*v4, *s1);
 	object* o5 = new object(*v5, *s2);
 
-	gp->add_object(*o1);
-	gp->add_object(*o2);
-	gp->add_object(*o3);
-	gp->add_object(*o4);
-	gp->add_object(*o5);
-	gp->init();
-	
+	g->add_object(o1);
+	g->add_object(o2);
+	g->add_object(o3);
+	g->add_object(o4);
+	g->add_object(o5);
+	g->init();
+
+	//object* which = g->get_object("no_name");
+	//g->obj_list[0]->scale = *s3;
+		
 	return 0;
 }
 /**/

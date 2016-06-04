@@ -6,9 +6,8 @@
 
 class graphics {
 	private:
-		object obj_list[99];
+		object* obj_list[99];
 		int obj_length;
-
 		int state;
 
 	public:
@@ -17,6 +16,7 @@ class graphics {
 
 		void init();
 		static void render();
-		void add_object(object obj);
+		void add_object(object* obj);
+		object* get_object(std::string name);
 		void draw_object();
 };
