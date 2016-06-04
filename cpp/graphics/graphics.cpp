@@ -11,9 +11,9 @@
 float r = 0;
 float time_d = 0;
 
-Vector3* pos;
+vector3* pos;
 chrono* chr;
-Vector3* scale;
+vector3* scale;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -52,14 +52,14 @@ void DrawString(float x, float y, std::string const& str);
 void DrawRect(float x, float y, float width, float height);
 
 //3d
-void DrawCube(Vector3 scale, Vector3 pos);
+void DrawCube(vector3 scale, vector3 pos);
 
 //constructors
 Graphics::Graphics(){		
 	r = 0;
   chr = new chrono();
-  pos = new Vector3();
-  scale = new Vector3(0.5, 1, 0.5);
+  pos = new vector3();
+  scale = new vector3(0.5, 1, 0.5);
 }
 
 Graphics::~Graphics(){
@@ -204,7 +204,7 @@ void DrawString(float x, float y, std::string const& str) {
 	}
 }
 
-void DrawCube(Vector3 scale, Vector3 pos) {
+void DrawCube(vector3 scale, vector3 pos) {
 	int face[][4] = {
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
