@@ -33,10 +33,10 @@ bool crypt::decode(std::string filename_) {
 /**/
 int main() {
 
-	crypt* crpt = new crypt(0, "test");
+  crypt* crpt = new crypt(0, "test");
   print("test: ");
   print(crpt->value);
 
-	return 0;		
+  return 0;		
 }
 /**/
