@@ -3,6 +3,11 @@
 #include "../vector/vector3.cpp"
 #include "../object/object.cpp"
 
+//--------------------------------------------
+//if use Graphics API, may be
+//some object generate and draw system.
+//--------------------------------------------
+
 class obj_manager {
 
 private:
