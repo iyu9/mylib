@@ -2,7 +2,9 @@
 
 #include "../chrono/chrono.cpp"
 #include "../vector/vector3.cpp"
+//#include "../manager/obj_manager.cpp"
 #include "../object/object.cpp"
+
 
 class graphics {
 	private:

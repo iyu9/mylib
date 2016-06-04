@@ -100,7 +100,7 @@ void obj_manager::load() {
 
 }
 
-/**/
+/*
 int main() {
   obj_manager* omanager = new obj_manager();
   vector3* v1 = new vector3(1, 2, 3);
@@ -111,4 +111,4 @@ int main() {
   omanager->load();
   return 0;
 }
-/**/
+*/
