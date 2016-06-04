@@ -12,8 +12,10 @@ float r = 0;
 float time_d = 0;
 
 vector3* pos;
-chrono* chr;
 vector3* scale;
+chrono* chr;
+
+graphics* gp;
 
 GLdouble vertex[][3] = {
 	{0, 0, 0},
@@ -55,25 +57,25 @@ void DrawRect(float x, float y, float width, float height);
 void DrawCube(vector3 scale, vector3 pos);
 
 //constructors
-Graphics::Graphics(){		
-	r = 0;
+graphics::graphics(){		
+  r = 0;
   chr = new chrono();
   pos = new vector3();
   scale = new vector3(0.5, 1, 0.5);
 }
 
-Graphics::~Graphics(){
+graphics::~graphics(){
 }
 
 void switch_camera() {		
-	glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
-	gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-	/*
-	glViewport(0, 0, 300, 300);
-	glLoadIdentity();
-	gluPerspective(0.0, (double)300 / (double)300, 1.0, 100.0);
-	gluLookAt(0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-	*/
+  glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
+  gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+  /*
+  glViewport(0, 0, 300, 300);
+  glLoadIdentity();
+  gluPerspective(0.0, (double)300 / (double)300, 1.0, 100.0);
+  gluLookAt(0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+  */
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -127,10 +129,11 @@ void idle() {
 }
 
 void display() {
-	//common delta
-	float delta = chr->get_delta();
+	
+	float delta = 0.001;//chr->get_delta();
 	time_d += delta;
 
+	/*
 	if(time_d < (1.0 / 60.0)) {
 		return;
 	}else {
@@ -142,11 +145,14 @@ void display() {
 	if(pos->x > 4) {
 		pos->x = -4;
 	}
+	*/
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gp->draw_object();
 
 	//glRotatef(r, 0, 1, 0);
 	//LINE_LOOP, QUADS, POLYGON etc
+	/*
 	DrawCube(*scale, *pos);	
 	DrawLine(0, 0, 0, 0);
 
@@ -154,12 +160,12 @@ void display() {
 	stream << r;
 	std::string res = stream.str();
 	DrawString(-0.8, 0.8, res);
-
+	*/
 	glutSwapBuffers();
 };
 
 //initialize once
-void Graphics::init() {
+void graphics::init() {
 
 	state = 0;	
 	int argc = 1;
@@ -248,9 +254,28 @@ void DrawCube(vector3 scale, vector3 pos) {
 	glEnd();
 }
 
+//regist render object
+void graphics::create_object(int type, vector3 pos) {
+	obj_list[obj_length] = pos;
+	obj_length++;
+}
+
+//draw registered render object
+void graphics::draw_object() {
+	for(int i = 0; i < obj_length; i++) {
+		vector3* scl = new vector3(1, 1, 1);
+		vector3 obj = obj_list[i];
+		DrawCube(*scl, obj);	
+	}	
+}
+
 /**/
 int main() {
-	Graphics* gp = new Graphics();
+	gp = new graphics();
+	vector3* v1 = new vector3(2, 0, 0);
+	vector3* v2 = new vector3(-2, 0, 0);
+	gp->create_object(0, *v1);
+	gp->create_object(0, *v2);
 	gp->init();
 	
 	return 0;

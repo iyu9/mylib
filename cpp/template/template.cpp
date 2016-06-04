@@ -46,6 +46,7 @@ int main (int argc, char** argv) {
     ofs << "  "<< arg << "* " << arg[0] << " = new " << arg << "();"  << std::endl << std::endl;
     ofs << "  return 0;" << std::endl;
     ofs << "}" << std::endl;
+    ofs << "/**/" << std::endl;
     ofs.close();
 
     //makefile
