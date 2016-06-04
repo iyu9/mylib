@@ -18,8 +18,7 @@ void ReadDataStructure() {
 		
 }
 
-void WriteDataStructure(ofstream* ofs) {
-	*ofs << "Count: " << count << std::endl;	
+void WriteDataStructure(std::ofstream* ofs) {
 }
 
 int savemanager::save() {
@@ -32,6 +31,14 @@ int savemanager::save() {
 }
 
 int savemanager::save(const char* file) {
+	ofs = new std::ofstream(file);
+	*ofs << "Count: " << count << std::endl;
+	
+	return 0;	
+}
+
+int savemanager::save(const char* file, int filemode) {
+	//TODO:add binmode
 	ofs = new std::ofstream(file);
 	*ofs << "Count: " << count << std::endl;
 	
