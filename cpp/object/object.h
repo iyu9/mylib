@@ -4,7 +4,7 @@
 //#include "../vector/vector3.cpp"
 
 class object {
-private:
+public:
   int id;
   std::string name;
   vector3 pos;

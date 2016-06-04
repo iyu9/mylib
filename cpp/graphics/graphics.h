@@ -6,7 +6,7 @@
 
 class graphics {
 	private:
-		vector3 obj_list[99];
+		object obj_list[99];
 		int obj_length;
 
 		int state;
@@ -17,6 +17,6 @@ class graphics {
 
 		void init();
 		static void render();
-		void add_object(int type, vector3 pos);
+		void add_object(object obj);
 		void draw_object();
 };
