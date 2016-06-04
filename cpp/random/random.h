@@ -1,10 +1,10 @@
 #include "../common/common.h"
 
-class ran {
+class t_random {
 
 public:
-	ran();
-	~ran();
+	t_random();
+	~t_random();
 
 	int max();
 	int value();
