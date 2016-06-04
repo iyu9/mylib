@@ -173,7 +173,7 @@ void DrawString(float x, float y, std::string const& str) {
 	}
 }
 
-void DrawCube(vector3 scale, vector3 pos) {
+void DrawCube(vector3 pos, vector3 scale) {
 	int face[][4] = {
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
@@ -227,7 +227,7 @@ void graphics::add_object(object obj) {
 void graphics::draw_object() {
 	for(int i = 0; i < obj_length; i++) {
 		object obj = obj_list[i];
-		DrawCube(obj.scale, obj.pos);		
+		DrawCube(obj.pos, obj.scale);		
 	}	
 }
 
