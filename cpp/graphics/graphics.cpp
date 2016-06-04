@@ -218,7 +218,7 @@ void DrawCube(vector3 scale, vector3 pos) {
 }
 
 //regist render object
-void graphics::create_object(int type, vector3 pos) {
+void graphics::add_object(int type, vector3 pos) {
 	obj_list[obj_length] = pos;
 	obj_length++;
 }
@@ -226,9 +226,16 @@ void graphics::create_object(int type, vector3 pos) {
 //draw registered render object
 void graphics::draw_object() {
 	for(int i = 0; i < obj_length; i++) {
-		vector3* scl = new vector3(1, 1, 1);
+		vector3* scale1 = new vector3(1, 1, 1);
+		vector3* scale2 = new vector3(10, 0.01, 10);
 		vector3 obj = obj_list[i];
-		DrawCube(*scl, obj);	
+
+		//for floor
+		if(i == 4) {
+			DrawCube(*scale2, obj);		
+		} else{
+			DrawCube(*scale1, obj);
+		}
 	}	
 }
 
@@ -248,15 +255,15 @@ int main() {
 	vector3* v2 = new vector3(-2, 0, 0);
 	vector3* v3 = new vector3(0, 0, 2);
 	vector3* v4 = new vector3(0, 0, -2);
-	vector3* v5 = new vector3(0, 2, 0);
+	vector3* v5 = new vector3(0, -2, 0);
 	vector3* v6 = new vector3(0, -2, 0);
 
-	gp->create_object(0, *v1);
-	gp->create_object(0, *v2);
-	gp->create_object(0, *v3);
-	gp->create_object(0, *v4);
-	//gp->create_object(0, *v5);
-	//gp->create_object(0, *v6);
+	gp->add_object(0, *v1);
+	gp->add_object(0, *v2);
+	gp->add_object(0, *v3);
+	gp->add_object(0, *v4);
+	gp->add_object(0, *v5);
+	//gp->add_object(0, *v6);
 	gp->init();
 	
 	return 0;
