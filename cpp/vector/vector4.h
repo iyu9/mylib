@@ -1,15 +1,12 @@
-/*
- *	4-Dimentions-Vector
- *	tomii
- */
-class Vector4 {
-	public:
+
+class vector4 {
+public:
 	float x, y, z, w;	
 
-	Vector4();
-	Vector4(float x, float y, float z, float w);
-	Vector4* operator + (Vector4* v);
-	Vector4* operator - (Vector4* v);
-	Vector4* operator * (float f);
-	Vector4* operator / (float f);
+	vector4();
+	vector4(float x, float y, float z, float w);
+	vector4* operator + (vector4* v);
+	vector4* operator - (vector4* v);
+	vector4* operator * (float f);
+	vector4* operator / (float f);
 };
