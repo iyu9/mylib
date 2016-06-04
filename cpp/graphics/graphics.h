@@ -16,6 +16,7 @@ class graphics {
 		~graphics();
 
 		void init();
+		static void render();
 		void create_object(int type, vector3 pos);
 		void draw_object();
 };

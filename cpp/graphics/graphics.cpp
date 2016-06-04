@@ -128,43 +128,6 @@ void idle() {
 	glutPostRedisplay();
 }
 
-void display() {
-	
-	float delta = 0.001;//chr->get_delta();
-	time_d += delta;
-
-	/*
-	if(time_d < (1.0 / 60.0)) {
-		return;
-	}else {
-		time_d = 0;
-	}
-
-	pos->x += 4 * delta;
- 
-	if(pos->x > 4) {
-		pos->x = -4;
-	}
-	*/
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gp->draw_object();
-
-	//glRotatef(r, 0, 1, 0);
-	//LINE_LOOP, QUADS, POLYGON etc
-	/*
-	DrawCube(*scale, *pos);	
-	DrawLine(0, 0, 0, 0);
-
-	std::ostringstream stream;
-	stream << r;
-	std::string res = stream.str();
-	DrawString(-0.8, 0.8, res);
-	*/
-	glutSwapBuffers();
-};
-
-//initialize once
 void graphics::init() {
 
 	state = 0;	
@@ -175,7 +138,7 @@ void graphics::init() {
 	glutInit(&argc, NULL);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
 	glutCreateWindow(NULL);
-	glutDisplayFunc(display);
+	glutDisplayFunc(/*display*/render);
 	glutIdleFunc(idle);
 	glutReshapeFunc(resize);
 	glClearColor(0, 0, 0, 1);
@@ -269,6 +232,15 @@ void graphics::draw_object() {
 	}	
 }
 
+void graphics::render() {		
+	float delta = 0.001;//chr->get_delta();
+	time_d += delta;
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gp->draw_object();
+	glutSwapBuffers();
+}
+
 /**/
 int main() {
 	gp = new graphics();
@@ -283,8 +255,8 @@ int main() {
 	gp->create_object(0, *v2);
 	gp->create_object(0, *v3);
 	gp->create_object(0, *v4);
-	gp->create_object(0, *v5);
-	gp->create_object(0, *v6);
+	//gp->create_object(0, *v5);
+	//gp->create_object(0, *v6);
 	gp->init();
 	
 	return 0;
