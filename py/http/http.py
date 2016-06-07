@@ -1,9 +1,17 @@
 #!/usr/bin/python
+#-*- coding: utf-8 -*-
 
+import sys
 import urllib
 
-#class sample
-#method needs self always
+# arg check
+param = sys.argv
+if len(param) != 2:
+		print "invalid arg count" 
+		sys.exit()
+#print "Requesting: " + param[1]
+
+# class sample
 class MyURL:
 	f = None
 	url = None
@@ -11,13 +19,13 @@ class MyURL:
 
 	def __init__(self, url_):
 		url = url_
-		self.f = urllib.urlopen(url)
+		self.f = urllib.urlopen(url_)
 
 	def get(self):
 		html = self.f.read()
 		print html
 
-m = MyURL("http://google.co.jp")
+m = MyURL(param[1])
 m.get()
 
 ###
