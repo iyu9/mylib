@@ -196,18 +196,18 @@ void actor::on_damage(actor* op) {
 		std::cout << "critical" << std::endl;
 	}
 
-  //weakness phase
-  int weak_factor = check_weakness();
-  if(weak_factor > 1) {
-    std::cout << "weak" << std::endl;
-  }
+	//weakness phase
+	int weak_factor = check_weakness();
+	if(weak_factor > 1) {
+	  std::cout << "weak" << std::endl;
+	}
 
 	//damage phase
 	float damage = (op->atk - def);
 
-  if(weak_factor > 1) {
-    damage *= 2;
-  }
+	if(weak_factor > 1) {
+	  damage *= 2;
+	}
 
 	if(is_critical) {
 		damage *= 3;
