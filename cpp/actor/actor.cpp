@@ -218,6 +218,18 @@ void actor::print_status() {
 	std::cout << "MOVE: " << move << std::endl << std::endl;
 }
 
+int actor::check_weakness() {
+  int count = 0;
+
+  for(int i=0; i<LIST_SIZE; i++) {
+    if(weakness_list[i] == WEAK_WEAK) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
 void actor::print_battle_status() {
 	std::cout << "NAME: " << name << std::endl;		
 	std::cout << "HP: " << hp << std::endl;		

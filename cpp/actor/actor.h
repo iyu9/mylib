@@ -5,11 +5,19 @@
 
 #include "../common/common.h"
 
+const int LIST_SIZE = 10;
+const int WEAK_NONE = 0;
+const int WEAK_WEAK = 1;
+const int WEAK_DEATH = 2;
+const int WEAK_STRONG = 3;
+const int WEAK_NODAMAGE = 4;
+const int WEAK_REFLECT = 5;
+
 class actor {
 public:
 	//idents
 	int id;
-    int index;
+  int index;
 	std::string name;
 	int type;
 	int condition;
@@ -38,10 +46,13 @@ public:
 	int max_hit;
 	int hit;
 
+  //weaknesses
+  int weakness_list[LIST_SIZE];
+
 	//lists
-	int equip_list;
-	int item_list;
-	int skill_list;
+	int equip_list[LIST_SIZE];
+	int item_list[LIST_SIZE];
+	int skill_list[LIST_SIZE];
 
 	//grows
 	float per_hp;
@@ -62,6 +73,7 @@ public:
 	void lvup();
 	void lvdn();
 	void on_damage(actor* op);
+  int check_weakness();
 
 	//utils
 	void print_status();
