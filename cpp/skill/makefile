@@ -1,0 +1,2 @@
+skill:
+	g++ skill.cpp

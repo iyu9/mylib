@@ -4,6 +4,8 @@
  */
 
 #include "../common/common.h"
+#include "../item/item.h"
+#include "../skill/skill.h"
 
 const int LIST_SIZE = 10;
 const int WEAK_NONE = 0;
@@ -15,7 +17,7 @@ const int WEAK_REFLECT = 5;
 
 class actor {
 public:
-	//idents
+	//base
 	int id;
 	int index;
 	std::string name;
@@ -46,10 +48,8 @@ public:
 	int max_hit;
 	int hit;
 	
-	//weaknesses
+	//liste
 	int weakness_list[LIST_SIZE];
-
-	//lists
 	int equip_list[LIST_SIZE];
 	int item_list[LIST_SIZE];
 	int skill_list[LIST_SIZE];
@@ -63,20 +63,22 @@ public:
 	float per_tec;
 	float per_luk;
 
-	//constructors
 	actor();
 	actor(std::string name_);
 	actor(std::string name_, int type_);
 	actor(int lv);
 	~actor();
 
-	//methods
 	void lvup();
 	void lvdn();
+	void attack(actor* op);
+	void guard();
+	void escape();
+	void use_item(item* it);
+	void use_skill(skill* sk);
 	void on_damage(actor* op);
 	int check_weakness();
 
-	//utils
 	void print_status();
 	void print_battle_status();
 };

@@ -244,6 +244,33 @@ void actor::on_damage(actor* atacker) {
 	std::cout << "damage: " << damage << std::endl;	
 }	
 
+//Actions
+void actor::attack(actor* target) {
+	target->on_damage(this);		
+}
+
+void actor::guard() {
+	def *= 2;		
+}
+
+void actor::escape() {
+	float r = rand_prob();
+	
+	if(r > 0.5) {
+		//true
+	}
+
+	//false...
+}
+
+void actor::use_skill(skill* sk) {
+	//		
+}
+
+void actor::use_item(item* it) {
+	//
+}
+
 void actor::print_status() {		
 	std::cout << "STATUS::" << std::endl;
 	std::cout << "LV: " << lv << std::endl;
