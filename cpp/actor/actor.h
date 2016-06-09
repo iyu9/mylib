@@ -17,7 +17,7 @@ class actor {
 public:
 	//idents
 	int id;
-  int index;
+	int index;
 	std::string name;
 	int type;
 	int condition;
@@ -45,9 +45,9 @@ public:
 	int move;
 	int max_hit;
 	int hit;
-
-  //weaknesses
-  int weakness_list[LIST_SIZE];
+	
+	//weaknesses
+	int weakness_list[LIST_SIZE];
 
 	//lists
 	int equip_list[LIST_SIZE];
@@ -60,6 +60,7 @@ public:
 	float per_atk;
 	float per_def;
 	float per_spd;
+	float per_tec;
 	float per_luk;
 
 	//constructors
@@ -73,7 +74,7 @@ public:
 	void lvup();
 	void lvdn();
 	void on_damage(actor* op);
-  int check_weakness();
+	int check_weakness();
 
 	//utils
 	void print_status();

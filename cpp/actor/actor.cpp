@@ -22,6 +22,7 @@ actor::actor() {
 	atk = 5;
 	def = 5;
 	spd = 5;
+	tec = 5;
 	luk = 5;
 	def = 5;
 	move = 5;
@@ -31,6 +32,7 @@ actor::actor() {
 	per_atk = 0.30;
 	per_def = 0.30;
 	per_spd = 0.30;
+	per_tec = 0.30;
 	per_luk = 0.30;
 }
 
@@ -49,6 +51,20 @@ actor::actor(std::string name_, int type_) {
 }
 
 actor::~actor() {
+}
+
+int upper_lim(int exp, int lim, int def) {
+	if(exp > lim) {
+		return def;
+	}
+	return exp;
+}
+
+int lower_lim(int exp, int lim, int def) {
+	if(exp < lim) {
+		return def;
+	}
+	return exp;
 }
 
 void actor::lvup() {
@@ -81,6 +97,11 @@ void actor::lvup() {
 		std::cout << "SPD UP: " << spd << std::endl;
 	}
 
+	percent = (float) rand() / RAND_MAX;
+	if(percent <= per_tec) {
+		tec++;	
+		std::cout << "TEC UP: " << tec << std::endl;
+	}
 
 	percent = (float) rand() / RAND_MAX;
 	if(percent <= per_luk) {
@@ -135,6 +156,11 @@ void actor::lvdn() {
 		std::cout << "SPD DOWN: " << spd << std::endl;
 	}
 
+	percent = (float) rand() / RAND_MAX;
+	if(percent <= per_tec) {
+		tec--;	
+		std::cout << "TEC DOWN: " << tec << std::endl;
+	}
 
 	percent = (float) rand() / RAND_MAX;
 	if(percent <= per_luk) {
@@ -170,22 +196,21 @@ int actor::check_weakness() {
   return count;
 }
 
-void actor::on_damage(actor* op) {
+void actor::on_damage(actor* atacker) {
 	float rand = rand_prob();
 	int is_critical = 0;
 
 	//hit phase
-	float hit_percent = 1.0;
-	float hosei = 0.1 * (op->hit - spd);
-	hit_percent -= hosei;
+	float hit_percent = 100;
+	float hit_factor = 2 * atacker->tec + atacker->luk - 2 * spd;
+	hit_percent += hit_factor;
 	if(rand > hit_percent) {
-		//not hit
 		std::cout << "miss" << std::endl;
 		return;	
 	}
 
 	//critical phase
-	float cri_percent = 0.1 * (op->luk - luk);
+	float cri_percent = lower_lim(atacker->tec - 2 * luk, 0, 0);
 	rand = rand_prob();
 	if(rand < cri_percent) {
 		is_critical = 1;
@@ -195,26 +220,25 @@ void actor::on_damage(actor* op) {
 	//weakness phase
 	int weak_factor = check_weakness();
 	if(weak_factor > 1) {
-	  std::cout << "weak" << std::endl;
+		std::cout << "weak" << std::endl;
 	}
 
 	//damage phase
-	float damage = (op->atk - def);
+	float damage = lower_lim((100 + atacker->atk - def), 0, 0);
 
 	if(weak_factor > 1) {
-	  damage *= 2;
+		damage *= 2;
 	}
 
 	if(is_critical) {
 		damage *= 3;
 	}
 
-	hp -=  damage;	
+	hp -= damage;	
 	if(hp <= 0) {
 		hp = 0;
 	}
 	
-	//debug
 	std::cout << "hit_percent: " << hit_percent  << std::endl;	
 	std::cout << "cri_percent: " << cri_percent  << std::endl;	
 	std::cout << "damage: " << damage << std::endl;	
@@ -232,6 +256,7 @@ void actor::print_status() {
 	std::cout << "ATK: " << atk << std::endl;
 	std::cout << "DEF: " << def << std::endl;
 	std::cout << "SPD: " << spd << std::endl;
+	std::cout << "TEC: " << tec << std::endl;
 	std::cout << "LUK: " << luk << std::endl;
 	std::cout << "MOVE: " << move << std::endl << std::endl;
 }
@@ -247,7 +272,7 @@ float rand_prob() {
 	return (float) (rand() / RAND_MAX);		
 }
 
-/*
+/**/
 int main() {
 	actor* player = new actor();
 	actor* enemy = new actor();
@@ -265,4 +290,4 @@ int main() {
 	delete(player);
 	return 0;		
 }
-*/
+/**/
