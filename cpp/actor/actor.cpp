@@ -1,21 +1,17 @@
 #include "actor.h"
 
-//forward
 float rand_prob();
 
-//type defined
 const int TYPE_HERO = 0;
 const int TYPE_KNIGHT = 1;
 const int TYPE_DRAGON = 2;
 const int TYPE_ARMOR = 3;
 const int TYPE_WITCH = 4;
 
-//condition defined
 const int CON_FINE = 0;
 const int CON_DEAD = 1;
 const int CON_STONE = 2;
 
-//constructors
 actor::actor() {
 	srand((unsigned)time(NULL));
 
@@ -224,7 +220,6 @@ void actor::on_damage(actor* op) {
 	std::cout << "damage: " << damage << std::endl;	
 }	
 
-//util methods
 void actor::print_status() {		
 	std::cout << "STATUS::" << std::endl;
 	std::cout << "LV: " << lv << std::endl;
