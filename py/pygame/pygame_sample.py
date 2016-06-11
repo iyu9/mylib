@@ -6,46 +6,90 @@ from pygame.locals import *
 import sys
 import time
 
+#GRAVITY FACTOR
 g = 9.8
 
+#DIRECTION
 UP	  = 0
 RIGHT = 1
 DOWN  = 2
 LEFT  = 3
 
+#ACTOR STATE
 FIXED = 0
 FALL = 1
 JUMP = 2
+
+ACTOR_STAT = [
+  'FIXED',
+  'FALL',
+  'JUMP'
+]
 
 class Vector2:
   def __init__(self):
 	self.x = 0
 	self.y = 0
 
-class Actor:
+class Object:
+  def __init__(self):
+	self.id = 0
+	self.name = "NO_NAME"
+	self.pos = Vector2()
+	self.scale = Vector2()
 
+class ObjectManager:
+  def __init__(self):
+	self.list = Object()
+  def add(self, obj):
+	self.list += obj
+  def delete(self, obj):	
+	self.list -= obj
+
+class GameManager:
+  def __init__(self):
+	self.STR_MODE = [
+	  'TITLE',
+	  'OPTION',
+	  'MAIN'
+	]
+
+class Actor:
   def __init__(self):
 	self.id = 0
 	self.name = "tommy"
 	self.v = Vector2()
 	self.pos = Vector2()
 	self.hp = 10
-	self.stat = 0
-	self.v_start_time = 0
+	self.stat = FIXED
+	self.fall_start = 0
 
   def update(self):
-	if self.v.y > 0:
+	if self.v.y > 0.1:
+	  self.stat = JUMP
 	  self.pos.y += self.v.y
+	  self.v.y *= 0.95
+	elif self.v.y < -0.1:
+	  self.stat = FALL
+	  self.pos.y += self.v.y * (time.clock() - self.fall_start)
+	  self.v.y += 0.02
+	else:
+	  self.stat = FIXED
+	  self.fall_start = 0
+
+  def shot(self):
+	bullet = Object()
 
   def jump(self):
-	if stat==FIXED:
-	  self.stat=JUMP
-	  self.v.y=10
+	if self.stat == FIXED:
+	  self.stat = JUMP
+	  self.v.y = 1
 
-
-  def falldown(self):
-	if self.pos.y>-100:
-	  self.pos.y-=0.1
+  def fall(self):
+	if self.pos.y > -500:
+	  self.stat = FALL
+	  self.v.y = -10
+	  self.fall_start = time.clock()
 
 actor = Actor()
 
@@ -63,6 +107,7 @@ def main():
 
 	# キー入力
 	pressed_key = pygame.key.get_pressed()
+
 	if pressed_key[K_LEFT]:
 	  actor.pos.x-=0.1
 	if pressed_key[K_RIGHT]:
@@ -71,22 +116,28 @@ def main():
 	  actor.pos.y+=0.1
 	if pressed_key[K_DOWN]:
 	  actor.pos.y-=0.1
+
+	if pressed_key[K_s]:
+	  actor.shot()
 	if pressed_key[K_x]:
-	  print "press x"
+	  actor.jump()
+	if pressed_key[K_c]:
+	  actor.fall()
 
-	#物理演算
-	actor.falldown()
-
+	actor.update()
 
 	#グラフィック処理
 	screen.fill((0,0,0))
 	text_clock = font.render("clock: " + str(time.clock()), True, (255,255,255))
 	text_pos = font.render("pos: " + str(actor.pos.x) + ", " + str(actor.pos.y), True, (255,255,255))
-
+	text_velocity = font.render("v: " + str(actor.v.x) + ", " + str(actor.v.y), True, (255,255,255))
+	text_stat = font.render("stat: " + ACTOR_STAT[actor.stat], True, (255,255,255))
 	#screen.blit(bg, rect_bg)
 	pygame.draw.rect(screen, (0,80,0), Rect(10+actor.pos.x, 10-actor.pos.y, 50, 50))
 	screen.blit(text_clock, [20, 20])
 	screen.blit(text_pos, [20, 40])
+	screen.blit(text_velocity, [20, 60])
+	screen.blit(text_stat, [20, 80])
 	pygame.display.update()
 
 	# イベント処理
