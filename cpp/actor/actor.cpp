@@ -264,11 +264,19 @@ void actor::escape() {
 }
 
 void actor::use_skill(skill* sk) {
-	//		
+	switch(sk->type) {
+	  case SK_ATTACK:
+	  case SK_HEAL:
+		break;
+	}		
 }
 
 void actor::use_item(item* it) {
-	//
+	switch(it->type) {
+	  case IT_HEAL:
+	  case IT_ATTACK:
+		break;
+	}		
 }
 
 void actor::print_status() {		

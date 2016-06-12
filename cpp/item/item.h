@@ -1,6 +1,5 @@
-const int ITEMTYPE_HEAL = 0;
-const int ITEMTYPE_ATACK = 1;
-const int ITEMTYPE_SPECIAL = 2;
+const int IT_HEAL = 0;
+const int IT_ATTACK = 1;
 
 class item {
 
