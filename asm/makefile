@@ -1,8 +1,8 @@
-test: test.o
-	ld -o test.out test.o
+hello: hello.o
+	ld -o hello.out hello.o
 
-test.o:
-	as -o test.o test.as
+hello.o:
+	as -o hello.o hello.as
 
 clean:
 	rm *.o *.out
