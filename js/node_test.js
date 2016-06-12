@@ -1,3 +1,4 @@
+//node.js - sample program
 
 var http = require('http');
 
@@ -6,4 +7,4 @@ http.createServer(function (request, response) {
   response.end('Hello World\n');
 }).listen(8124);
 
-console.log('Server running at http://127.0.0.1:8124/');eREATE TABLE t_(id int, address text)
+console.log('Server running at http://127.0.0.1:8124/');
