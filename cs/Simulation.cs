@@ -219,7 +219,6 @@ namespace SampleGame
 
     public void Update()
     {
-      //STATE
       WL(state.ToString());
 
       map.Print(allys);
@@ -298,7 +297,7 @@ namespace SampleGame
     }
   }
 
-  class Program
+  class Simulation
   {
     public static void Main(string[] args)
     {
