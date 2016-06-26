@@ -279,6 +279,11 @@ void actor::use_item(item* it) {
 	}		
 }
 
+void actor::action_move(vector2 vec) {
+	//pos.x += vec.x;
+	//pos.y += vec.y;
+}
+
 void actor::print_status() {		
 	std::cout << "STATUS::" << std::endl;
 	std::cout << "LV: " << lv << std::endl;
@@ -293,7 +298,9 @@ void actor::print_status() {
 	std::cout << "SPD: " << spd << std::endl;
 	std::cout << "TEC: " << tec << std::endl;
 	std::cout << "LUK: " << luk << std::endl;
-	std::cout << "MOVE: " << move << std::endl << std::endl;
+	std::cout << "MOVE: " << move << std::endl;
+	std::cout << "POS: " << "(" << pos.x << ", " << pos.y << ")"
+	<< std::endl << std::endl << std::endl;
 }
 
 

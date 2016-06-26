@@ -1,0 +1,2 @@
+node:
+	g++ node.cpp

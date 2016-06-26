@@ -1,0 +1,2 @@
+mino:
+	g++ mino.cpp

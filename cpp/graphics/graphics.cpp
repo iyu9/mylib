@@ -232,6 +232,24 @@ void graphics::draw_object() {
 	}	
 }
 
+GLuint loadImage(const char* path) {
+  int width, height;
+  unsigned char *data;
+
+  //--load image
+  width = 100;
+  height = 100;
+  //--//
+  GLuint tex;
+  glGenTextures(1, &tex);
+  glBindTexture(GL_TEXTURE_2D, tex);
+  gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE ,data);
+
+  delete(data);
+
+  return tex;
+}
+
 //main method
 void graphics::render() {
 	double delta = chr->get_delta();
@@ -299,7 +317,7 @@ int main() {
 
 	//object* which = g->get_object("no_name");
 	//g->obj_list[0]->scale = *s3;
-		
+	
 	return 0;
 }
 /**/

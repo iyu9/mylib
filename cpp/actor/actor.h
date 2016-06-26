@@ -6,6 +6,7 @@
 #include "../common/common.h"
 #include "../item/item.h"
 #include "../skill/skill.h"
+#include "../vector/vector2.cpp"
 
 const int LIST_SIZE = 10;
 const int WEAK_NONE = 0;
@@ -23,6 +24,7 @@ public:
 	std::string name;
 	int type;
 	int condition;
+	vector2 pos;
 
 	//params
 	int lv;
@@ -69,6 +71,7 @@ public:
 	actor(int lv);
 	~actor();
 
+	void action_move(vector2 vec);
 	void lvup();
 	void lvdn();
 	void attack(actor* op);
