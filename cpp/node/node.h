@@ -5,13 +5,14 @@ const int NodeLimitNum = 10;
 class node {
 private:
   int id;
+
+public:
   std::string name;
   int prevCount;
   int nextCount;
   int prev[NodeLimitNum];
   int next[NodeLimitNum];
 
-public:
   node();
   node(int id, std::string name);
   ~node();
