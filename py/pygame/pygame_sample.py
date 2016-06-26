@@ -98,8 +98,11 @@ def main():
   screen = pygame.display.set_mode((400, 400))
   pygame.display.set_caption("Hello Pygame")
   font = pygame.font.Font(None, 25)
-  #bg = pygame.image.load("bg.png").convert_alpha()
+  #bg = pygame.image.load("rockman.jpg").convert_alpha()
   #rect_bg = bg.get_rect()
+
+  #actor = pygame.image.load("rockman.jpg").convert_alpha()
+  #rect_actor = actor.get_rect()
 
   x = y = z = 0
 
@@ -133,6 +136,7 @@ def main():
 	text_velocity = font.render("v: " + str(actor.v.x) + ", " + str(actor.v.y), True, (255,255,255))
 	text_stat = font.render("stat: " + ACTOR_STAT[actor.stat], True, (255,255,255))
 	#screen.blit(bg, rect_bg)
+	#screen.blit(actor, rect_actor)
 	pygame.draw.rect(screen, (0,80,0), Rect(10+actor.pos.x, 10-actor.pos.y, 50, 50))
 	screen.blit(text_clock, [20, 20])
 	screen.blit(text_pos, [20, 40])

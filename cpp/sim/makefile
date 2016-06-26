@@ -1,0 +1,2 @@
+sim:
+	g++ sim.cpp

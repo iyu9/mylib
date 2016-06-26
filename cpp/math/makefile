@@ -1,0 +1,2 @@
+math:
+	g++ math.cpp

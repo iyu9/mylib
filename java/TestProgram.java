@@ -2,7 +2,12 @@ import java.io.*;
 
 public class TestProgram {
 
-  public static void main(String args[]) {
-	System.out.println("おひさ");
+  private int index;
+  private String command;
+  
+
+  public static void main() {
+	String str = "てすと";
+	System.out.println(str);
   }
 }
