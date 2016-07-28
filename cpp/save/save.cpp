@@ -13,9 +13,7 @@ savemanager::~savemanager() {
 }
 
 //functions
-
-void ReadDataStructure() {
-		
+void ReadDataStructure() {		
 }
 
 void WriteDataStructure(std::ofstream* ofs) {
@@ -67,7 +65,7 @@ int savemanager::load(const char* file) {
 	return 0;	
 }
 
-/*unit-test*/
+/**/
 int main() {
 	savemanager* s = new savemanager();
 

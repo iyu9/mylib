@@ -2,7 +2,7 @@
 
 const char exit_code = '4';
 
-//util
+//util function
 void newln() {
 		std::cout << std::endl;		
 }
