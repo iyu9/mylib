@@ -11,17 +11,14 @@ void println(const char* str) {
 		std::cout << str << std::endl;
 }
 
-//constructors
 Game::Game() {
 	mode = 0;
 	command = 0;	
 }
 
 Game::~Game() {
-	//delete members!		
 }
 
-//functions
 int Game::input_command() {
 	std::cin >> command;
 }
@@ -80,7 +77,7 @@ void Game::MainLoop() {
 	}	
 }
 
-/*unit-test*/
+/**/
 int main(){
 	Game* game = new Game();
 	game->MainLoop();
