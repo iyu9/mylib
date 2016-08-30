@@ -4,6 +4,11 @@
 
 using namespace std;
 
+void print_screen(string msg)
+{
+  cout << msg;
+}
+
 void clear_screen()
 {
   system("clear");  
@@ -12,17 +17,16 @@ void clear_screen()
 int main()
 {
   regex re("a");
+  clear_screen();
+  print_screen("Hello, CLI GAME");
 
   while(1)
   {
-	int cmd = 0;
+	int cmd;
 	scanf("%d", &cmd);
+
 	clear_screen();
-	cout << "test" << endl;
-	cout << "test" << endl;
-	cout << "test" << endl;
-	cout << "test" << endl;
-	cout << "test" << endl;
+	print_screen("test");
   }
 
   return 0;
