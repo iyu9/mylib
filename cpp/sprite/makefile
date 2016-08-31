@@ -1,0 +1,2 @@
+sprite:
+	g++ sprite.cpp

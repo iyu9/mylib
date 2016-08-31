@@ -1,0 +1,2 @@
+script:
+	g++ script.cpp

@@ -125,7 +125,7 @@ void actor::lvup() {
 	std::cout << std::endl;
 }
 
-
+/*
 void actor::lvdn() {
 
 	if(lv <= 1) {
@@ -183,7 +183,7 @@ void actor::lvdn() {
 
 	std::cout << std::endl;
 }
-
+*/
 int actor::check_weakness() {
   int count = 1;
 
@@ -279,6 +279,11 @@ void actor::use_item(item* it) {
 	}		
 }
 
+void actor::get_exp(int exp)
+{
+    this->exp += exp;
+}
+
 void actor::action_move(vector2 vec) {
 	//pos.x += vec.x;
 	//pos.y += vec.y;
@@ -330,6 +335,7 @@ int main() {
 	player->print_battle_status();
 
 	delete(player);
+	delete(enemy);
 	return 0;		
 }
 /**/

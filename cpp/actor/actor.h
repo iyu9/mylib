@@ -6,6 +6,7 @@
 #include "../common/common.h"
 #include "../item/item.h"
 #include "../skill/skill.h"
+#include "../magic/magic.h"
 #include "../vector/vector2.cpp"
 
 const int LIST_SIZE = 10;
@@ -55,6 +56,7 @@ public:
 	int equip_list[LIST_SIZE];
 	int item_list[LIST_SIZE];
 	int skill_list[LIST_SIZE];
+	int magic_list[LIST_SIZE];
 
 	//grows
 	float per_hp;
@@ -73,14 +75,16 @@ public:
 
 	void action_move(vector2 vec);
 	void lvup();
-	void lvdn();
-	void attack(actor* op);
+	//void lvdn();
+	void attack(actor* target);
 	void guard();
 	void escape();
-	void use_item(item* it);
-	void use_skill(skill* sk);
-	void on_damage(actor* op);
+	void use_item(item* item);
+	void use_skill(skill* skill);
+	void use_magic(magic* magic);
+	void on_damage(actor* attacker);
 	int check_weakness();
+	void get_exp(int exp);
 
 	void print_status();
 	void print_battle_status();
