@@ -8,6 +8,14 @@ battle::battle(): scene::scene()
     this->enemy = new actor("slime");
 }
 
+battle::battle(actor* player, actor* enemy)
+{
+    this->step = STEP_INIT;
+
+    this->player = player;
+    this->enemy = enemy;
+}
+
 battle::~battle()
 {
     delete(player);

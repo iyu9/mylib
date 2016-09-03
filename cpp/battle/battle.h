@@ -1,5 +1,6 @@
 #include "../scene/scene.cpp"
 #include "../actor/actor.cpp"
+//#include "../map/map.cpp"
 
 std::string step_name[4] = {
    "STEP_INIT",
@@ -27,6 +28,7 @@ public:
 	actor* enemy;
 
 	battle();
+	battle(actor* player, actor* enemy);
 	~battle();
 
     void update();
