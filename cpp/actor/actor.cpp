@@ -319,7 +319,7 @@ float rand_prob() {
 	return (float) (rand() / RAND_MAX);		
 }
 
-/**/
+/*
 int main() {
 	actor* player = new actor();
 	actor* enemy = new actor();
@@ -338,4 +338,4 @@ int main() {
 	delete(enemy);
 	return 0;		
 }
-/**/
+*/

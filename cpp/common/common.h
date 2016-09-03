@@ -8,6 +8,11 @@
 #include <time.h>
 #include <math.h>
 
+void clear()
+{
+   system("clear"); 
+}
+
 void print(std::string msg) {
    std::cout << msg;
 }

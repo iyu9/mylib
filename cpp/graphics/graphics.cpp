@@ -266,11 +266,11 @@ void graphics::render() {
 	DrawCube(*pos, s);
 		
 	std::ostringstream stream;
-	/*
+	/**/
 	stream << timer;
 	std::string str = stream.str();
 	DrawString(-0.8, 0.8, str);
-	*/
+	/**/
 	stream << delta;
 	std::string d_str = stream.str();
 	DrawString(-0.8, 1, d_str);

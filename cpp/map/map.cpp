@@ -1,6 +1,5 @@
 #include "map.h"
 
-//constructors
 map::map() {
 	pos_x = pos_y = 1;
 
@@ -14,9 +13,7 @@ map::map() {
 map::~map() {
 }
 
-//methods
 void map::create(int type) {
-	//outer block
 	for(int i = 0; i < MAP_SIZE; i++) {
 		for(int j = 0; j < MAP_SIZE; j++) {
 			if(i == 0 || i == MAP_SIZE-1 || j == 0 || j == MAP_SIZE-1) {

@@ -1,19 +1,23 @@
 #include "battle.h"
 
-battle::battle(): scene::scene() {
+battle::battle(): scene::scene()
+{
     this->step = STEP_INIT;
 
     this->player = new actor("tommy");
     this->enemy = new actor("slime");
 }
 
-battle::~battle() {
+battle::~battle()
+{
     delete(player);
     delete(enemy);
 }
 
-void battle::next_step(int current) {
-    switch(current) {
+void battle::next_step(int current)
+{
+    switch(current)
+	{
        case STEP_INIT:
         step = STEP_CMD;
         break;
@@ -31,20 +35,28 @@ void battle::next_step(int current) {
     }
 }
 
-void battle::ret_step(int current) {
-    switch(current) {
-       case STEP_INIT: break;
-       case STEP_CMD: break;
-       case STEP_ACT: break;
-       case STEP_FIN: break;
+void battle::ret_step(int current)
+{
+    switch(current)
+	{
+       case STEP_INIT:
+	     break;
+       case STEP_CMD:
+		 break;
+       case STEP_ACT:
+	     break;
+       case STEP_FIN:
+	     break;
     }
 }
 
-void battle::input(int current) {
+void battle::input()
+{
     std::string cmd;
     std::cin >> cmd;
 
-    switch(cmd[0]) {
+    switch(cmd[0])
+	{
       case 'a':
         break;
       case 'g':
@@ -54,11 +66,13 @@ void battle::input(int current) {
     }
 }
 
-//If cui mode, there are only print functions.
-void battle::render(int current) {
+void battle::render(int current)
+{
+	clear();
     println(step_name[step]);
 
-    switch(current) {
+    switch(current)
+	{
       case STEP_INIT:
         println(enemy->name + "と出会った！");
         println("");
@@ -76,9 +90,10 @@ void battle::render(int current) {
     }        
 }
 
-// model control
-void battle::proc(int current) {
-   switch(current) {
+void battle::proc(int current)
+{
+   switch(current)
+   {
       case STEP_INIT:
       case STEP_CMD:
       case STEP_ACT:
@@ -87,21 +102,26 @@ void battle::proc(int current) {
    }     
 }
 
-void battle::update() {
+void battle::update()
+{
     render(step);
-    input(step);
+    input();
 
     proc(step);
     next_step(step);
 }
 
 /**/
-int main() {
-	battle* bs = new battle();
+int main()
+{
+	battle* b = new battle();
 
-    while(!bs->is_exit()) {
-      bs->update();
+    while(!b->is_exit())
+	{
+      b->update();
     }
+
+	delete(b);
     
 	return 0;
 }

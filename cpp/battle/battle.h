@@ -15,7 +15,8 @@ private:
     int pl_idx;
 
 public:
-    enum BattleStep {
+    enum BattleStep
+	{
        STEP_INIT,
        STEP_CMD,
        STEP_ACT,
@@ -33,7 +34,7 @@ public:
     void next_actor(int pl_idx);
 	void next_step(int current_step);
 	void ret_step(int current_step);
-    void input(int current_step);
+    void input();
     void render(int current_step);
     void proc(int current_step);
 };
