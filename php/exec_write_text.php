@@ -1,16 +1,18 @@
 <?php
 
   //sample input param
-  $_POST['cmd'] = "test";
-  $_POST['txt'] = "test";
-  $_POST['log'] = "test";
-  $_POST['pass'] = "password";
+  $_POST['cmd'] = "regist";
+  $_POST['txt'] = "submit_something_text";
+  $_POST['usr'] = "test_user";
+  $_POST['pass'] = "password";;
 
   //post param
   $cmd = $_POST['cmd'];
   $txt = $_POST['txt'];
-  $log = $_POST['log'];
+  $usr = $_POST['usr'];
   $pass = $_POST['pass'];
+
+  $log = date(DATE_RSS) .' '. $usr .' '. $cmd .' '. $txt .' '. "\n";
 
   //check pass
   if ($pass != "password")
@@ -20,6 +22,6 @@
 
   //output log
   $fout = fopen("log.txt", 'a');
-  fwrite($fout, "exec" . date(DATE_RSS) . '\n');
+  fwrite($fout, $log);
   fclose($fout);
 ?>
