@@ -6,6 +6,10 @@ chrono::chrono()
 	prev_clock = start;
 }
 
+chrono::~chrono()
+{
+}
+
 clock_t chrono::get_clock_sec()
 {
 	clock_t current = clock();
@@ -53,6 +57,7 @@ double chrono::get_time()
 	return time;
 }
 
+/*
 #include <stdio.h>
 #include <time.h>
 
@@ -66,7 +71,6 @@ int main(void)
   start = clock();
   printf( "開始時間:%d¥n", start );
 
-  /* 何かの処理 */
   for( i=0; i<500000000; i++ );
 
   //end = clock();
@@ -74,18 +78,6 @@ int main(void)
   //printf( "処理時間:%f¥n", (double) (end - start) / CLOCKS_PER_SEC );
 
   printf("start from time = %f", c->get_time());
-  return 0;
-}
-
-/*
-int main() {
-  chrono* c = new chrono();
-
-  while(1) {
-  	std::cout << "get_sec(): " << c->get_sec() << std::endl;
-  	std::cout << "get_delta(): " << c->get_delta() << std::endl;
-  }
-
   return 0;
 }
 */
