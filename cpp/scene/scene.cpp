@@ -3,64 +3,74 @@
 /*
  * Scene Transition Control Class
  * @Written by Tomii
- * */
+ */
 
-scene::scene() {
+scene::scene()
+{
     this->state = state_enter;
     this->id = 0;
     this->name = "";        
 }
 
-scene::scene(int id_, std::string name_) {
+scene::scene(int id_, std::string name_)
+{
 	this->state = state_enter;
 	this->id = id_;
 	this->name = name_;	
 }
 
-scene::scene(int id_) {
+scene::scene(int id_)
+{
 	this->state = state_enter;
 	this->id = id_;
 	this->name = "";	
 }
-scene::scene(std::string name_) {
+scene::scene(std::string name_)
+{
 	this->state = state_enter;
 	this->id = -1;
 	this->name = name_;	
 }
 
-scene::~scene() {
-	//release		
+scene::~scene()
+{
 }
 
-void scene::update() {
-	if (state == state_enter) {
+void scene::update()
+{
+	if (state == state_enter)
+	{
 		on_enter();
 		state = state_update;
 		return;		
 	}
 
-	//update main
-	on_update();
-
-	if (state == state_exit) {
+	if (state == state_exit)
+	{
 		on_exit();
 		return;		
 	}
+
+	on_update();
 }
 
-void scene::on_update() {
+void scene::on_update()
+{
 	//std::cout << "on_update" << std::endl;
 }
 
-void scene::on_enter() {
+void scene::on_enter()
+{
 	//std::cout << "on_enter" << std::endl;	
 }
 
-void scene::on_exit() {	
+void scene::on_exit()
+{	
 	//std::cout << "on_exit" << std::endl;
 }
 
-bool scene::is_exit() {
+bool scene::is_exit()
+{
 	return (state == state_exit);	
 }
 

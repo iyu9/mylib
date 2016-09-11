@@ -2,48 +2,48 @@
 
 const char exit_code = '4';
 
-//util function
-void newln() {
-		std::cout << std::endl;		
-}
-
-void println(const char* str) {
-		std::cout << str << std::endl;
-}
-
-Game::Game() {
+Game::Game()
+{
 	mode = 0;
-	command = 0;	
+	cmd = 0;
+	current_scene = new scene();
 }
 
-Game::~Game() {
+Game::~Game()
+{
 }
 
-int Game::input_command() {
-	std::cin >> command;
+int Game::input_command()
+{
+	std::cin >> cmd;
 }
 
-int Game::decode_command() {
-	switch(command) {
+int Game::decode_command() 
+{
+	switch(cmd)
+	{
 		case '0':
 		case '1':
 		case '2':
 		case '3':
 		case '4':
-			mode = command;
+			mode = cmd;
 			break;
 
 		break;	
 	}		
 }
 
-void Game::Input() {
+void Game::Input()
+{
 	input_command();
 	decode_command();	
 }
 
-void Game::Render() {
-	switch(mode) {
+void Game::Render()
+{
+	switch(mode)
+	{
 		case '0':
 		println("Title");
 		break;
@@ -66,22 +66,27 @@ void Game::Render() {
 	}	
 }
 
-void Game::MainLoop() {
-	println("Terra Anigma\n");
+void Game::MainLoop()
+{
 	println("Title Menu:");
 	println("(1.Start, 2.Load, 3.Config, 4.Exit)");
 
-	while(command != exit_code) {
+	while(cmd != exit_code)
+	{
+	  /*
 		Input();
 		Render();	
+	  */
 	}	
 }
 
 /**/
-int main(){
+int main()
+{
 	Game* game = new Game();
 	game->MainLoop();
 	delete(game);
+
 	return 0;		
 }
 /**/

@@ -43,7 +43,7 @@ void battle::next_step(int current)
     }
 }
 
-void battle::ret_step(int current)
+void battle::back_step(int current)
 {
     switch(current)
 	{

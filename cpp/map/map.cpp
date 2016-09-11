@@ -109,11 +109,11 @@ void map::move_pl(int dir, int move) {
 	}		
 }
 
-/**/
+/*
 int main() {
 	map* m = new map();
 	m->create(0);
 	m->print(); 
 	return 0;		
 }
-/**/
+*/

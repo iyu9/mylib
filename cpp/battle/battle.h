@@ -1,6 +1,6 @@
 #include "../scene/scene.cpp"
 #include "../actor/actor.cpp"
-//#include "../map/map.cpp"
+#include "../map/map.cpp"
 
 std::string step_name[4] = {
    "STEP_INIT",
@@ -35,7 +35,7 @@ public:
 
     void next_actor(int pl_idx);
 	void next_step(int current_step);
-	void ret_step(int current_step);
+	void back_step(int current_step);
     void input();
     void render(int current_step);
     void proc(int current_step);

@@ -1,14 +1,16 @@
 #include "../common/common.h"
+#include "../scene/scene.cpp"
+#include "game_def.hpp"
+#include "message_def.hpp"
 
-//very abstract game-class
-class Game {
-
+class Game
+{
 private:
-	//members
-	int mode;
-	char command;
+	scene* current_scene;
 
-	//functions
+	int mode;
+	char cmd;
+
 	int input_command();
 	int decode_command();
 	void Render();
