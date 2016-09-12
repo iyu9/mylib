@@ -6,6 +6,9 @@ battle::battle(): scene::scene()
 
     this->player = new actor("tommy");
     this->enemy = new actor("slime");
+
+	//this->players = new actor[6];
+	//this->enemies = new actor[6];
 }
 
 battle::battle(actor* player, actor* enemy)
@@ -16,10 +19,21 @@ battle::battle(actor* player, actor* enemy)
     this->enemy = enemy;
 }
 
+battle::battle(actor* players[], actor* enemies[])
+{
+    this->step = STEP_INIT;
+
+    this->players = players;
+    this->enemies = enemies;
+}
+
 battle::~battle()
 {
     delete(player);
     delete(enemy);
+
+    delete[] players;
+    delete[] enemies;
 }
 
 void battle::input()

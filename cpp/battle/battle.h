@@ -2,15 +2,16 @@
 #include "../actor/actor.cpp"
 #include "../map/map.cpp"
 
-std::string step_name[4] = {
+std::string step_name[4] =
+{
    "STEP_INIT",
    "STEP_CMD",
    "STEP_ACT",
    "STEP_FIN"
 };
 
-class battle: public scene {
-
+class battle: public scene
+{
 private:
     int step;
     int pl_idx;
@@ -30,8 +31,12 @@ public:
 	actor* player;
 	actor* enemy;
 
+	actor** players;
+	actor** enemies;
+
 	battle();
 	battle(actor* player, actor* enemy);
+	battle(actor* player[], actor* enemy[]);
 	~battle();
 
     void update();
