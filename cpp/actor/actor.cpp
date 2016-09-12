@@ -131,20 +131,20 @@ actor::actor(std::string name_, int type_)
 
 actor::~actor(){}
 
-int upper_lim(int exp, int lim, int def)
+int upper_lim(int val, int lim, int upper_val)
 {
-	if(exp > lim) {
-		return def;
+	if (val > lim) {
+		return upper_val;
 	}
-	return exp;
+	return val;
 }
 
-int lower_lim(int exp, int lim, int def)
+int lower_lim(int val, int lim, int lower_val)
 {
-	if(exp < lim) {
-		return def;
+	if (val < lim) {
+		return lower_val;
 	}
-	return exp;
+	return val;
 }
 
 void actor::lvup()
@@ -305,7 +305,7 @@ void actor::on_damage(actor* atacker) {
 	}
 
 	//damage phase
-	float damage = lower_lim((100 + atacker->atk - def), 0, 0);
+	float damage = lower_lim(atacker->atk - def, 0, 0);
 
 	if(weak_factor > 1) {
 		damage *= 2;

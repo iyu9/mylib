@@ -39,6 +39,8 @@ public:
 	actor** players;
 	actor** enemies;
 
+	map* battle_map;
+
 	battle();
 	battle(actor* player, actor* enemy);
 	battle(actor* player[], actor* enemy[]);
@@ -48,5 +50,6 @@ public:
 
     void input();
     void render();
+	void draw_map();
     void proc();
 };

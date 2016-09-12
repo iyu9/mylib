@@ -10,6 +10,8 @@ battle::battle(): scene::scene()
     this->player = new actor("tommy");
     this->enemy = new actor("slime");
 
+	this->battle_map = new map();
+
 	//this->players = new actor[6];
 	//this->enemies = new actor[6];
 }
@@ -85,43 +87,54 @@ void battle::input()
         break;
 
 	  case 'm':
-		println("youmoved");
+		println("you moved position");
 		player->move(1, 1);
 		break;
 
+	  case 'f':
+		println("you check map");
+		draw_map();
+		break;
+
 	  case 'i':
+		println("your items list");
 		//player->use_item();
 		break;
 
 	  case 's':
 		clear();
+		print("step = ");
+		println(step_name[step]);
+		println("");
+		println("");
 		println("Status::");
 		player->print_battle_status();
 		enemy->print_battle_status();
 		step = STEP_CMD;
+		break;
+
+	  case 'q':
+		println("BYE");
+		set_exit();
 		break;
     }
 }
 
 void battle::render()
 {
-	print("current_step = ");
-    println(step_name[step]);
-
     switch(step)
 	{
       case STEP_INIT:
         println(enemy->name + "と出会った！");
         println("");
 		step = STEP_CMD;
-        player->print_battle_status();
-        println("コマンド？");
-        println("(A)ttack, (G)uard, (E)scape, (M)ove, (S)tatus, (U)se");
+        println("Command >");
+        println("(A)ttack, (G)uard, (E)scape, (F)igure, (M)ove, (S)tatus, (U)se");
         break;
 
       case STEP_CMD:
-        println("コマンド？");
-        println("(A)ttack, (G)uard, (E)scape, (M)ove, (S)tatus, (U)se");
+        println("Command>");
+        println("(A)ttack, (G)uard, (E)scape, (F)igure, (M)ove, (S)tatus, (U)se");
 		break;
 
 	  case STEP_USE:
@@ -163,11 +176,16 @@ void battle::render()
     }        
 }
 
+void battle::draw_map()
+{
+	battle_map->print();
+}
+
 void battle::update()
 {
     render();
 
-	if(step == STEP_CMD)
+	if (step == STEP_CMD)
 	{
 	  input();
 	}
