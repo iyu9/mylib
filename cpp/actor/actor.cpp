@@ -355,6 +355,16 @@ bool actor::escape()
 	return false;
 }
 
+bool actor::is_dead()
+{
+	if (hp <= 0)
+	{
+	  return true;
+	}
+
+	return false;
+}
+
 void actor::use_skill(skill* sk)
 {
 	switch(sk->type)

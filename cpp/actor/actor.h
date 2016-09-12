@@ -80,6 +80,7 @@ public:
 	void guard();
 	void refresh();
 	bool escape();
+	bool is_dead();
 	void use_item(item* item);
 	void use_skill(skill* skill);
 	void use_magic(magic* magic);

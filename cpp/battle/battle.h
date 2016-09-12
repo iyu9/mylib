@@ -20,8 +20,11 @@ public:
 	{
        STEP_INIT,
        STEP_CMD,
+	   STEP_USE,
        STEP_ACT,
-       STEP_FIN
+       STEP_FIN,
+	   STEP_LOSE,
+	   STEP_WIN,
     };
 
 	actor* player;

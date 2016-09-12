@@ -35,14 +35,22 @@ void battle::input()
 	{
       case 'a':
 	    player->attack(enemy);
-		//enemy->print_status();
+		if (enemy->is_dead())
+		{
+		  println("you defeated enemies");
+		  step = STEP_WIN; 
+		}
+		step = STEP_ACT;
         break;
+
       case 'g':
-		println("you guarded");
+		println("you carefully defenced");
 		println(player->def);
 		player->guard();
 		println(player->def);
+		step = STEP_ACT;
         break;
+
       case 'e':
 		if (!player->escape()) {
 		  println("escape succeeded!");
@@ -50,14 +58,23 @@ void battle::input()
 		}
 		else {
 		  println("escape failed!");  
+		  step = STEP_ACT;
 		}
         break;
+
+	  case 's':
+		clear();
+		println("Status::");
+		player->print_battle_status();
+		enemy->print_battle_status();
+		step = STEP_CMD;
+		break;
     }
 }
 
 void battle::render()
 {
-    //clear();
+	print("current_step = ");
     println(step_name[step]);
 
     switch(step)
@@ -65,19 +82,40 @@ void battle::render()
       case STEP_INIT:
         println(enemy->name + "と出会った！");
         println("");
-		step++;
+		step = STEP_CMD;
         //player->print_battle_status();
 		//enemy->print_status();
         println("コマンド？");
-        println("(A)ttack, (G)uard, (E)scape");
+        println("(A)ttack, (G)uard, (E)scape, (S)tatus, (U)se");
         break;
 
       case STEP_CMD:
         println("コマンド？");
-        println("(A)ttack, (G)uard, (E)scape");
+        println("(A)ttack, (G)uard, (E)scape, (S)tatus, (U)se");
+		break;
+
+	  case STEP_USE:
+		println("use item");
+		break;
+
       case STEP_ACT:
+		println("enemy turn action");
+		enemy->attack(player);
+		if (player->is_dead())
+		{
+		  println("RIP: you died!");
+		  set_exit();
+		  step = STEP_LOSE;
+		}
+
       case STEP_FIN:
         break;
+	  case STEP_LOSE:
+		break;
+	  case STEP_WIN:
+		println("YOU GET EXP:");
+		println("YOU GET ITEM:");
+		break;
     }        
 }
 
@@ -89,14 +127,21 @@ void battle::proc()
       case STEP_CMD:
       case STEP_ACT:
       case STEP_FIN:
-        break;
+	  case STEP_LOSE:
+		break;
+	  case STEP_WIN:
+		break;
    }     
 }
 
 void battle::update()
 {
     render();
-    input();
+
+	if(step == STEP_CMD)
+	{
+	  input();
+	}
     //proc();
 }
 
