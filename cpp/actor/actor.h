@@ -46,8 +46,8 @@ public:
 	int max_tec;
 	int tec;		
 
-	int max_move;		
-	int move;
+	int max_mov;		
+	int mov;
 	int max_hit;
 	int hit;
 	
@@ -74,6 +74,7 @@ public:
 	~actor();
 
 	void action_move(vector2 vec);
+	void move(int x_, int y_);
 	void lvup();
 	//void lvdn();
 	void attack(actor* target);

@@ -15,20 +15,20 @@ const int CON_STONE = 2;
 actor::actor()
 {
 	srand((unsigned)time(NULL));
-
+	
 	name = "no_name";
-	lv = 1;
-	hp = 10;
-	mp = 10;
+	lv  = 1;
+	hp  = 10;
+	mp  = 10;
 	atk = 5;
 	def = 5;
 	spd = 5;
 	tec = 5;
 	luk = 5;
-	move = 5;
+	mov = 5;
 
-	per_hp = 0.80;
-	per_mp = 0.80;
+	per_hp  = 0.80;
+	per_mp  = 0.80;
 	per_atk = 0.30;
 	per_def = 0.30;
 	per_spd = 0.30;
@@ -39,20 +39,20 @@ actor::actor()
 actor::actor(std::string name_)
 {
 	srand((unsigned)time(NULL));
-	name = name_;	
 
-	lv = 1;
-	hp = 10;
-	mp = 10;
+	name = name_;	
+	lv  = 1;
+	hp  = 10;
+	mp  = 10;
 	atk = 5;
 	def = 5;
 	spd = 5;
 	tec = 5;
 	luk = 5;
-	move = 5;
+	mov = 5;
 
-	per_hp = 0.80;
-	per_mp = 0.80;
+	per_hp  = 0.80;
+	per_mp  = 0.80;
 	per_atk = 0.30;
 	per_def = 0.30;
 	per_spd = 0.30;
@@ -64,26 +64,26 @@ actor::actor(std::string name_)
 	max_spd = spd;
 	max_tec = tec;
 	max_luk = luk;
-	max_move = move;
+	max_mov = mov;
 }
 
 actor::actor(int lv)
 {
 	srand((unsigned)time(NULL));
-	lv = lv;
-    name = "NO_NAME";	
 
-	hp = 10;
-	mp = 10;
+    name = "NO_NAME";	
+	lv = lv;
+	hp  = 10;
+	mp  = 10;
 	atk = 5;
 	def = 5;
 	spd = 5;
 	tec = 5;
 	luk = 5;
-	move = 5;
+	mov = 5;
 
-	per_hp = 0.80;
-	per_mp = 0.80;
+	per_hp  = 0.80;
+	per_mp  = 0.80;
 	per_atk = 0.30;
 	per_def = 0.30;
 	per_spd = 0.30;
@@ -94,28 +94,28 @@ actor::actor(int lv)
 	max_spd = spd;
 	max_tec = tec;
 	max_luk = luk;
-	max_move = move;
+	max_mov = mov;
 }
 
 actor::actor(std::string name_, int type_)
 {
 	srand((unsigned)time(NULL));
+
 	name = name_;
 	type = type_;
-
-	lv = 1;
-	hp = 10;
-	mp = 10;
+	lv  = 1;
+	hp  = 10;
+	mp  = 10;
 	atk = 5;
 	def = 5;
 	spd = 5;
 	tec = 5;
 	luk = 5;
 	def = 5;
-	move = 5;
+	mov = 5;
 
-	per_hp = 0.80;
-	per_mp = 0.80;
+	per_hp  = 0.80;
+	per_mp  = 0.80;
 	per_atk = 0.30;
 	per_def = 0.30;
 	per_spd = 0.30;
@@ -126,7 +126,7 @@ actor::actor(std::string name_, int type_)
 	max_spd = spd;
 	max_tec = tec;
 	max_luk = luk;
-	max_move = move;
+	max_mov = mov;
 }
 
 actor::~actor(){}
@@ -396,6 +396,12 @@ void actor::action_move(vector2 vec)
 	//pos.y += vec.y;
 }
 
+void actor::move(int x_, int y_)
+{
+	pos.x += x_;
+	pos.y += y_;
+}
+
 void actor::print_status()
 {		
 	std::cout << "STATUS::" << std::endl;
@@ -411,7 +417,7 @@ void actor::print_status()
 	std::cout << "SPD: " << spd << std::endl;
 	std::cout << "TEC: " << tec << std::endl;
 	std::cout << "LUK: " << luk << std::endl;
-	std::cout << "MOVE: " << move << std::endl;
+	std::cout << "MOV: " << mov << std::endl;
 	std::cout << "POS: " << "(" << pos.x << ", " << pos.y << ")"
 	<< std::endl << std::endl << std::endl;
 }

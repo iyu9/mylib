@@ -19,8 +19,6 @@ private:
     int step;
     int pl_idx;
 	int em_idx;
-	int turn;
-
 public:
     enum BattleStep
 	{
