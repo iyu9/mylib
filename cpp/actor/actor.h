@@ -78,7 +78,8 @@ public:
 	//void lvdn();
 	void attack(actor* target);
 	void guard();
-	void escape();
+	void refresh();
+	bool escape();
 	void use_item(item* item);
 	void use_skill(skill* skill);
 	void use_magic(magic* magic);

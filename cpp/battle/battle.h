@@ -14,7 +14,7 @@ class battle: public scene {
 private:
     int step;
     int pl_idx;
-
+	int em_idx;
 public:
     enum BattleStep
 	{
@@ -33,10 +33,7 @@ public:
 
     void update();
 
-    void next_actor(int pl_idx);
-	void next_step(int current_step);
-	void back_step(int current_step);
     void input();
-    void render(int current_step);
-    void proc(int current_step);
+    void render();
+    void proc();
 };

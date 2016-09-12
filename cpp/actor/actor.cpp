@@ -12,10 +12,97 @@ const int CON_FINE = 0;
 const int CON_DEAD = 1;
 const int CON_STONE = 2;
 
-actor::actor() {
+actor::actor()
+{
 	srand((unsigned)time(NULL));
 
 	name = "no_name";
+	lv = 1;
+	hp = 10;
+	mp = 10;
+	atk = 5;
+	def = 5;
+	spd = 5;
+	tec = 5;
+	luk = 5;
+	move = 5;
+
+	per_hp = 0.80;
+	per_mp = 0.80;
+	per_atk = 0.30;
+	per_def = 0.30;
+	per_spd = 0.30;
+	per_tec = 0.30;
+	per_luk = 0.30;
+}
+
+actor::actor(std::string name_)
+{
+	srand((unsigned)time(NULL));
+	name = name_;	
+
+	lv = 1;
+	hp = 10;
+	mp = 10;
+	atk = 5;
+	def = 5;
+	spd = 5;
+	tec = 5;
+	luk = 5;
+	move = 5;
+
+	per_hp = 0.80;
+	per_mp = 0.80;
+	per_atk = 0.30;
+	per_def = 0.30;
+	per_spd = 0.30;
+	per_tec = 0.30;
+	per_luk = 0.30;
+
+	max_atk = atk;
+	max_def = def;
+	max_spd = spd;
+	max_tec = tec;
+	max_luk = luk;
+	max_move = move;
+}
+
+actor::actor(int lv)
+{
+	srand((unsigned)time(NULL));
+	lv = lv;
+    name = "NO_NAME";	
+
+	hp = 10;
+	mp = 10;
+	atk = 5;
+	def = 5;
+	spd = 5;
+	tec = 5;
+	luk = 5;
+	move = 5;
+
+	per_hp = 0.80;
+	per_mp = 0.80;
+	per_atk = 0.30;
+	per_def = 0.30;
+	per_spd = 0.30;
+	per_tec = 0.30;
+
+	max_atk = atk;
+	max_def = def;
+	max_spd = spd;
+	max_tec = tec;
+	max_luk = luk;
+	max_move = move;
+}
+
+actor::actor(std::string name_, int type_)
+{
+	srand((unsigned)time(NULL));
+	name = name_;
+	type = type_;
+
 	lv = 1;
 	hp = 10;
 	mp = 10;
@@ -33,43 +120,37 @@ actor::actor() {
 	per_def = 0.30;
 	per_spd = 0.30;
 	per_tec = 0.30;
-	per_luk = 0.30;
+
+	max_atk = atk;
+	max_def = def;
+	max_spd = spd;
+	max_tec = tec;
+	max_luk = luk;
+	max_move = move;
 }
 
-actor::actor(std::string name_) {
-	name = name_;	
-}
+actor::~actor(){}
 
-actor::actor(int lv) {
-	lv = lv;
-    name = "NO_NAME";	
-}
-
-actor::actor(std::string name_, int type_) {
-	name = name_;
-	type = type_;
-}
-
-actor::~actor() {
-}
-
-int upper_lim(int exp, int lim, int def) {
+int upper_lim(int exp, int lim, int def)
+{
 	if(exp > lim) {
 		return def;
 	}
 	return exp;
 }
 
-int lower_lim(int exp, int lim, int def) {
+int lower_lim(int exp, int lim, int def)
+{
 	if(exp < lim) {
 		return def;
 	}
 	return exp;
 }
 
-void actor::lvup() {
-
-	if(lv >= 99) {
+void actor::lvup()
+{
+	if(lv >= 99)
+	{
 		std::cout << "already 99..." << std::endl;
 		return;
 	}
@@ -249,30 +330,45 @@ void actor::attack(actor* target) {
 	target->on_damage(this);		
 }
 
-void actor::guard() {
+void actor::guard()
+{
 	def *= 2;		
 }
 
-void actor::escape() {
-	float r = rand_prob();
-	
-	if(r > 0.5) {
-		//true
-	}
-
-	//false...
+void actor::refresh()
+{
+	atk = max_atk;
+	def = max_def;
+	spd = max_spd;
+	luk = max_luk;
 }
 
-void actor::use_skill(skill* sk) {
-	switch(sk->type) {
+bool actor::escape()
+{
+	float r = rand_prob();
+	
+	if (r > 0.5)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void actor::use_skill(skill* sk)
+{
+	switch(sk->type)
+	{
 	  case SK_ATTACK:
 	  case SK_HEAL:
 		break;
 	}		
 }
 
-void actor::use_item(item* it) {
-	switch(it->type) {
+void actor::use_item(item* it)
+{
+	switch(it->type)
+	{
 	  case IT_HEAL:
 	  case IT_ATTACK:
 		break;
@@ -284,12 +380,14 @@ void actor::get_exp(int exp)
     this->exp += exp;
 }
 
-void actor::action_move(vector2 vec) {
+void actor::action_move(vector2 vec)
+{
 	//pos.x += vec.x;
 	//pos.y += vec.y;
 }
 
-void actor::print_status() {		
+void actor::print_status()
+{		
 	std::cout << "STATUS::" << std::endl;
 	std::cout << "LV: " << lv << std::endl;
 	std::cout << "TYPE: " << type << std::endl;
@@ -309,13 +407,15 @@ void actor::print_status() {
 }
 
 
-void actor::print_battle_status() {
+void actor::print_battle_status()
+{
 	std::cout << "NAME: " << name << std::endl;		
 	std::cout << "HP: " << hp << std::endl;		
 	std::cout << "MP: " << mp << std::endl << std::endl;		
 }
 
-float rand_prob() {
+float rand_prob()
+{
 	return (float) (rand() / RAND_MAX);		
 }
 

@@ -22,69 +22,52 @@ battle::~battle()
     delete(enemy);
 }
 
-void battle::next_step(int current)
-{
-    switch(current)
-	{
-       case STEP_INIT:
-        step = STEP_CMD;
-        break;
-
-       case STEP_CMD:
-        step = STEP_ACT;
-        break;
-
-       case STEP_ACT:
-        step = STEP_FIN;
-        break;
-
-       case STEP_FIN:
-        break;
-    }
-}
-
-void battle::back_step(int current)
-{
-    switch(current)
-	{
-       case STEP_INIT:
-	     break;
-       case STEP_CMD:
-		 break;
-       case STEP_ACT:
-	     break;
-       case STEP_FIN:
-	     break;
-    }
-}
-
 void battle::input()
 {
     std::string cmd;
     std::cin >> cmd;
 
+	//clear();
+	player->refresh();
+	enemy->refresh();
+
     switch(cmd[0])
 	{
       case 'a':
+	    player->attack(enemy);
+		//enemy->print_status();
         break;
       case 'g':
+		println("you guarded");
+		println(player->def);
+		player->guard();
+		println(player->def);
         break;
       case 'e':
+		if (!player->escape()) {
+		  println("escape succeeded!");
+		  set_exit();
+		}
+		else {
+		  println("escape failed!");  
+		}
         break;
     }
 }
 
-void battle::render(int current)
+void battle::render()
 {
-	clear();
+    //clear();
     println(step_name[step]);
 
-    switch(current)
+    switch(step)
 	{
       case STEP_INIT:
         println(enemy->name + "と出会った！");
         println("");
-        player->print_battle_status();
+		step++;
+        //player->print_battle_status();
+		//enemy->print_status();
         println("コマンド？");
         println("(A)ttack, (G)uard, (E)scape");
         break;
@@ -98,9 +81,9 @@ void battle::render(int current)
     }        
 }
 
-void battle::proc(int current)
+void battle::proc()
 {
-   switch(current)
+   switch(step)
    {
       case STEP_INIT:
       case STEP_CMD:
@@ -112,11 +95,9 @@ void battle::proc(int current)
 
 void battle::update()
 {
-    render(step);
+    render();
     input();
-
-    proc(step);
-    next_step(step);
+    //proc();
 }
 
 /**/

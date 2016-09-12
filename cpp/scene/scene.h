@@ -27,4 +27,5 @@ public:
 
 	virtual void update();
 	virtual bool is_exit();
+	void set_exit();
 };

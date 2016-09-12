@@ -74,6 +74,11 @@ bool scene::is_exit()
 	return (state == state_exit);	
 }
 
+void scene::set_exit()
+{
+	state = state_exit;  
+}
+
 /*
 int main() {
 	scene* s = new scene(0, "name");
