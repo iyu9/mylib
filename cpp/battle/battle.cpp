@@ -52,6 +52,13 @@ void battle::input()
     switch (cmd[0])
 	{
       case 'a':
+
+		if (battle_map->get_dist(player, enemy) > player->range)
+		{
+		  println("over fire range");
+		  return;
+		}
+
 	    player->attack(enemy);
 		if (enemy->is_dead())
 		{
