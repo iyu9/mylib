@@ -86,8 +86,24 @@ void battle::input()
         break;
 
 	  case 'm':
-		println("you moved position");
-		player->move(1, 1);
+		print("Remain Move: ");
+		println(player->mov);
+		println("x = ");
+		int x, y;
+		std::cin >> x;
+		println("y = ");
+		std::cin >> y;
+
+		if (x >= 0 && y >= 0 && x + y <= player->mov)
+		{
+		  println("you moved position");
+		  player->move(x, y);  
+		}
+		else
+		{
+		  println("can't move");  
+		}
+
 		break;
 
 	  case 'f':
@@ -128,12 +144,14 @@ void battle::render()
         println("");
 		step = STEP_CMD;
         println("Command >");
-        println("(A)ttack, (G)uard, (E)scape, (F)igure, (M)ove, (S)tatus, (U)se");
+        println("(A)ttack, (G)uard, (E)scape, (F)igure");
+        println("(M)ove, (S)tatus, (U)se");
         break;
 
       case STEP_CMD:
         println("Command>");
-        println("(A)ttack, (G)uard, (E)scape, (F)igure, (M)ove, (S)tatus, (U)se");
+        println("(A)ttack, (G)uard, (E)scape, (F)igure");
+        println("(M)ove, (S)tatus, (U)se");
 		break;
 
 	  case STEP_USE:
