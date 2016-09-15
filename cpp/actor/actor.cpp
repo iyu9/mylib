@@ -26,6 +26,7 @@ actor::actor()
 	tec = 5;
 	luk = 5;
 	mov = 5;
+	range = 2;
 
 	per_hp  = 0.80;
 	per_mp  = 0.80;
@@ -34,6 +35,7 @@ actor::actor()
 	per_spd = 0.30;
 	per_tec = 0.30;
 	per_luk = 0.30;
+	max_range = range;
 }
 
 actor::actor(std::string name_)
@@ -50,6 +52,7 @@ actor::actor(std::string name_)
 	tec = 5;
 	luk = 5;
 	mov = 5;
+	range = 2;
 
 	per_hp  = 0.80;
 	per_mp  = 0.80;
@@ -65,6 +68,7 @@ actor::actor(std::string name_)
 	max_tec = tec;
 	max_luk = luk;
 	max_mov = mov;
+	max_range = range;
 }
 
 actor::actor(int lv)
@@ -81,6 +85,7 @@ actor::actor(int lv)
 	tec = 5;
 	luk = 5;
 	mov = 5;
+	range = 2;
 
 	per_hp  = 0.80;
 	per_mp  = 0.80;
@@ -95,6 +100,7 @@ actor::actor(int lv)
 	max_tec = tec;
 	max_luk = luk;
 	max_mov = mov;
+	max_range = range;
 }
 
 actor::actor(std::string name_, int type_)
@@ -113,6 +119,7 @@ actor::actor(std::string name_, int type_)
 	luk = 5;
 	def = 5;
 	mov = 5;
+	range = 2;
 
 	per_hp  = 0.80;
 	per_mp  = 0.80;
@@ -127,6 +134,7 @@ actor::actor(std::string name_, int type_)
 	max_tec = tec;
 	max_luk = luk;
 	max_mov = mov;
+	max_range = range;
 }
 
 actor::~actor(){}

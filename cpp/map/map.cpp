@@ -61,9 +61,9 @@ void map::print() {
 }
 
 void map::print(actor* player, actor* enemy) {		
-	for(int i = 0; i < MAP_SIZE; i++)
+	for(int j = 0; j < MAP_SIZE; j++)
 	{
-		for(int j = 0; j < MAP_SIZE; j++)
+		for(int i = 0; i < MAP_SIZE; i++)
 		{
 			if (i == player->pos.x && j == player->pos.y)
 			{
@@ -82,12 +82,18 @@ void map::print(actor* player, actor* enemy) {
 	}
 }
 
-void map::print(actor** players, actor** enemies) {		
-	for(int i = 0; i < MAP_SIZE; i++) {
-		for(int j = 0; j < MAP_SIZE; j++) {
-			if (i == pos_x && j == pos_y) {
+void map::print(actor** players, actor** enemies)
+{		
+	for(int j = 0; j < MAP_SIZE; j++)
+	{
+		for(int i = 0; i < MAP_SIZE; i++)
+		{
+			if (i == pos_x && j == pos_y)
+			{
 				std::cout << sign(MAP_TYPE_PLAYER) << ' ';
-			} else {
+			}
+			else
+			{
 				std::cout << sign(coord[i][j]) << ' ';
 			}
 		}

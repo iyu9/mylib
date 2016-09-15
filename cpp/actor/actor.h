@@ -17,7 +17,8 @@ const int WEAK_STRONG = 3;
 const int WEAK_NODAMAGE = 4;
 const int WEAK_REFLECT = 5;
 
-class actor {
+class actor
+{
 public:
 	//base
 	int id;
@@ -50,6 +51,8 @@ public:
 	int mov;
 	int max_hit;
 	int hit;
+	int max_range;
+	int range;
 	
 	//liste
 	int weakness_list[LIST_SIZE];

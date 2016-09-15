@@ -95,20 +95,17 @@ void battle::input()
 	  case 'm':
 		print("Remain Move: ");
 		println(player->mov);
-		println("x = ");
+		print("x_coord = ");
 		int x, y;
 		std::cin >> x;
-		println("y = ");
+		print("y_coord = ");
 		std::cin >> y;
 
-		if (x >= 0 && y >= 0 && x + y <= player->mov)
+		if (x + y <= player->mov)
 		{
 		  println("you moved position");
 		  player->move(x, y);  
-		}
-		else
-		{
-		  println("can't move");  
+		  battle_map->print(player, enemy);
 		}
 
 		break;
