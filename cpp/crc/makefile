@@ -1,0 +1,2 @@
+crc:
+	g++ crc.cpp
