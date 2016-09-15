@@ -82,6 +82,8 @@ public:
 	void refresh();
 	bool escape();
 	bool is_dead();
+
+	void set_item(item* item);
 	void use_item(item* item);
 	void use_skill(skill* skill);
 	void use_magic(magic* magic);

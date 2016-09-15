@@ -375,6 +375,11 @@ void actor::use_skill(skill* sk)
 	}		
 }
 
+void actor::set_item(item* it)
+{
+	//item_list[0] = it->id; 
+}
+
 void actor::use_item(item* it)
 {
 	switch(it->type)

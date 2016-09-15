@@ -8,7 +8,33 @@ math::~math() {
 
 }
 
-int fib(int num) {
+int cut_lower(int val, int lower_lim)
+{
+  if (val < lower_lim)
+  {
+	val = lower_lim;
+  }
+}
+
+int cut_upper(int val, int upper_lim)
+{
+  if (val > upper_lim)
+  {
+	val = upper_lim;
+  }
+}
+
+int cut_area(int val, int lower_lim, int upper_lim)
+{ 
+  if (val < lower_lim)
+  {
+	val = lower_lim;
+  }
+
+  if (val > upper_lim)
+  {
+	val = upper_lim;
+  }
 }
 
 /**/

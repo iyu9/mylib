@@ -40,12 +40,49 @@ char map::sign(int val) {
 			return 'N';
 		case MAP_TYPE_FOREST:
 			return 'F';
+		case MAP_TYPE_ENEMY:
+			return 'E';
 		default:
 			return ' ';
 	}
 }
 
 void map::print() {		
+	for(int i = 0; i < MAP_SIZE; i++) {
+		for(int j = 0; j < MAP_SIZE; j++) {
+			if (i == pos_x && j == pos_y) {
+				std::cout << sign(MAP_TYPE_PLAYER) << ' ';
+			} else {
+				std::cout << sign(coord[i][j]) << ' ';
+			}
+		}
+		std::cout << std::endl;
+	}
+}
+
+void map::print(actor* player, actor* enemy) {		
+	for(int i = 0; i < MAP_SIZE; i++)
+	{
+		for(int j = 0; j < MAP_SIZE; j++)
+		{
+			if (i == player->pos.x && j == player->pos.y)
+			{
+				std::cout << sign(MAP_TYPE_PLAYER) << ' ';
+			}
+			else if (i == enemy->pos.x && j == enemy->pos.y)
+			{
+				std::cout << sign(MAP_TYPE_ENEMY) << ' ';
+			}
+			else
+			{
+				std::cout << sign(coord[i][j]) << ' ';
+			}
+		}
+		std::cout << std::endl;
+	}
+}
+
+void map::print(actor** players, actor** enemies) {		
 	for(int i = 0; i < MAP_SIZE; i++) {
 		for(int j = 0; j < MAP_SIZE; j++) {
 			if (i == pos_x && j == pos_y) {
@@ -107,6 +144,16 @@ void map::move_pl(int dir, int move) {
 			}
 			break;	 
 	}		
+}
+
+int map::get_dist(actor* a, actor* b)
+{
+  int x_dist = (a->pos.x - b->pos.x);
+  int y_dist = (a->pos.y - b->pos.y);
+  x_dist = (x_dist < 0) ? -x_dist : x_dist;
+  y_dist = (y_dist < 0) ? -y_dist : y_dist;
+
+  return (x_dist + y_dist); 
 }
 
 /*

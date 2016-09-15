@@ -59,8 +59,7 @@ void battle::input()
 		  step = STEP_WIN;
 		  return;
 		}
-		pl_idx++;
-		if (pl_idx >= PLAYER_COUNT)
+		if (++pl_idx >= PLAYER_COUNT)
 		{
 		  pl_idx = em_idx = 0;
 		  step = STEP_ENEMY;
@@ -150,8 +149,7 @@ void battle::render()
 		  set_exit();
 		  step = STEP_LOSE;
 		}
-		em_idx++;
-		if (em_idx > ENEMY_COUNT)
+		if (++em_idx > ENEMY_COUNT)
 		{
 		  pl_idx = em_idx = 0;
 		  turn++;
@@ -178,7 +176,7 @@ void battle::render()
 
 void battle::draw_map()
 {
-	battle_map->print();
+	battle_map->print(player, enemy);
 }
 
 void battle::update()
