@@ -50,6 +50,5 @@ public:
 
     void input();
     void render();
-	void draw_map();
     void proc();
 };

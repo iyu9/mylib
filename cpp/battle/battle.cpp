@@ -115,7 +115,7 @@ void battle::input()
 
 	  case 'f':
 		println("you check map");
-		draw_map();
+		battle_map->print(player, enemy);
 		break;
 
 	  case 'i':
@@ -197,11 +197,6 @@ void battle::render()
 		set_exit();
 		break;
     }        
-}
-
-void battle::draw_map()
-{
-	battle_map->print(player, enemy);
 }
 
 void battle::update()
