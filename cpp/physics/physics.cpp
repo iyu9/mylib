@@ -1,40 +1,44 @@
 #include "physics.h"
 
-physics::physics() {
+physics::physics()
+{
 	ch = new chrono();	
 }
 
-physics::physics(float vx, float vy, float vz) {
+physics::physics(float vx, float vy, float vz)
+{
 	v.x = vx;
 	v.y = vy;
 	v.z = vz;
 }
 
-physics::~physics() {
-
-}
+physics::~physics() {}
 
 //TODO:switch falldown type
-void physics::fall_down() {
+void physics::fall_down()
+{
   pos.y += (v.y * t) - (0.5 * g * t * t);
 }
 
-void physics::update_stat() {
+void physics::update_stat()
+{
   //on ground
-  if(pos.y <= -AREA_LIMIT) {
+  if (pos.y <= -AREA_LIMIT)
+  {
 	stat = PH_GROUND;
 	pos.y = -100;
 	v.y = 0;
   }
 
   //on flow
-  else {
+  else
+  {
 	stat = PH_FLOW;	  
   }
 }
 
-vector3 physics::update() {
-
+vector3 physics::update()
+{
   update_stat();
 
   //update time
@@ -45,7 +49,8 @@ vector3 physics::update() {
   pos.z += v.z * t;
 
   //update falldown to the ground process
-  if(stat != PH_GROUND) {
+  if (stat != PH_GROUND)
+  {
 	fall_down();
   }
 
@@ -53,7 +58,8 @@ vector3 physics::update() {
 }
 
 //simple sphere_col
-bool physics::is_collision(physics op) {
+bool physics::is_collision(physics op)
+{
   float r = 2; 
   vector3 a = pos;
   vector3 b = op.pos;
@@ -71,7 +77,8 @@ bool physics::is_collision(physics op) {
 
 bool physics::is_collision_floor(physics op) {
   //fall down floor from above
-  if(is_collision(op) && pos.y >= op.pos.y) {
+  if (is_collision(op) && pos.y >= op.pos.y)
+  {
 	//reset falldown stat
 	stat = PH_GROUND;
 	v.y = 0;
@@ -81,19 +88,22 @@ bool physics::is_collision_floor(physics op) {
   return false;
 }
 
-bool physics::add_force(vector3 a) {
+bool physics::add_force(vector3 a)
+{
 	//invalid
 	//vector3 vec = a * (t * t);
 	//v = &vec;
 }
 
 /**/
-int main() {
+int main()
+{
   physics* p = new physics(0, 100, 0);
   p->pos.y = 100;
   physics* f = new physics();
 
-  while(1) {
+  while(1)
+  {
     vector3 pos = p->update();
 
     std::cout << "time=" << p->t << ": " 

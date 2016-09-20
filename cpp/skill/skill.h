@@ -3,14 +3,16 @@
 const int SK_ATTACK = 0;
 const int SK_HEAL = 1;
 
-class skill {
+class skill
+{
 public:
   int id;
+  int lv;
   std::string name;
   int type;
   int attr;
   int value;
-
+  
   skill();
   ~skill();
 };
