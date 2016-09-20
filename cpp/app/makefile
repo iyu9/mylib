@@ -1,2 +1,0 @@
-app:
-	g++ app.cpp
