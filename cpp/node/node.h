@@ -2,7 +2,7 @@
 
 const int NodeLimitNum = 10;
 
-class node {
+template <typename T> class node {
 private:
   int id;
 
@@ -10,27 +10,21 @@ public:
   std::string name;
   int prevCount;
   int nextCount;
-  int prev[NodeLimitNum];
-  int next[NodeLimitNum];
+  template <typename T> prev[NodeLimitNum];
+  template <typename T> next[NodeLimitNum];
 
   node();
   node(int id, std::string name);
   ~node();
 
-  void addNextNode(int next) {
-	if(nextCount > NodeLimitNum) {
-	  std::cout << "Node NextList is Full" << std::endl;
-	}
-
+  void addNextNode(template <typename T> next)
+  {
 	next[nextCount] = next;
 	nextCount++;
   }
 
-  void addPrevNode(int prev) {	
-	if(prevCount > NodeLimitNum) {
-	  std::cout << "Node PrevList is Full" << std::endl;
-	}
-
+  void addPrevNode(template <typename T> prev)
+  {	
 	prev[prevCount] = prev;
 	prevCount++;
   }
