@@ -1,7 +1,7 @@
 #include "../common/common.h"
 
-class matrix {
-
+class matrix
+{
 private:
     int size_x;
     int size_y;
