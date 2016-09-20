@@ -1,0 +1,2 @@
+quiz:
+	g++ quiz.cpp
