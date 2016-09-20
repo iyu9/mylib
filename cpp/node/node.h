@@ -2,28 +2,26 @@
 
 const int NodeLimitNum = 10;
 
-template <typename T> class node {
+template <typename T> class node
+{
 private:
   int id;
 
 public:
   std::string name;
+
+  T prev[NodeLimitNum];
+  T next[NodeLimitNum];
   int prevCount;
   int nextCount;
-  template <typename T> prev[NodeLimitNum];
-  template <typename T> next[NodeLimitNum];
 
-  node();
-  node(int id, std::string name);
-  ~node();
-
-  void addNextNode(template <typename T> next)
+  void addNextNode(T next)
   {
 	next[nextCount] = next;
 	nextCount++;
   }
 
-  void addPrevNode(template <typename T> prev)
+  void addPrevNode(T prev)
   {	
 	prev[prevCount] = prev;
 	prevCount++;

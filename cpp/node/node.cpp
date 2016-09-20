@@ -1,16 +1,9 @@
 #include "node.h"
 
-node::node() {
-
-}
-
-node::~node() {
-
-}
-
 /**/
-int main() {
-  node* n = new node();
+int main()
+{
+  node<int>* n = new node<int>();
 
   return 0;
 }
