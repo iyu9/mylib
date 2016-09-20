@@ -4,6 +4,12 @@
 
 int main (int argc, char** argv)
 {
+  if (argc != 2)
+  {
+	std::cout << "arg less" << std::endl;
+	exit(1);
+  }
+
   enum OutPutType
   {
 	Banner,
@@ -11,31 +17,20 @@ int main (int argc, char** argv)
 	News
   };
 
-  std::string src_dir  = "./";
-  std::string dest_dir = "./";
+  std::string src_dir  = "/mnt/c/WorkSpace/Unity/Project/RikuColle/trunk/Rikukore/Assets/BundleResources/Images/Event/dummy/";
+  std::string dest_dir = "/mnt/c/WorkSpace/Unity/Project/RikuColle/trunk/Rikukore/Assets/BundleResources/Images/Event/";
+
   //const int pf_id = 0;
   const int type = 0;
 
   std::string root_dir[] =
   {
 	"dummy/",
-	"gesoten/",
-	"hangame/",
-	"mixi/",
-	"mobage/",
-	"nijiyome/",
-	"rakuten/",
   };
 
   std::string name_tail[] = 
   {
 	"",
-	"_gc",
-	"_hang",
-	"_mixi",
-	"_ym",
-	"_njym",
-	"_rktn",
   };
 
   std::string sub_dir[] =
@@ -45,37 +40,35 @@ int main (int argc, char** argv)
 	"News/",
   };
 
-  std::cout << "*START*" << std::endl;
-  std::cout << "[0]:" + sizeof(root_dir[0]) << std::endl;
-  std::cout << "[ARRAY]: " + sizeof(root_dir) << std::endl;
+  std::cout << "*START*" << std::endl << std::endl;
 
+  std::string img_type = argv[1];
 
   for (int pf_id = 0; pf_id < (sizeof(root_dir) / sizeof(root_dir[0])); pf_id++)
   {
+	std::cout << "PF:" << root_dir[pf_id] << std::endl;
 
-  std::cout << sizeof(root_dir[0]) / sizeof(root_dir) << std::endl;
+	std::string exec_state1 = 
+	  "cp " + src_dir + "banner_1" + img_type + " " + dest_dir 
+		+ root_dir[pf_id] + sub_dir[Banner] + "banner_1" + name_tail[pf_id] + img_type;
+	system(exec_state1.c_str());
+	std::cout << "EXEC(1): " << exec_state1 << std::endl;
 
-  std::string exec_state1 = 
-	"cp " + src_dir + "banner_1.*" + " " + dest_dir 
-	  + root_dir[pf_id] + sub_dir[Banner] + "banner_1.jpg?" + name_tail[pf_id];
-  system(exec_state1.c_str());
-  std::cout << "EXEC(1): " << exec_state1 << std::endl;
+	std::string exec_state2 = 
+	  "cp " + src_dir + "banner_2" + img_type + " " + dest_dir 
+		+ root_dir[pf_id] + sub_dir[Banner] + "banner_2" + name_tail[pf_id] + img_type;
+	system(exec_state2.c_str());
+	std::cout << "EXEC(2): " << exec_state2 << std::endl;
 
-  std::string exec_state2 = 
-	"cp " + src_dir + "banner_2.*" + " " + dest_dir 
-	  + root_dir[pf_id] + sub_dir[Banner] + "banner_2.jpg?" + name_tail[pf_id];
-  system(exec_state2.c_str());
-  std::cout << "EXEC(2): " << exec_state2 << std::endl;
-
-  std::string exec_state3 = 
-	"cp " + src_dir + "banner_3.*" + " " + dest_dir 
-	  + root_dir[pf_id] + sub_dir[Banner] + "banner_3.jpg?" + name_tail[pf_id];
-  system(exec_state3.c_str());
-  std::cout << "EXEC(3): " << exec_state3 << std::endl;
-  
+	std::string exec_state3 = 
+	  "cp " + src_dir + "banner_3" + img_type + " " + dest_dir 
+		+ root_dir[pf_id] + sub_dir[Banner] + "banner_3" + name_tail[pf_id] + img_type;
+	system(exec_state3.c_str());
+	std::cout << "EXEC(3): " << exec_state3 << std::endl << std::endl;
   }
 
   std::cout << "*END*" << std::endl;
+
   /*
   //banner
   if (type == Banner)
