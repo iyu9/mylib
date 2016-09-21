@@ -25,6 +25,7 @@ class save_manager
 	private:
 		std::ifstream *ifs;
 		std::ofstream *ofs;
+		save_data *data;
 
 	public:
 		save_manager();

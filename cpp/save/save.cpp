@@ -39,7 +39,8 @@ int save_manager::load()
 	ifs = new std::ifstream("save.dat");
 	std::string buffer;
 
-	while (*ifs && getline(*ifs, buffer)) {
+	while (*ifs && getline(*ifs, buffer))
+	{
 		std::cout << buffer << std::endl;
 	}
 
@@ -51,7 +52,8 @@ int save_manager::load(const char* file)
 	ifs = new std::ifstream(file);
 	std::string buffer;
 
-	while (*ifs && getline(*ifs, buffer)) {
+	while (*ifs && getline(*ifs, buffer))
+	{
 		std::cout << buffer << std::endl;
 	}
 
