@@ -1,55 +1,40 @@
 #include "save.h"
 
-savemanager::savemanager()
+save_manager::save_manager()
 {
 	ifs = NULL;
 	ofs = NULL;
-	time = 0;
-	count = 0;
 }
 
-savemanager::~savemanager()
+save_manager::~save_manager()
 {
 	delete(ifs);
 	delete(ofs);		
 }
 
-void ReadDataStructure()
-{		
-}
-
-void WriteDataStructure(std::ofstream* ofs)
-{
-  *ofs << "date:" << "1423/12/32/2200" << std::endl;
-  *ofs << "Count: " << "120" << std::endl;
-}
-
-int savemanager::save()
+int save_manager::save()
 {
 	ofs = new std::ofstream("save.dat");
 
 	//Write Attributes
-	WriteDataStructure(ofs);
 	
 	return 0;	
 }
 
-int savemanager::save(const char* file)
+int save_manager::save(const char* file)
 {
 	ofs = new std::ofstream(file);
-	WriteDataStructure(ofs);
 	return 0;	
 }
 
-int savemanager::save(const char* file, int filemode)
+int save_manager::save(const char* file, int filemode)
 {
 	//TODO:add binmode
 	ofs = new std::ofstream(file);
-	WriteDataStructure(ofs);	
 	return 0;	
 }
 
-int savemanager::load()
+int save_manager::load()
 {
 	ifs = new std::ifstream("save.dat");
 	std::string buffer;
@@ -61,7 +46,7 @@ int savemanager::load()
 	return 0;	
 }
 
-int savemanager::load(const char* file)
+int save_manager::load(const char* file)
 {
 	ifs = new std::ifstream(file);
 	std::string buffer;
@@ -76,7 +61,7 @@ int savemanager::load(const char* file)
 /**/
 int main()
 {
-	savemanager* s = new savemanager();
+	save_manager* s = new save_manager();
 
 	s->load();
 	s->save();

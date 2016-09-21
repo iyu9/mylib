@@ -1,20 +1,34 @@
 #include "../common/common.h"
+#include "../json/picojson.h"
+#include "../actor/actor.h"
 #include <fstream>
 
-const int FILEMODE_TEXT = 0;
-const int FILEMODE_BIN = 1;
+//WRITE THIS
+class save_data
+{
+public:
+  std::string date;
+  actor players;
+  int flags[100];
+  int check_sum; 
+};
+//
 
-class savemanager {
+enum FILEMODE
+{
+  FILEMODE_TEXT,
+  FILEMODE_BIN
+};
+
+class save_manager
+{
 	private:
 		std::ifstream *ifs;
 		std::ofstream *ofs;
 
-		int time;
-		int count;
-
 	public:
-		savemanager();
-		~savemanager();
+		save_manager();
+		~save_manager();
 
 		int save();
 		int save(const char* file);
