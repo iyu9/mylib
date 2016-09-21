@@ -1,12 +1,13 @@
 #include "../common/common.h"
 
-//SUIT
-const int CLUB = 0;
-const int DAIA = 1;
-const int HEART = 2;
-const int SPADE = 3;
+enum SUIT
+{
+  CLUB = 0,
+  DAIA = 1,
+  HEART = 2,
+  SPADE = 3, 
+};
 
-//SUIT_NAME
 std::string suit_name[] =
 {
 	"CLUB",
