@@ -46,25 +46,22 @@ GLdouble color[][3] = {
 };
 
 
-//forward declaration
 void DrawLine(float x1, float y1, float x2, float y2);
 void DrawString(float x, float y, std::string const& str);
 void DrawRect(float x, float y, float width, float height);
-
-//3d
 void DrawCube(vector3 scale, vector3 pos);
 
-//constructors
-graphics::graphics(){		
+graphics::graphics()
+{
   r = 0;
   chr = new chrono();
   pos = new vector3(0,0,0);
 }
 
-graphics::~graphics(){
-}
+graphics::~graphics(){}
 
-void switch_camera() {		
+void switch_camera()
+{		
   glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
   gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
   /*
@@ -116,7 +113,8 @@ void keyboard(unsigned char key, int x, int y)
   }
 }
 
-void resize(int w, int h) {
+void resize(int w, int h)
+{
 	glViewport(0, 0, w, h);
 
 	glLoadIdentity();
@@ -125,12 +123,13 @@ void resize(int w, int h) {
 	gluLookAt(3.0, 4.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
-void idle() {
+void idle()
+{
 	glutPostRedisplay();
 }
 
-void graphics::init() {
-
+void graphics::init()
+{
 	state = 0;	
 	int argc = 1;
 
@@ -148,15 +147,16 @@ void graphics::init() {
 	glutMainLoop();
 }
 
-//helper draw methods
-void DrawLine(float x1, float y1, float x2, float y2) {
+void DrawLine(float x1, float y1, float x2, float y2)
+{
 	glBegin(GL_LINE_LOOP);
 	glVertex2d(x1, y1);	
 	glVertex2d(x2, y2);
 	glEnd();
 }
 
-void DrawRect(float x, float y, float width, float height) {
+void DrawRect(float x, float y, float width, float height)
+{
 	glBegin(GL_QUADS);
 	glVertex2d(x,y);	
 	glVertex2d(x + width, y);
@@ -165,7 +165,8 @@ void DrawRect(float x, float y, float width, float height) {
 	glEnd();
 }
 
-void DrawString(float x, float y, std::string const& str) {
+void DrawString(float x, float y, std::string const& str)
+{
 	float z = -1.0f;
 	glRasterPos3f(x, y, z);
 
@@ -174,7 +175,8 @@ void DrawString(float x, float y, std::string const& str) {
 	}
 }
 
-void DrawCube(vector3 pos, vector3 scale) {
+void DrawCube(vector3 pos, vector3 scale)
+{
 	int face[][4] = {
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
@@ -219,20 +221,24 @@ void DrawCube(vector3 pos, vector3 scale) {
 }
 
 //regist render object
-void graphics::add_object(object* obj) {
+void graphics::add_object(object* obj)
+{
 	obj_list[obj_length] = obj;
 	obj_length++;
 }
 
 //draw registered render object
-void graphics::draw_object() {
-	for(int i = 0; i < obj_length; i++) {
+void graphics::draw_object()
+{
+	for (int i = 0; i < obj_length; i++)
+	{
 		object obj = *obj_list[i];
 		DrawCube(obj.pos, obj.scale);		
 	}	
 }
 
-GLuint loadImage(const char* path) {
+GLuint loadImage(const char* path)
+{
   int width, height;
   unsigned char *data;
 
@@ -251,7 +257,8 @@ GLuint loadImage(const char* path) {
 }
 
 //main method
-void graphics::render() {
+void graphics::render()
+{
 	double delta = chr->get_delta();
 	timer += delta;
 
@@ -277,7 +284,8 @@ void graphics::render() {
 	glutSwapBuffers();
 }
 
-object* graphics::get_object(std::string name) {	
+object* graphics::get_object(std::string name)
+{	
 	for(int i = 0; i < obj_length; i++) {
 		object* obj = obj_list[i];
 
@@ -290,7 +298,8 @@ object* graphics::get_object(std::string name) {
 }
 
 /**/
-int main() {
+int main()
+{
 	g = new graphics();
 	vector3* v1 = new vector3(2, 0, 0);
 	vector3* v2 = new vector3(-2, 0, 0);
