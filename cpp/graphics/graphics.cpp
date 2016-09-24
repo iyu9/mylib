@@ -74,8 +74,8 @@ void switch_camera()
 
 void keyboard(unsigned char key, int x, int y)
 {
-  switch (key) {
-
+  switch (key)
+  {
   case 'w':
 	  glTranslatef(0, 0.1, 0);
 	  break;
@@ -170,7 +170,8 @@ void DrawString(float x, float y, std::string const& str)
 	float z = -1.0f;
 	glRasterPos3f(x, y, z);
 
-	for(int i = 0; i < str.length(); i++) {
+	for(int i = 0; i < str.length(); i++)
+	{
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
 	}
 }
@@ -209,9 +210,11 @@ void DrawCube(vector3 pos, vector3 scale)
 	vertex[7][0] = -scale.x + pos.x; vertex[7][1] =  scale.y + pos.y; vertex[7][2] =  scale.z + pos.z;
 
 	glBegin(GL_QUADS);
-	for (int j = 0; j < 6; ++j) {
+	for (int j = 0; j < 6; ++j)
+	{
 		glColor3dv(color[j]);
-		for (int i = 0; i < 4; ++i) {
+		for (int i = 0; i < 4; ++i)
+		{
 			glVertex3dv(vertex[face[j][i]]);
 		}
 	}
