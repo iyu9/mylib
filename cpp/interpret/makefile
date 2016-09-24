@@ -1,0 +1,2 @@
+interpret:
+	g++ interpret.cpp
