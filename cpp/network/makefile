@@ -1,0 +1,2 @@
+network:
+	g++ network.cpp
