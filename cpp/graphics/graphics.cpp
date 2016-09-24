@@ -15,6 +15,11 @@ chrono* chr;
 graphics* g;
 vector3* pos;
 
+#define TEXSIZE 64
+GLuint tex_id = 114514;			  //texture unique name(GUID)
+
+GLubyte bits[TEXSIZE][TEXSIZE][3];
+
 GLdouble vertex[][3] = {
 	{0, 0, 0},
 	{1, 0, 0},
@@ -49,7 +54,10 @@ GLdouble color[][3] = {
 void DrawLine(float x1, float y1, float x2, float y2);
 void DrawString(float x, float y, std::string const& str);
 void DrawRect(float x, float y, float width, float height);
+void DrawTexture2D(float x, float y, float width, float height);
 void DrawCube(vector3 scale, vector3 pos);
+
+GLuint LoadImage(const char* path);
 
 graphics::graphics()
 {
@@ -60,10 +68,20 @@ graphics::graphics()
 
 graphics::~graphics(){}
 
+/*
+void timer_func(int value)
+{
+    glRotatef(1, 0.5, 1, 0.25);
+    glutPostRedisplay();
+    glutTimerFunc(50, timer_func, 0);
+}*/
+
 void switch_camera()
-{		
+{
+  //2D
   glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
   gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+
   /*
   glViewport(0, 0, 300, 300);
   glLoadIdentity();
@@ -136,13 +154,19 @@ void graphics::init()
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(300,300);
 	glutInit(&argc, NULL);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
 	glutCreateWindow(NULL);
 	glutDisplayFunc(/*display*/render);
 	glutIdleFunc(idle);
+	//glutTimerFunc(100, timer_func, 0);
 	glutReshapeFunc(resize);
 	glClearColor(0, 0, 0, 1);
+
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+
+	LoadImage(NULL);
+
 	glutKeyboardFunc(keyboard);
 	glutMainLoop();
 }
@@ -165,12 +189,24 @@ void DrawRect(float x, float y, float width, float height)
 	glEnd();
 }
 
+//NOT WORK
+void DrawTexture2D(float x, float y, float width, float height)
+{
+	glBindTexture(GL_TEXTURE_2D, tex_id);
+	glBegin(GL_POLYGON);
+	  glTexCoord2f(0, 0); glVertex2d(x,y);	
+	  glTexCoord2f(0, 1); glVertex2d(x + width, y);
+	  glTexCoord2f(1, 1); glVertex2d(x + width, y + height);
+	  glTexCoord2f(1, 0); glVertex2d(x, y + height);
+	glEnd();
+}
+
 void DrawString(float x, float y, std::string const& str)
 {
 	float z = -1.0f;
 	glRasterPos3f(x, y, z);
 
-	for(int i = 0; i < str.length(); i++)
+	for (int i = 0; i < str.length(); i++)
 	{
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
 	}
@@ -178,7 +214,8 @@ void DrawString(float x, float y, std::string const& str)
 
 void DrawCube(vector3 pos, vector3 scale)
 {
-	int face[][4] = {
+	int face[][4] =
+	{
 		{0, 1, 2, 3},
 		{1, 5, 6, 2},
 		{5, 4, 7, 6},
@@ -232,11 +269,11 @@ void graphics::draw_object()
 	for (int i = 0; i < obj_length; i++)
 	{
 		object obj = *obj_list[i];
-		DrawCube(obj.pos, obj.scale);		
+		DrawCube(obj.pos, obj.scale);
 	}	
 }
 
-GLuint loadImage(const char* path)
+GLuint LoadImage(const char* path)
 {
   int width, height;
   unsigned char *data;
@@ -244,14 +281,29 @@ GLuint loadImage(const char* path)
   width = 100;
   height = 100;
 
-  GLuint tex;
-  glGenTextures(1, &tex);
-  glBindTexture(GL_TEXTURE_2D, tex);
-  gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE ,data);
+  //make texture bits
+  for (int i = 0 ; i < TEXSIZE ; i++)
+  {
+	int r = (i * 0xFF) / TEXSIZE;
+	for (int j = 0 ; j < TEXSIZE ; j++)
+	{
+	  bits[i][j][0] = (GLubyte) r;
+	  bits[i][j][1] = (GLubyte) (( j * 0xFF ) / TEXSIZE);
+	  bits[i][j][2] = (GLubyte) r;
+	}
+  }
 
-  delete(data);
+  glGenTextures(1, &tex_id);
+  glBindTexture(GL_TEXTURE_2D, tex_id);
+  //gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE ,data);
+  glTexImage2D(
+	GL_TEXTURE_2D, 0, 3, TEXSIZE, TEXSIZE, 0,
+	GL_RGB, GL_UNSIGNED_BYTE, bits
+  );
 
-  return tex;
+  //delete(data);
+
+  return tex_id;
 }
 
 void graphics::render()
@@ -268,7 +320,7 @@ void graphics::render()
 	pos->x += delta;
 	vector3 s(1,1,1);
 	DrawCube(*pos, s);
-		
+	//DrawTexture2D(-1, -1, 1, 1);
 	std::ostringstream stream;
 	/**/
 	stream << timer;
