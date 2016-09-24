@@ -3,19 +3,12 @@
 class interpret
 {
 private:
-  enum CommandAct
-  {
-	CMD_INIT,
-	CMD_SHOW,
-	CMD_HIDE
-  };
-
   std::string commandNames[10]; 
+  bool act(std::string command);
 
 public:
   interpret();
   ~interpret();
 
   bool parse(std::string code);
-  bool act(std::string command);
 };

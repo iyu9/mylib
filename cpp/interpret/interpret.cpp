@@ -2,6 +2,7 @@
 
 interpret::interpret()
 {
+  //Register commands
   commandNames[0] = "Init"; 
   commandNames[1] = "Show"; 
   commandNames[2] = "Hide"; 
