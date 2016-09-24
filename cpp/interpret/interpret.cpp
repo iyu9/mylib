@@ -1,11 +1,14 @@
 #include "interpret.h"
 
-interpret::interpret() {
-  
+interpret::interpret()
+{
+  commandNames[0] = "Init"; 
+  commandNames[1] = "Show"; 
+  commandNames[2] = "Hide"; 
 }
 
-interpret::~interpret() {
-
+interpret::~interpret()
+{
 }
 
 bool interpret::parse(std::string code)
@@ -19,6 +22,7 @@ bool interpret::parse(std::string code)
 	}
   }
 
+  std::cout << "NOT Found Command" << code << std::endl;
   return false;
 }
 
@@ -28,6 +32,7 @@ bool interpret::act(std::string command)
   {
 	if (command == commandNames[i])
 	{
+	  std::cout << "Do " << command << std::endl;
 	  return true;
 	}	
   }
@@ -39,6 +44,10 @@ bool interpret::act(std::string command)
 int main()
 {
   interpret* i = new interpret();
+  i->parse("Init");
+  i->parse("Show");
+  i->parse("Hide");
+  i->parse("AntiPattern");
 
   return 0;
 }
