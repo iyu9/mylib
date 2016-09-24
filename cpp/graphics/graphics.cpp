@@ -7,7 +7,8 @@
 //#include <d3d9.h>
 //#include <d3dx9.h>
 
-//global declaration
+bool rotate_flag = true;
+
 float r = 0;
 float timer = 0;
 
@@ -49,7 +50,6 @@ GLdouble color[][3] = {
   { 1, 0, 1},
   { 0, 1, 1}
 };
-
 
 void DrawLine(float x1, float y1, float x2, float y2);
 void DrawString(float x, float y, std::string const& str);
@@ -118,6 +118,14 @@ void keyboard(unsigned char key, int x, int y)
 	  glTranslatef(0, 0, -0.1);
 	  break;
 
+  case 'r':
+	  glRotatef(1, 1, 0, 5);
+	  break;
+
+  case 'p':
+	  rotate_flag = (!rotate_flag);
+	  break;
+
   case 'c':
   	  switch_camera();
 	  break;
@@ -156,40 +164,42 @@ void graphics::init()
 	glutInit(&argc, NULL);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
 	glutCreateWindow(NULL);
-	glutDisplayFunc(/*display*/render);
+
+	glutDisplayFunc(render);
 	glutIdleFunc(idle);
 	//glutTimerFunc(100, timer_func, 0);
 	glutReshapeFunc(resize);
-	glClearColor(0, 0, 0, 1);
+	glutKeyboardFunc(keyboard);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 
 	LoadImage(NULL);
 
-	glutKeyboardFunc(keyboard);
 	glutMainLoop();
 }
 
 void DrawLine(float x1, float y1, float x2, float y2)
 {
 	glBegin(GL_LINE_LOOP);
-	glVertex2d(x1, y1);	
-	glVertex2d(x2, y2);
+	  glVertex2d(x1, y1);	
+	  glVertex2d(x2, y2);
 	glEnd();
 }
 
 void DrawRect(float x, float y, float width, float height)
 {
 	glBegin(GL_QUADS);
-	glVertex2d(x,y);	
-	glVertex2d(x + width, y);
-	glVertex2d(x + width, y + height);
-	glVertex2d(x, y + height);
+	  glVertex2d(x,y);	
+	  glVertex2d(x + width, y);
+	  glVertex2d(x + width, y + height);
+	  glVertex2d(x, y + height);
 	glEnd();
 }
 
-//NOT WORK
+/*
+** NOT WORK
+*/
 void DrawTexture2D(float x, float y, float width, float height)
 {
 	glBindTexture(GL_TEXTURE_2D, tex_id);
@@ -264,6 +274,9 @@ void graphics::add_object(object* obj)
 	obj_length++;
 }
 
+/*
+** TODO: according to each draw object SURFACE
+*/
 void graphics::draw_object()
 {
 	for (int i = 0; i < obj_length; i++)
@@ -273,6 +286,9 @@ void graphics::draw_object()
 	}	
 }
 
+/*
+** TODO: load image
+*/
 GLuint LoadImage(const char* path)
 {
   int width, height;
@@ -309,15 +325,20 @@ GLuint LoadImage(const char* path)
 void graphics::render()
 {
 	double delta = chr->get_delta();
-	timer += delta;
+	//timer += delta;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	if (rotate_flag)
+	{
+	  glRotatef(0.1, 1, 0, 0);
+	}
 
 	//main	
 	//g->draw_object();
 
 	//for debug
-	pos->x += delta;
+	//pos->x += delta;
 	vector3 s(1,1,1);
 	DrawCube(*pos, s);
 	//DrawTexture2D(-1, -1, 1, 1);
