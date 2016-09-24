@@ -78,7 +78,6 @@ void timer_func(int value)
 
 void switch_camera()
 {
-  //2D
   glOrtho(0.0, 0.0, 10.0, 0.0, 0.0, 0.0);
   gluLookAt(0, 0, 10, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
@@ -94,6 +93,14 @@ void keyboard(unsigned char key, int x, int y)
 {
   switch (key)
   {
+  case '1':
+	  glTranslatef(0, 0, 0.1);
+	  break;
+
+  case '2':
+	  glTranslatef(0, 0, -0.1);
+	  break;
+
   case 'w':
 	  glTranslatef(0, 0.1, 0);
 	  break;
@@ -216,7 +223,7 @@ void DrawString(float x, float y, std::string const& str)
 	float z = -1.0f;
 	glRasterPos3f(x, y, z);
 
-	for (int i = 0; i < str.length(); i++)
+	FOR (i, str.length())
 	{
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
 	}
@@ -257,10 +264,10 @@ void DrawCube(vector3 pos, vector3 scale)
 	vertex[7][0] = -scale.x + pos.x; vertex[7][1] =  scale.y + pos.y; vertex[7][2] =  scale.z + pos.z;
 
 	glBegin(GL_QUADS);
-	for (int j = 0; j < 6; ++j)
+	FOR (j, 6)
 	{
 		glColor3dv(color[j]);
-		for (int i = 0; i < 4; ++i)
+		FOR (i, 4)
 		{
 			glVertex3dv(vertex[face[j][i]]);
 		}
@@ -279,7 +286,7 @@ void graphics::add_object(object* obj)
 */
 void graphics::draw_object()
 {
-	for (int i = 0; i < obj_length; i++)
+	FOR (i, obj_length)
 	{
 		object obj = *obj_list[i];
 		DrawCube(obj.pos, obj.scale);
@@ -298,10 +305,10 @@ GLuint LoadImage(const char* path)
   height = 100;
 
   //make texture bits
-  for (int i = 0 ; i < TEXSIZE ; i++)
+  FOR (i, TEXSIZE)
   {
 	int r = (i * 0xFF) / TEXSIZE;
-	for (int j = 0 ; j < TEXSIZE ; j++)
+	FOR (j, TEXSIZE)
 	{
 	  bits[i][j][0] = (GLubyte) r;
 	  bits[i][j][1] = (GLubyte) (( j * 0xFF ) / TEXSIZE);
@@ -335,7 +342,7 @@ void graphics::render()
 	}
 
 	//main	
-	//g->draw_object();
+	g->draw_object();
 
 	//for debug
 	//pos->x += delta;
@@ -356,11 +363,11 @@ void graphics::render()
 
 object* graphics::get_object(std::string name)
 {	
-	for (int i = 0; i < obj_length; i++)
+	FOR (i, obj_length)
 	{
 		object* obj = obj_list[i];
 
-		if(obj->name == name)
+		if (obj->name == name)
 		{
 			return obj_list[i];	
 		}

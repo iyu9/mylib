@@ -4,9 +4,13 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+
+#define LENGTH(array) (sizeof(array) / sizeof(array[0]) )
+#define FOR(i, until) for(int i = 0; i < until; i++)
 
 void clear()
 {
