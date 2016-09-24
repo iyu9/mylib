@@ -199,7 +199,6 @@ void DrawCube(vector3 pos, vector3 scale)
 	};
 	*/
 	
-	//re-valueset
 	vertex[0][0] = -scale.x + pos.x; vertex[0][1] = -scale.y + pos.y; vertex[0][2] = -scale.z + pos.z;
 	vertex[1][0] =  scale.x + pos.x; vertex[1][1] = -scale.y + pos.y; vertex[1][2] = -scale.z + pos.z;
 	vertex[2][0] =  scale.x + pos.x; vertex[2][1] =  scale.y + pos.y; vertex[2][2] = -scale.z + pos.z;
@@ -209,7 +208,6 @@ void DrawCube(vector3 pos, vector3 scale)
 	vertex[6][0] =  scale.x + pos.x; vertex[6][1] =  scale.y + pos.y; vertex[6][2] =  scale.z + pos.z;
 	vertex[7][0] = -scale.x + pos.x; vertex[7][1] =  scale.y + pos.y; vertex[7][2] =  scale.z + pos.z;
 
-    //render
 	glBegin(GL_QUADS);
 	for (int j = 0; j < 6; ++j) {
 		glColor3dv(color[j]);
@@ -220,14 +218,12 @@ void DrawCube(vector3 pos, vector3 scale)
 	glEnd();
 }
 
-//regist render object
 void graphics::add_object(object* obj)
 {
 	obj_list[obj_length] = obj;
 	obj_length++;
 }
 
-//draw registered render object
 void graphics::draw_object()
 {
 	for (int i = 0; i < obj_length; i++)
@@ -242,10 +238,9 @@ GLuint loadImage(const char* path)
   int width, height;
   unsigned char *data;
 
-  //--load image
   width = 100;
   height = 100;
-  //--//
+
   GLuint tex;
   glGenTextures(1, &tex);
   glBindTexture(GL_TEXTURE_2D, tex);
@@ -256,7 +251,6 @@ GLuint loadImage(const char* path)
   return tex;
 }
 
-//main method
 void graphics::render()
 {
 	double delta = chr->get_delta();
@@ -286,10 +280,12 @@ void graphics::render()
 
 object* graphics::get_object(std::string name)
 {	
-	for(int i = 0; i < obj_length; i++) {
+	for (int i = 0; i < obj_length; i++)
+	{
 		object* obj = obj_list[i];
 
-		if(obj->name == name) {
+		if(obj->name == name)
+		{
 			return obj_list[i];	
 		}
 	}	
