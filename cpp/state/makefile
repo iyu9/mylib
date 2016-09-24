@@ -1,0 +1,2 @@
+state:
+	g++ state.cpp
