@@ -2,6 +2,10 @@
 
 class base_state
 {
+protected:
+  void on_start();
+  void on_exit();
+
 public:
   int state_id;
   int state_type;
@@ -14,6 +18,7 @@ public:
   ~base_state();
   
   bool change_state(base_state* next);
+  void update();
 };
 
 //-----------------------
@@ -22,39 +27,24 @@ public:
 
 class Title : base_state
 {
-  Title() : base_state()
-  {
-	
-  }
-
-  ~Title()
-  {
-	
-  }
+  Title() : base_state(){}
+  void on_start(){}
+  void on_exit(){}
+  void update(){}
 };
 
 class Battle : base_state
 {
-  Battle() : base_state()
-  {
-	
-  }
-
-  ~Battle()
-  {
-	
-  }
+  Battle() : base_state(){}
+  void on_start(){}
+  void on_exit(){}
+  void update(){}
 };
 
 class Option : base_state
 {
-  Option() : base_state()
-  {
-	
-  }
-
-  ~Option()
-  {
-	
-  }
+  Option() : base_state(){}
+  void on_start(){}
+  void on_exit(){}
+  void update(){}
 };
