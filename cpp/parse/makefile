@@ -1,0 +1,2 @@
+parser:
+	g++ parse.cpp
