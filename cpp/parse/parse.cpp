@@ -1,5 +1,7 @@
 #include "../common/common.h"
 #include <stack>
+#include <typeinfo>
+#include <cstdlib>
 
 //Reference:
 //https://ja.wikipedia.org/wiki/Interpreter_%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3
@@ -42,24 +44,30 @@ class TerminalExpression_Minus : Expression
 class parser
 {
   private:
-    Expression parseTree[10] = new Expression[10]; // only one NonTerminal Expression here
+    std::vector<Expression> parseTree; // only one NonTerminal Expression here
 
   public:
     parser(std::string s)
     {
       for (std::string token : s.split(" "))
       {
-        if      (token.equals("+")) parseTree.add( new TerminalExpression_Plus() );
-        else if (token.equals("-")) parseTree.add( new TerminalExpression_Minus() );
+        if      (token.equals("+")) 
+		  parseTree.add( new TerminalExpression_Plus() );
+        else if (token.equals("-")) 
+		  parseTree.add( new TerminalExpression_Minus() );
         // ...
-        else                        parseTree.add( new TerminalExpression_Number(Integer.valueOf(token)) );
+        else                        
+		  parseTree.add( new TerminalExpression_Number(atoi(token)));
       }
     }
 
     int evaluate()
     {
       std::stack<int> context = new std::stack<int>();
-      for (Expression e : parseTree) e.interpret(context);
+      for (Expression e : parseTree)
+	  { 
+		e.interpret(context);
+	  }
       return context.pop();
     }
 };
