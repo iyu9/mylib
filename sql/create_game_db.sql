@@ -1,34 +1,44 @@
+-- リセット
+DROP TABLE t_player_data;
+DROP TABLE t_enemy_data;
+DROP TABLE t_ranking;
+DROP TABLE t_stage_data;
+DROP TABLE m_map;
+DROP TABLE m_lv_exp; 
+DROP TABLE m_enemy;
+DROP TABLE t_player;
+
 -- キャラメイン
-CREATE TABLE t_player(id int primary key, name text, score int, first_login date, last_login date);
-INSERT INTO t_player (id, next_exp) VALUES (1, '山賊');
-INSERT INTO t_player (id, next_exp) VALUES (2, '海賊');
+CREATE TABLE t_player(id int PRIMARY KEY, name text, score int, first_login date, last_login date);
+INSERT INTO t_player (id, name) VALUES (1, '山賊');
+INSERT INTO t_player (id, name) VALUES (2, '海賊');
 
 -- 敵マスタ
-CREATE TABLE m_enemy (id int primary key, name text);
-INSERT INTO m_enemy (id, next_exp) VALUES (1, '山賊');
-INSERT INTO m_enemy (id, next_exp) VALUES (2, '海賊');
-INSERT INTO m_enemy (id, next_exp) VALUES (3, '盗賊');
-INSERT INTO m_enemy (id, next_exp) VALUES (4, '戦士');
-INSERT INTO m_enemy (id, next_exp) VALUES (5, '騎士');
-INSERT INTO m_enemy (id, next_exp) VALUES (6, '剣士');
+CREATE TABLE m_enemy (id int PRIMARY KEY, name text);
+INSERT INTO m_enemy (id, name) VALUES (1, '山賊');
+INSERT INTO m_enemy (id, name) VALUES (2, '海賊');
+INSERT INTO m_enemy (id, name) VALUES (3, '盗賊');
+INSERT INTO m_enemy (id, name) VALUES (4, '戦士');
+INSERT INTO m_enemy (id, name) VALUES (5, '騎士');
+INSERT INTO m_enemy (id, name) VALUES (6, '剣士');
 
 -- キャラステータス
-CREATE TABLE t_player_data(player_id int foreign key,
+CREATE TABLE t_player_data(player_id int REFERENCES t_player(id),
   name text, lv int, exp int, hp int, max_hp int, mp int, max_mp int, atk int, def int, spd int, luk int, mov int, cond int);
-CREATE TABLE t_enemy_data ( enemy_id int primary key,
+CREATE TABLE t_enemy_data ( enemy_id int PRIMARY KEY,
   name text, lv int, exp int, hp int, max_hp int, mp int, max_mp int, atk int, def int, spd int, luk int, mov int, cond int);
 
 -- ランキングデータ
-CREATE TABLE t_ranking(player_id int foreign key, int high_score);
+CREATE TABLE t_ranking(player_id int REFERENCES t_player(id), high_score int);
 
 -- ステージデータ, マップデータ
-CREATE TABLE t_stage_data(stage_id int primary key, avg_lv int);
+CREATE TABLE t_stage_data(stage_id int PRIMARY KEY, avg_lv int);
 CREATE TABLE m_map(id int, val text);
-  INSERT INTO m_map (id, val) VALUES (1, '1,0,1,0,1\n1,1,0,1,1\n1,0,0,0,1\n1,1,0,1,1\n1,0,1,0,1');
+  INSERT INTO m_map (id, val) VALUES (1, '1,0,1,0,1\r\n1,1,0,1,1\r\n1,0,0,0,1\r\n1,1,0,1,1\r\n1,0,1,0,1');
 
 -- レベル対経験値マスタ生成(暫定)
 -- BEGIN --
-  CREATE TABLE m_lv_exp(lv int primary key, next_exp int);
+  CREATE TABLE m_lv_exp(lv int PRIMARY KEY, next_exp int);
   INSERT INTO m_lv_exp (lv, next_exp) VALUES (1, 10);
   INSERT INTO m_lv_exp (lv, next_exp) VALUES (2, 20);
   INSERT INTO m_lv_exp (lv, next_exp) VALUES (3, 30);
