@@ -23,13 +23,13 @@ INSERT INTO m_enemy (id, name) VALUES (5, '騎士');
 INSERT INTO m_enemy (id, name) VALUES (6, '剣士');
 
 -- キャラステータス
-CREATE TABLE t_player_data(player_id int REFERENCES t_player(id),
+CREATE TABLE t_player_data(id int REFERENCES t_player(id),
   name text, lv int, exp int, hp int, max_hp int, mp int, max_mp int, atk int, def int, spd int, luk int, mov int, cond int);
-CREATE TABLE t_enemy_data ( enemy_id int PRIMARY KEY,
+CREATE TABLE t_enemy_data (id int PRIMARY KEY,
   name text, lv int, exp int, hp int, max_hp int, mp int, max_mp int, atk int, def int, spd int, luk int, mov int, cond int);
 
 -- ランキングデータ
-CREATE TABLE t_ranking(player_id int REFERENCES t_player(id), high_score int);
+CREATE TABLE t_ranking(id int REFERENCES t_player(id), high_score int);
 
 -- ステージデータ, マップデータ
 CREATE TABLE t_stage_data(stage_id int PRIMARY KEY, avg_lv int);
