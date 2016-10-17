@@ -1,7 +1,7 @@
 <?php
   $db_conn = pg_connect("dbname=template1 user=tomii");
 
-  $query = 'SELECT * FROM test';
+  $query = 'SELECT * FROM m_enemy';
   $result = pg_query($query);
 
   while($line = pg_fetch_array($result, null, PGSQL_ASSOC))
