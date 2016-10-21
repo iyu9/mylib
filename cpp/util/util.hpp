@@ -43,6 +43,7 @@ int main()
     bool is_between_test = is_between(180, 170, 190);
  
     std::cout << cut_test << std::endl;
+    std::cout << is_between_test << std::endl;
 
     return 0;
 }
