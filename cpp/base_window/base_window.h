@@ -8,4 +8,7 @@ public:
 
 	void open();
     void close();
+
+	void open(void(callback()));
+    void close(void(callback()));
 };
