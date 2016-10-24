@@ -1,0 +1,2 @@
+rect:
+	g++ rect.cpp
