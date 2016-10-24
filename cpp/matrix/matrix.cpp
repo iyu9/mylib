@@ -40,8 +40,11 @@ void matrix::clear()
 /**/
 int main()
 {
-    matrix* mat = new matrix(10, 10);
+    matrix* mat = new matrix(4, 4);
     mat->print(); 
+
+    
+
 
     return 0;        
 }

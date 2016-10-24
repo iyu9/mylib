@@ -6,7 +6,7 @@ Game::Game()
 {
 	mode = 0;
 	cmd = 0;
-	current_scene = new scene();
+	s_manager = new scene_manager();
 }
 
 Game::~Game()

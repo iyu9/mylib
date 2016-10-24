@@ -46,7 +46,7 @@ actor::actor(std::string name_)
 	lv  = 1;
 	hp  = 10;
 	mp  = 10;
-	atk = 5;
+	atk = 10;
 	def = 5;
 	spd = 5;
 	tec = 5;

@@ -1,6 +1,6 @@
 #include "scene.h"
 
-class scane_manager
+class scene_manager
 {
 private:
     scene* current_scene;

@@ -16,7 +16,7 @@ bool interpret::parse(std::string code)
 {
   for (int i = 0; i < LENGTH(commandNames); i++)
   {
-	if (code == commandNames[i])
+	if (code.find(commandNames[i]))
 	{
 	  act(code);
 	  return true;
@@ -31,7 +31,7 @@ bool interpret::act(std::string command)
 {
   for (int i = 0; i < LENGTH(commandNames); i++)
   {
-	if (command == commandNames[i])
+	if (command.find(commandNames[i]))
 	{
 	  std::cout << "Do " << command << std::endl;
 	  return true;
