@@ -3,9 +3,9 @@ class Camera
   public:
     float waitTime = 0f;
     
+    float sec = 1.5f;
     float amp = 1f;
     float freq = 20f;
-    float sec = 1.5f;
 
     /*
      * カメラの振動を開始します。
@@ -13,14 +13,14 @@ class Camera
      * amp_ : 振幅
      * freq_: 振動数
      */
-    public void StartShakeCamera(float sec_, float amp_, float freq_)
+    void StartShakeCamera(float sec_, float amp_, float freq_)
     {
         sec = sec_;
         amp = amp_;
         freq = freq_;   
     }
     
-    public void Update()
+    void Update()
     {
         if (waitTime > 0f)
         {
