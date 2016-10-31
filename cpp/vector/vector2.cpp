@@ -1,5 +1,8 @@
 #include "vector2.h"
 
+const vector2 vector2::zero = vector2(0, 0);
+const vector2 vector2::one = vector2(1, 1);
+
 //constructors
 vector2::vector2(){
 	x = 0;
@@ -40,15 +43,19 @@ vector2* vector2::operator/(float f) {
 	return v;
 }
 
-/*
+
+/**/
 #include <iostream>
-int main () {
-	
+int main ()
+{
 	vector2* a = new vector2(12, 3);
 	vector2* b = new vector2(14, 5);
 	std::cout << a->x << ", " << a->y << std::endl;
+
+    std::cout << vector2::zero.x;
+
 	delete(a);
 	delete(b);
 	return 0;		
 }
-*/
+/**/

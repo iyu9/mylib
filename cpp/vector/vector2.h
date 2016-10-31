@@ -1,7 +1,9 @@
-
 class vector2 {
 	public:
-	float x, y;	
+	float x, y;
+
+    static const vector2 zero;
+    static const vector2 one;
 
 	vector2();
 	vector2(float x, float y);
@@ -10,3 +12,4 @@ class vector2 {
 	vector2* operator * (float f);
 	vector2* operator / (float f);
 };
+
