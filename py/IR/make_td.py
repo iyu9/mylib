@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# CREATE TD
+# Prepare Basic Info
 termList = {"hello", "term", "doc", "matrix"}
 docList = {"doc1.csv", "doc2.csv", "doc3.csv", "doc4.csv"}
 
@@ -9,7 +9,7 @@ termDocList = []
 termDocList.append(termDoc)
 termDocList.append(termDoc)
 
-# CALC
+# Create Term-Doc Matrix
 for termDoc in termDocList:
   for x in termDoc:
 	print x
@@ -21,16 +21,21 @@ def GetTermSum(termDocList, key):
 	termSum += termDoc[key]
   return termSum
 
-def GetSumTermList(termDocList):
+def GetTermSumList(termDocList):
   termList = []
   sumList = []
+  dictionary = {}
+
+  # GET TERMS
   for termDoc in termDocList:
 	for key in termDoc:
 	  termList.append(key)
 
-GetSumTermList(termDocList);
+  # GET SUMS
+  for term in termList:
+	print GetTermSum(termDocList, term)
+	dictionary[term] = GetTermSum(termDocList, term);
 
-print GetTermSum(termDocList, "hello")
-print GetTermSum(termDocList, "term")
-print GetTermSum(termDocList, "doc")
-print GetTermSum(termDocList, "matrix")
+  print dictionary
+
+GetTermSumList(termDocList);
