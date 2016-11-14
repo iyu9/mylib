@@ -1,27 +1,28 @@
-GAME_SCREEN_PLOT
-
 //-------------------------------------------
 //Note: Plot according to interpreter format
 //-------------------------------------------
 
-GAME_SPLASH:
- //RESOURCES
- IMAGE CIRCLE_LOGO = CENTER(256,256)
- //FUNCTIONS
- ChangeScene(3.0f);
+class Splash:
+ Image CircleSplashLogo = CENTER(256,256)
+ +ChangeScene(3.0f);
  
-GAME_TITLE:
- IMAGE TITLE_BG = (0, 0, 1280, 720)
- IMAGE TITLE_LOGO = CENTER_UPPER
- IMAGE TITLE_BUTTON = RIGHT
+class Title:
+ Image imgBg = (width, height)
+ Image imgGameLogo = CENTER_UPPER
+ Image imgButton = RIGHT
 
- TEXT TXT_BUTTON1 = "Start"
- TEXT TXT_BUTTON2 = "Load"
- TEXT TXT_BUTTON3 = "Gallary"
- TEXT TXT_BUTTON4 = "Option"
- TEXT TXT_BUTTON5 = "Exit"
+ Button btnMenu1 = "Start"
+ Button btnMenu2 = "Load"
+ Button btnMenu3 = "Gallary"
+ Button btnMenu4 = "Option"
+ Button btnMenu5 = "Exit"
 
- OnClick();
- OnMouseOver();
+ -OnClick()
+ -OnMouseOver()
 
+ -Init()
+ -ChangeScene()
 
+class Option:
+ Image imgBg = (width, height)
+ Image imgButton
