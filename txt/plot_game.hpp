@@ -3,15 +3,15 @@
 //-------------------------------------------
 
 class Splash:
- Image CircleSplashLogo = CENTER(256,256)
- +ChangeScene(3.0f)
+ Image imgSplashLogo = CENTER(256,256)
+ -ChangeScene(TransitionTime)
  
 class Title:
- Image imgBg = (width, height)
- Image imgGameLogo = CENTER_UPPER
- Image imgButton = RIGHT
+ Image imgBg
+ Image imgGameLogo
+ Image imgButton
 
- Button btnMenu = {
+ Button[] btnMenu = {
    "Start",
    "Load",
    "Gallary",
@@ -22,9 +22,33 @@ class Title:
  -OnClick()
  -OnMouseOver()
 
- -Init()
- -ChangeScene()
+ -InitScene()
+ -ChangeScene(TransitionTime, btnClicked)
 
 class Option:
- Image imgBg = (width, height)
+ Image imgBg
  Image imgButton
+ Image imgSlider
+
+ Button btnClose
+
+ Slider sldBgmVolume
+ Slider sldSeVolume
+ Slider sldVoiceVolume
+
+ -Save()
+ -ChangeScene(TransitionTime)
+
+class Adv:
+ Image imgSpeaker
+ Image imgNextArrow
+ Image imgAdvFrames
+ Image imgView
+
+ -OnClick()
+ -NextMessage()
+ -ChangeScene(TransitionTime);
+
+class ConfirmPopup:
+ +Show()
+ +Hide()
