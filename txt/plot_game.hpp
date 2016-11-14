@@ -4,18 +4,20 @@
 
 class Splash:
  Image CircleSplashLogo = CENTER(256,256)
- +ChangeScene(3.0f);
+ +ChangeScene(3.0f)
  
 class Title:
  Image imgBg = (width, height)
  Image imgGameLogo = CENTER_UPPER
  Image imgButton = RIGHT
 
- Button btnMenu1 = "Start"
- Button btnMenu2 = "Load"
- Button btnMenu3 = "Gallary"
- Button btnMenu4 = "Option"
- Button btnMenu5 = "Exit"
+ Button btnMenu = {
+   "Start",
+   "Load",
+   "Gallary",
+   "Option",
+   "Exit",
+ }
 
  -OnClick()
  -OnMouseOver()
