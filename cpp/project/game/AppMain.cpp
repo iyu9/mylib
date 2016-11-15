@@ -33,7 +33,7 @@ namespace AppMain
 	return true;
   }
 
-  std::string CheckInput()
+  std::string CheckCommand()
   {
 	std::string cmd;
 	std::cin >>	cmd;
@@ -43,7 +43,7 @@ namespace AppMain
 	return cmd;
   }
 
-  void Decode(std::string cmd)
+  void DecodeCommand(std::string cmd)
   {
 	for (int i = 0; i < 0; i++)
 	{
@@ -56,8 +56,8 @@ namespace AppMain
 
   void MainLoop()
   {
-	std::string cmd = CheckInput();
-	Decode(cmd);
+	std::string cmd = CheckCommand();
+	DecodeCommand(cmd);
   }
 }
 
