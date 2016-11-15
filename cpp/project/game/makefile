@@ -1,2 +1,2 @@
 AppMain:
-		g++ -o AppMain AppMain.cpp
+		g++ AppMain.cpp
