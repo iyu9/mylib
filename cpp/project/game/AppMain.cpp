@@ -7,7 +7,15 @@ namespace AppMain
 {
   bool isQuit = false;
   int currentScene = 0;
-  std::string cmd;
+
+  std::string checkCommands[] =
+  {
+	"start",
+	"load",
+	"continue",
+	"option",
+	"exit",
+  };
 
   enum Scene
   {
@@ -25,11 +33,31 @@ namespace AppMain
 	return true;
   }
 
-  void MainLoop()
+  std::string CheckInput()
   {
+	std::string cmd;
 	std::cin >>	cmd;
 	std::cout << std::endl << "inputed: ";
 	std::cout << cmd << std::endl;
+
+	return cmd;
+  }
+
+  void Decode(std::string cmd)
+  {
+	for (int i = 0; i < 0; i++)
+	{
+	  if (cmd == checkCommands[i])
+	  {
+		
+	  }
+	}
+  }
+
+  void MainLoop()
+  {
+	std::string cmd = CheckInput();
+	Decode(cmd);
   }
 }
 
