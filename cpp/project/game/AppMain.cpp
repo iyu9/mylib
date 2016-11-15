@@ -2,11 +2,19 @@
 
 namespace Time
 {
-  float delta = 0;
+  long clock = 0;
+  double delta = 0;
+
+  double GetSec()
+  {
+	//
+  }
 };
 
 namespace Scene
 {
+  static int currentScene;
+
   enum Scene
   {
 	Loading,
@@ -18,12 +26,18 @@ namespace Scene
   }; 
 };
 
-namespace AppMain
+namespace Command
 {
-  bool isQuit = false;
-  int currentScene = 0;
+  enum Command
+  {
+	Start,
+	Load,
+	Continue,
+	Option,
+	Exit,
+  };
 
-  std::string checkCommands[] =
+  static std::string checkCommands[] =
   {
 	"start",
 	"load",
@@ -31,15 +45,15 @@ namespace AppMain
 	"option",
 	"exit",
   };
+}
 
-  /*
-   * Initialize app settings before MainLoop()
-   */
-  bool Init()
-  {
-	currentScene = Scene::Loading;
-	return true;
-  }
+namespace AppMain
+{
+  bool isQuit = false;
+  int currentScene = 0;
+
+  void Initialize(){}
+  void Release(){}
 
   std::string CheckCommand()
   {
@@ -58,8 +72,6 @@ namespace AppMain
 
   void MainLoop()
   {
-	Time::delta += 1;
-
 	std::string cmd = CheckCommand();
 	DecodeCommand(cmd);
   }
@@ -68,12 +80,13 @@ namespace AppMain
 /**/
 int main ()
 {
-  AppMain::Init();
-
+  AppMain::Initialize();
   while (!AppMain::isQuit)
   {
 	AppMain::MainLoop();
   }
-  return 0;  
+
+  AppMain::Release();
+  return 0;
 }
 /**/
