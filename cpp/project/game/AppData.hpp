@@ -9,13 +9,30 @@ namespace AppData
 	static int clearFlag;
   };
   
-  void Save(){}
-  void Load(){}
+  void Save()
+  {
+	//
+	print("Data Saved");
+  }
+
+  void Load()
+  {
+	//
+	print("Data Loaded");
+  }
+
+  void Clear()
+  {
+	//
+	print("Data Cleared");
+  }
 };
 
 /**/
 int main ()
 {
+  AppData::Clear();
+  AppData::Load();
   AppData::Save();  
 
   return 0;
