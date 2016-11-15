@@ -2,14 +2,29 @@
 /*
  * Application Entry Point
  */
+namespace AppMain
+{
+  bool isQuit = false;
 
-bool isQuit = false;
+  bool Init()
+  {
+	return true;
+  }
 
+  void MainLoop()
+  {
+	
+  }
+}
+
+/**/
 int main ()
 {
-  while(isQuit)
+  AppMain::Init();
+  while(!AppMain::isQuit)
   {
-	//DO
+	AppMain::MainLoop();
   }
   return 0;  
 }
+/**/
