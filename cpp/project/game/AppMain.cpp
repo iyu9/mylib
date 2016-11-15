@@ -1,8 +1,23 @@
 #include "../../common_class/common/common.h"
 
-/*
- * Application Entry Point
- */
+namespace Time
+{
+  float delta = 0;
+};
+
+namespace Scene
+{
+  enum Scene
+  {
+	Loading,
+	Title,
+	Start,
+	Continue,
+	Option,
+	Exit
+  }; 
+};
+
 namespace AppMain
 {
   bool isQuit = false;
@@ -17,19 +32,12 @@ namespace AppMain
 	"exit",
   };
 
-  enum Scene
-  {
-	Loading,
-	Title,
-	Start,
-	Continue,
-	Option,
-	Exit
-  };
-
+  /*
+   * Initialize app settings before MainLoop()
+   */
   bool Init()
   {
-	currentScene = Loading;
+	currentScene = Scene::Loading;
 	return true;
   }
 
@@ -45,17 +53,13 @@ namespace AppMain
 
   void DecodeCommand(std::string cmd)
   {
-	for (int i = 0; i < 0; i++)
-	{
-	  if (cmd == checkCommands[i])
-	  {
-		
-	  }
-	}
+	//DECODE_ACTION	
   }
 
   void MainLoop()
   {
+	Time::delta += 1;
+
 	std::string cmd = CheckCommand();
 	DecodeCommand(cmd);
   }
@@ -65,7 +69,8 @@ namespace AppMain
 int main ()
 {
   AppMain::Init();
-  while(!AppMain::isQuit)
+
+  while (!AppMain::isQuit)
   {
 	AppMain::MainLoop();
   }
