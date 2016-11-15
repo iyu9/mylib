@@ -1,5 +1,5 @@
-AppMain:
+main:
 		g++ AppMain.cpp
 
-AppData:
-		g++ AppData.hpp
+appdata:
+		g++ -imacros DBG.hpp -o AppData AppData.hpp

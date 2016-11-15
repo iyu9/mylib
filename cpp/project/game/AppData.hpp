@@ -28,7 +28,7 @@ namespace AppData
   }
 };
 
-/**/
+#ifdef UNIT_TESTING
 int main ()
 {
   AppData::Clear();
@@ -37,4 +37,4 @@ int main ()
 
   return 0;
 }
-/**/
+#endif

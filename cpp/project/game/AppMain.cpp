@@ -1,51 +1,10 @@
 #include "../../common_class/common/common.h"
 
-namespace Time
-{
-  long clock = 0;
-  double delta = 0;
+#include "./common/time.hpp"
+#include "./common/scene.hpp"
+#include "./common/command.hpp"
 
-  double GetSec()
-  {
-	//
-  }
-};
-
-namespace Scene
-{
-  static int currentScene;
-
-  enum Scene
-  {
-	Loading,
-	Title,
-	Start,
-	Continue,
-	Option,
-	Exit
-  }; 
-};
-
-namespace Command
-{
-  enum Command
-  {
-	Start,
-	Load,
-	Continue,
-	Option,
-	Exit,
-  };
-
-  static std::string checkCommands[] =
-  {
-	"start",
-	"load",
-	"continue",
-	"option",
-	"exit",
-  };
-}
+#include "./AppData.hpp"
 
 namespace AppMain
 {
@@ -81,6 +40,7 @@ namespace AppMain
 int main ()
 {
   AppMain::Initialize();
+
   while (!AppMain::isQuit)
   {
 	AppMain::MainLoop();
