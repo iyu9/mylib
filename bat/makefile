@@ -9,14 +9,16 @@ OBJS = main.o
 CC = g++
 CFLAGS = -W
 
+# Suffix Rule
 .SUFFIXES: .cpp .o
 
-#Primary Target
-$(PROGRAM):
-	$(CC) $(PROGRAM) $^
+# Primary Target
+$(PROGRAM): $(OBJS)
+		$(CC) -o $(PROGRAM) $^
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<
+		$(CC) $(CFLAGS) -c $<
 
+.PHONY: clean
 clean:
-	$(RM) $(PRORAM) $(OBJS)
+		$(RM) $(PRORAM) $(OBJS)
