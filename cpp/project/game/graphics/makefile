@@ -1,0 +1,2 @@
+GLManager:
+	g++ GLManager.cpp

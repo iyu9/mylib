@@ -1,4 +1,5 @@
 #include "../../../common_class/common/common.h"
+#include "GL/glut.h"
 
 namespace GLManager
 {
@@ -8,10 +9,3 @@ namespace GLManager
 	void Render(){} 
   };
 }
-
-#ifdef UNIT_TESTING
-int main ()
-{
-  return 0;  
-}
-#endif
