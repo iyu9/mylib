@@ -9,12 +9,12 @@ namespace GLManager
 	  void Init()
 	  {
 		glutInit(0, NULL);
-		glutClearWindow(NULL);
-		glutDisplayFunc(render);
+		glutCreateWindow(NULL);
+		glutDisplayFunc(Render);
 		glutMainLoop();
 	  }
 
-	  void Render()
+	  static void Render()
 	  {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_LINE_LOOP);
