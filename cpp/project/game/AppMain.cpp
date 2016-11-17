@@ -4,6 +4,8 @@
 #include "./common/scene.hpp"
 #include "./common/command.hpp"
 
+#include "./graphics/GLManager.hpp"
+
 #include "./AppData.hpp"
 
 namespace AppMain
