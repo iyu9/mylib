@@ -1,15 +1,21 @@
-#include "../../../common_class/common/common.h"
-#include "GL/glut.h"
+#include <GL/glut.h>
 
-namespace GLManager
+/*
+ * OpenGL Graphics Control Class
+ */
+namespace GL
 {
+
   class GLManager
   {
 	public:
-	  void Init()
+	  GLManager(){}
+	  ~GLManager(){}
+
+	  static void Init(int* argc, char* argv[])
 	  {
-		glutInit(0, NULL);
-		glutCreateWindow(NULL);
+		glutInit(argc, argv);
+		glutCreateWindow(argv[0]);
 		glutDisplayFunc(Render);
 		glutMainLoop();
 	  }
@@ -18,11 +24,12 @@ namespace GLManager
 	  {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_LINE_LOOP);
-		  glVertex2d(0,0);
-		  glVertex2d(1,0);
-		  glVertex2d(1,1);
-		  glVertex2d(0,1);
+		  glVertex2d(-0.9, -0.9);
+		  glVertex2d( 0.9, -0.9);
+		  glVertex2d( 0.9,  0.9);
+		  glVertex2d(-0.9,  0.9);
+		glEnd();
 		glFlush();
 	  } 
   };
-}
+};

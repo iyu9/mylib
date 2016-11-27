@@ -1,6 +1,12 @@
 #include "GLManager.hpp"
 
-int main ()
+using namespace GL;
+
+/*
+ * OpenGL Manager Unit Testing
+ */
+int main(int argc, char* argv[])
 {
+  GLManager::Init(&argc, argv);
   return 0;  
 }
