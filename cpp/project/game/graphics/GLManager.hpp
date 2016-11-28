@@ -38,12 +38,14 @@ namespace GL
 		glutReshapeFunc(Reshape);
 		glutMouseFunc(Mouse);
 		glutKeyboardFunc(Keyboard);
+		glutIdleFunc(Idle);
 		glClearColor(0,0,1,1);
 		glutMainLoop();
 	  }
 	  
 	  static void Display()
 	  {
+		pos.x -= 0.00001;
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_LINE_LOOP);
 		  glVertex2d(-0.9 + pos.x, -0.9 + pos.y);
@@ -62,6 +64,11 @@ namespace GL
 		glViewport(0, 0, w, h);	
 		glLoadIdentity();
 		glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
+	  }
+
+	  static void Idle()
+	  {	
+		glutPostRedisplay();	
 	  }
 
 	  static void Keyboard(unsigned char key, int x, int y)
@@ -85,7 +92,6 @@ namespace GL
 			break;
 		}
 
-		glutPostRedisplay();	
 	  }
 
 	  static void Mouse(int button, int state, int x, int y)
