@@ -14,8 +14,10 @@ namespace GL
 	float y;
   };
 
-  const int WindowWidth = 320;
-  const int WindowHeight = 240;
+  const Vec2 WindowPos = {100, 100};
+  const Vec2 WindowSize = {320, 240};
+
+  const int IntervalUpdate = 100; //msec
 
   static Vec2 pos;
   const float MoveVal = 0.1;
@@ -29,23 +31,25 @@ namespace GL
 
 	  static void Init(int* argc, char* argv[])
 	  {
-		glutInitWindowPosition(100, 100);
-		glutInitWindowSize(WindowWidth, WindowHeight);
+		glutInitWindowPosition(WindowPos.x, WindowPos.y);
+		glutInitWindowSize(WindowSize.x, WindowSize.y);
 		glutInit(argc, argv);
 		glutInitDisplayMode(GLUT_RGBA);
 		glutCreateWindow(argv[0]);
+
+		//Set Handle Functions
 		glutDisplayFunc(Display);
 		glutReshapeFunc(Reshape);
 		glutMouseFunc(Mouse);
 		glutKeyboardFunc(Keyboard);
-		glutIdleFunc(Idle);
-		glClearColor(0,0,1,1);
+		glutTimerFunc(IntervalUpdate, Timer, 0);
+
+		glClearColor(0,0,0,1);
 		glutMainLoop();
 	  }
 	  
 	  static void Display()
 	  {
-		pos.x -= 0.00001;
 		glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_LINE_LOOP);
 		  glVertex2d(-0.9 + pos.x, -0.9 + pos.y);
@@ -58,7 +62,6 @@ namespace GL
 		glFlush();
 	  } 
 
-
 	  static void Reshape(int w, int h)
 	  {
 		glViewport(0, 0, w, h);	
@@ -66,9 +69,12 @@ namespace GL
 		glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
 	  }
 
-	  static void Idle()
+	  static void Timer(int value)
 	  {	
-		glutPostRedisplay();	
+		//Update	
+
+		glutPostRedisplay();
+		glutTimerFunc(IntervalUpdate, Timer, 0);
 	  }
 
 	  static void Keyboard(unsigned char key, int x, int y)
@@ -91,7 +97,6 @@ namespace GL
 		    pos.x += MoveVal;	
 			break;
 		}
-
 	  }
 
 	  static void Mouse(int button, int state, int x, int y)
