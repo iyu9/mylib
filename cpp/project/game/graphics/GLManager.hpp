@@ -10,8 +10,16 @@ namespace GL
 {
   struct Vec2
   {
-	float x;
-	float y;
+    float x;
+    float y;
+  };
+
+  struct Rect
+  {
+    float x;
+    float y;
+    float w;
+    float h;
   };
 
   const Vec2 WindowPos = {100, 100};
@@ -24,105 +32,121 @@ namespace GL
 
   class GLManager
   {
-	private:
-	public:
-	  GLManager(){}
-	  ~GLManager(){}
+    private:
+      static void DrawRect(float x, float y, float w, float h)
+      {
+        glBegin(GL_POLYGON);
+          glVertex2d(x, y);
+          glVertex2d(x + w, y);
+          glVertex2d(x + w, y + h);
+          glVertex2d(x, y + h);
+        glEnd();
+      }
 
-	  static void Init(int* argc, char* argv[])
-	  {
-		glutInitWindowPosition(WindowPos.x, WindowPos.y);
-		glutInitWindowSize(WindowSize.x, WindowSize.y);
-		glutInit(argc, argv);
-		glutInitDisplayMode(GLUT_RGBA);
-		glutCreateWindow(argv[0]);
+      static void DrawLine(int start_x, int start_y, int end_x, int end_y)
+      {
+        glBegin(GL_LINE);
+          glVertex2d(start_x, start_y);
+          glVertex2d(end_x, end_y);
+        glEnd();  
+      }
 
-		//Set Handle Functions
-		glutDisplayFunc(Display);
-		glutReshapeFunc(Reshape);
-		glutMouseFunc(Mouse);
-		glutKeyboardFunc(Keyboard);
-		glutTimerFunc(IntervalUpdate, Timer, 0);
+      static void DrawText()
+      {
+      //add plugin...  
+      }
 
-		glClearColor(0,0,0,1);
-		glutMainLoop();
-	  }
-	  
-	  static void Display()
-	  {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glBegin(GL_LINE_LOOP);
-		  glVertex2d(-0.9 + pos.x, -0.9 + pos.y);
-		  glVertex2d( 0.9 + pos.x, -0.9 + pos.y);
-		  glVertex2d( 0.9 + pos.x,  0.9 + pos.y);
-		  glVertex2d(-0.9 + pos.x,  0.9 + pos.y);
-		  glVertex2d(-0.9 + pos.x, -0.9 + pos.y);
-		  glVertex2d( 0.9 + pos.x,  0.9 + pos.y);
-		glEnd();
-		glFlush();
-	  } 
+      //for Auto Handling//
+      static void Display()
+      {
+        glClear(GL_COLOR_BUFFER_BIT);
+          DrawRect(-0.9, -0.9, 1.8, 1.8);
+        glFlush();
+      } 
 
-	  static void Reshape(int w, int h)
-	  {
-		glViewport(0, 0, w, h);	
-		glLoadIdentity();
-		glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
-	  }
+      static void Reshape(int w, int h)
+      {
+        glViewport(0, 0, w, h);  
+        glLoadIdentity();
+        glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
+      }
 
-	  static void Timer(int value)
-	  {	
-		//Update	
+      static void Timer(int value)
+      {  
+        //Update//
+        glutPostRedisplay();
+        glutTimerFunc(IntervalUpdate, Timer, 0);
+      }
 
-		glutPostRedisplay();
-		glutTimerFunc(IntervalUpdate, Timer, 0);
-	  }
+      static void Keyboard(unsigned char key, int x, int y)
+      {
+        switch (key)
+        {
+          case 'q':
+            exit(0);
+            break;
+          case 'w':
+            pos.y += MoveVal;  
+            break;
+          case 'a':
+            pos.x -= MoveVal;  
+            break;
+          case 's':
+            pos.y -= MoveVal;  
+            break;
+          case 'd':
+            pos.x += MoveVal;  
+            break;
+        }
+      }
 
-	  static void Keyboard(unsigned char key, int x, int y)
-	  {
-		switch (key)
-		{
-		  case 'q':
-			exit(0);
-			break;
-		  case 'w':
-		    pos.y += MoveVal;	
-			break;
-		  case 'a':
-		    pos.x -= MoveVal;	
-			break;
-		  case 's':
-		    pos.y -= MoveVal;	
-			break;
-		  case 'd':
-		    pos.x += MoveVal;	
-			break;
-		}
-	  }
+      static void Mouse(int button, int state, int x, int y)
+      {
+        switch (button)
+        {
+          case GLUT_LEFT_BUTTON:
+            printf("MOUSE_LEFT");
+            break;
+          case GLUT_MIDDLE_BUTTON:
+            printf("MOUSE_MIDDLE");
+            break;
+          case GLUT_RIGHT_BUTTON:
+            printf("MOUSE_RIGHT");
+            break;
+        }
 
-	  static void Mouse(int button, int state, int x, int y)
-	  {
-		switch (button)
-		{
-		  case GLUT_LEFT_BUTTON:
-			printf("MOUSE_LEFT");
-			break;
-		  case GLUT_MIDDLE_BUTTON:
-			printf("MOUSE_MIDDLE");
-			break;
-		  case GLUT_RIGHT_BUTTON:
-			printf("MOUSE_RIGHT");
-			break;
-		}
+        switch (state)
+        {
+          case GLUT_UP:
+            printf("MOUSE_ON_UP");
+            break;
+          case GLUT_DOWN:
+            printf("MOUSE_ON_DOWN");
+            break;
+        }
+      }
 
-		switch (state)
-		{
-		  case GLUT_UP:
-			printf("MOUSE_ON_UP");
-			break;
-		  case GLUT_DOWN:
-			printf("MOUSE_ON_DOWN");
-			break;
-		}
-	  }
+    public:
+      GLManager(){}
+      ~GLManager(){}
+
+      static void Init(int* argc, char* argv[])
+      {
+        glutInitWindowPosition(WindowPos.x, WindowPos.y);
+        glutInitWindowSize(WindowSize.x, WindowSize.y);
+        glutInit(argc, argv);
+        glutInitDisplayMode(GLUT_RGBA);
+        glutCreateWindow(argv[0]);
+
+        //Set Handle Functions
+        glutDisplayFunc(Display);
+        glutReshapeFunc(Reshape);
+        glutMouseFunc(Mouse);
+        glutKeyboardFunc(Keyboard);
+        glutTimerFunc(IntervalUpdate, Timer, 0);
+
+        glClearColor(0,0,0,1);
+        glutMainLoop();
+      }
   };
-};
+}
