@@ -22,10 +22,44 @@ namespace GL
     float h;
   };
 
-  struct Object
+  class Object
   {
+	public:
 	int id;
-	Vec2 pos;	
+	int drawType;
+	Vec2 pos;
+
+	void Render()
+	{
+	  
+	}
+  };
+
+  enum DrawType
+  {
+	Line,
+	Rect,
+	Poly,
+  };
+
+  class Scene
+  {
+	private:
+	  Object drawTarget[10];
+
+    public:
+	  void Load(const char* sceneName)
+	  {
+			
+	  }
+
+	  void Render()
+	  {
+		for (int i = 0; i < 10; i++)
+		{
+		  drawTarget[i].Render();
+		} 
+	  }
   };
 
   const Vec2 WindowPos = {100, 100};
@@ -35,14 +69,14 @@ namespace GL
 
   static Vec2 pos;
   const float MoveVal = 0.1;
+
+  static Object actor;
   
-  Object actor; 
+  static Scene scene;
 
   class GLManager
   {
     private:
-	  Object object[10];
-	  int objectCount;
 
       static void DrawRect(float x, float y, float w, float h)
       {
@@ -160,14 +194,9 @@ namespace GL
         glutMainLoop();
       }
 	  
-      void AddObject()
-      {
-        objectCount++;
-      }
-
-      void DelObject()
-      {
-        objectCount--;
-      }
+	  void SetScene(const Scene *scene)
+	  {
+		//
+	  }
   };
 }
