@@ -159,15 +159,15 @@ namespace GL
         glClearColor(0,0,0,1);
         glutMainLoop();
       }
+	  
+      void AddObject()
+      {
+        objectCount++;
+      }
 
-	  void AddObject()
-	  {
-		objectCount++;
-	  }
-
-	  void DelObject()
-	  {
-		objectCount--;
-	  }
+      void DelObject()
+      {
+        objectCount--;
+      }
   };
 }
