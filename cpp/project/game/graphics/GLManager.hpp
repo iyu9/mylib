@@ -22,43 +22,54 @@ namespace GL
     float h;
   };
 
-  class Object
-  {
-	public:
-	int id;
-	int drawType;
-	Vec2 pos;
-
-	void Render()
-	{
-	  
-	}
-  };
-
-  enum DrawType
+  enum RenderObjectType
   {
 	Line,
 	Rect,
 	Poly,
   };
 
+  class Object
+  {
+	public:
+	  int id;
+	  int renderType;
+	  Vec2 pos;
+
+	  Object(){}
+	  ~Object(){}
+
+	  int GetID()
+	  {
+		return id;
+	  }
+
+	  int GetRenderType()
+	  {
+		return renderType;
+	  }
+  };
+
   class Scene
   {
 	private:
-	  Object drawTarget[10];
+	  Object drawTarget[99];
 
     public:
-	  void Load(const char* sceneName)
+
+	  void Save(const char* fileName)
 	  {
-			
+		//Save Scene File
 	  }
 
-	  void Render()
+	  void Load(const char* sceneName)
 	  {
-		for (int i = 0; i < 10; i++)
-		{
-		  drawTarget[i].Render();
-		} 
+		//Load Scene File	
+	  }
+
+	  void GetRenderTypes()
+	  {
+		//
 	  }
   };
 
@@ -71,7 +82,6 @@ namespace GL
   const float MoveVal = 0.1;
 
   static Object actor;
-  
   static Scene scene;
 
   class GLManager
