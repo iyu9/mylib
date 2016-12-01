@@ -50,7 +50,7 @@ namespace GL
 	  int id;
 	  int renderType;
 
-	  Vec2 vertices[99];
+	  Vec2 verts[99];
 	  Vec2 pos;
 
 	  Object(){}
@@ -99,7 +99,7 @@ namespace GL
   static Vec2 pos;
   const float MoveVal = 0.1;
 
-  static Object actor;
+  Object actor;
   static Scene scene;
 
   class GLManager
