@@ -14,6 +14,21 @@ namespace GL
     float y;
   };
 
+  struct Vec3
+  {
+	float x;
+	float y;
+	float z;
+  };
+
+  struct Vec4
+  {
+	float x;
+	float y;
+	float z;
+	float w;
+  };
+
   struct Rect
   {
     float x;
@@ -22,7 +37,7 @@ namespace GL
     float h;
   };
 
-  enum RenderObjectType
+  enum RenderType
   {
 	Line,
 	Rect,
@@ -34,6 +49,8 @@ namespace GL
 	public:
 	  int id;
 	  int renderType;
+
+	  Vec2 vertices[99];
 	  Vec2 pos;
 
 	  Object(){}
@@ -53,7 +70,7 @@ namespace GL
   class Scene
   {
 	private:
-	  Object drawTarget[99];
+	  Object object[99];
 
     public:
 
@@ -67,9 +84,10 @@ namespace GL
 		//Load Scene File	
 	  }
 
-	  void GetRenderTypes()
+	  //read only pointer ?
+	  const Object* GetObjects()
 	  {
-		//
+		return object;
 	  }
   };
 
@@ -204,9 +222,5 @@ namespace GL
         glutMainLoop();
       }
 	  
-	  void SetScene(const Scene *scene)
-	  {
-		//
-	  }
   };
 }
