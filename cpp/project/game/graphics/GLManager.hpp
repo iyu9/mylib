@@ -22,6 +22,12 @@ namespace GL
     float h;
   };
 
+  struct Object
+  {
+	int id;
+	Vec2 pos;	
+  };
+
   const Vec2 WindowPos = {100, 100};
   const Vec2 WindowSize = {320, 240};
 
@@ -29,10 +35,15 @@ namespace GL
 
   static Vec2 pos;
   const float MoveVal = 0.1;
+  
+  Object actor; 
 
   class GLManager
   {
     private:
+	  Object object[10];
+	  int objectCount;
+
       static void DrawRect(float x, float y, float w, float h)
       {
         glBegin(GL_POLYGON);
@@ -53,14 +64,14 @@ namespace GL
 
       static void DrawText()
       {
-      //add plugin...  
+		//add plugin...  
       }
 
       //for Auto Handling//
       static void Display()
       {
         glClear(GL_COLOR_BUFFER_BIT);
-          DrawRect(-0.9, -0.9, 1.8, 1.8);
+          DrawRect(-0.9 + actor.pos.x, -0.9 + actor.pos.y, 1.8, 1.8);
         glFlush();
       } 
 
@@ -86,16 +97,16 @@ namespace GL
             exit(0);
             break;
           case 'w':
-            pos.y += MoveVal;  
+            actor.pos.y += MoveVal;  
             break;
           case 'a':
-            pos.x -= MoveVal;  
+            actor.pos.x -= MoveVal;  
             break;
           case 's':
-            pos.y -= MoveVal;  
+            actor.pos.y -= MoveVal;  
             break;
           case 'd':
-            pos.x += MoveVal;  
+            actor.pos.x += MoveVal;  
             break;
         }
       }
@@ -138,7 +149,7 @@ namespace GL
         glutInitDisplayMode(GLUT_RGBA);
         glutCreateWindow(argv[0]);
 
-        //Set Handle Functions
+        //Set Auto Execute Functions
         glutDisplayFunc(Display);
         glutReshapeFunc(Reshape);
         glutMouseFunc(Mouse);
@@ -148,5 +159,15 @@ namespace GL
         glClearColor(0,0,0,1);
         glutMainLoop();
       }
+
+	  void AddObject()
+	  {
+		objectCount++;
+	  }
+
+	  void DelObject()
+	  {
+		objectCount--;
+	  }
   };
 }
