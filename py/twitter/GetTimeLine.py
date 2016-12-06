@@ -10,23 +10,17 @@ CS = ''         # Consumer Secret
 AT = ''         # Access Token
 AS = ''         # Accesss Token Secert
 
-# ^CC擾pURL
 url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
 
-# ƂɃp[^
 params = {}
 
-# OAuth  GET
 twitter = OAuth1Session(CK, CS, AT, AS)
 req = twitter.get(url, params = params)
 
 if req.status_code == 200:
-  # X|XJSON`Ȃ parse 
   timeline = json.loads(req.text)
-  # ecC[g{\
   for tweet in timeline:
 	print(tweet["text"])
 
 else:
-  # G[ꍇ
   print ("Error: %d" % req.status_code)
