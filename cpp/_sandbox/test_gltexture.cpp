@@ -4,12 +4,14 @@
 #define TEX_HEIGHT 16 
 #define TEX_WIDTH 16 
 
-static GLubyte image[TEX_HEIGHT][TEX_WIDTH][4]; void initTexture(void) 
+static GLubyte image[TEX_HEIGHT][TEX_WIDTH][4];
+
+void initTexture(void) 
 {
   int i, j, c;
-  for (i=0;i<TEX_HEIGHT;i++) 
+  for (i = 0; i < TEX_HEIGHT; i++) 
   {
-	for (j=0;j<TEX_WIDTH;j++)
+	for (j = 0; j < TEX_WIDTH; j++)
 	{
 	  c = ( ((i&0x01)==0)^((j&0x01)==0) );
 	  image[i][j][0] = image[i][j][1] = image[i][j][2] = c*255;
