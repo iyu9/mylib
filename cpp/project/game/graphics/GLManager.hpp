@@ -2,10 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//#define TEST_TEX
+
 /*
  * OpenGL Graphics Control Class
- * Referenced by https://tokoik.github.io/opengl/libglut.html#3.1
+ * Reference:
+ * https://tokoik.github.io/opengl/libglut.html#3.1,
+ * http://www.oit.ac.jp
  */
+
+#ifdef TEST_TEX
 
 #define TEX_HEIGHT 16 
 #define TEX_WIDTH 16 
@@ -21,7 +27,7 @@ void InitTexture(void)
     {
       c = ( ((i&0x01)==0)^((j&0x01)==0) );
       image[i][j][0] = image[i][j][1] = image[i][j][2] = c*255;
-      image[i][j][3]=255;
+      image[i][j][3] = 255;
     }
   }
 } 
@@ -55,6 +61,8 @@ void displayAltanative()
   glutSwapBuffers();
 }
 
+#endif
+
 namespace GL
 {
   struct Vec2
@@ -68,22 +76,6 @@ namespace GL
 	float x;
 	float y;
 	float z;
-  };
-
-  struct Vec4
-  {
-	float x;
-	float y;
-	float z;
-	float w;
-  };
-
-  struct Rect
-  {
-    float x;
-    float y;
-    float w;
-    float h;
   };
 
   enum RenderType
@@ -188,17 +180,18 @@ namespace GL
 
       static void Reshape(int w, int h)
       {
-		/*
-        glViewport(0, 0, w, h);  
-        glLoadIdentity();
-        glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
-		*/
+#ifdef TEST_TEX
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glFrustum(-5.0, 5.0, -5.0, 5.0, 5.0, 500.0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+#else
+        glViewport(0, 0, w, h);  
+        glLoadIdentity();
+        glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
+#endif
       }
 
       static void Timer(int value)
@@ -212,9 +205,12 @@ namespace GL
       {
         switch (key)
         {
+		  //Exit
           case 'q':
             exit(0);
             break;
+
+		  //WASD
           case 'w':
             actor.pos.y += MoveVal;  
             break;
@@ -227,8 +223,39 @@ namespace GL
           case 'd':
             actor.pos.x += MoveVal;  
             break;
+
+		  //ZXC
+		  case 'z':
+			break;
+		  case 'x':
+			break;
+		  case 'c':
+			break;
         }
       }
+
+	  static void SpecialKey(int key, int x, int y)
+	  {
+		switch(key)
+		{
+		  case GLUT_KEY_F1:
+			exit(0);	
+			break;
+
+		  case GLUT_KEY_UP:
+			actor.pos.y += MoveVal;
+			break;
+		  case GLUT_KEY_RIGHT:
+			actor.pos.x += MoveVal;
+			break;
+		  case GLUT_KEY_DOWN:
+			actor.pos.y -= MoveVal;
+			break;
+		  case GLUT_KEY_LEFT:
+			actor.pos.x -= MoveVal;
+			break;
+		}	
+	  }
 
       static void Mouse(int button, int state, int x, int y)
       {
@@ -266,9 +293,14 @@ namespace GL
         glutInitWindowPosition(WindowPos.x, WindowPos.y);
         glutInitWindowSize(WindowSize.x, WindowSize.y);
         glutInit(argc, argv);
+#ifdef TEST_TEX
         glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
+#else
+        glutInitDisplayMode(GLUT_RGBA);
+#endif
         glutCreateWindow(argv[0]);
 
+#ifdef TEST_TEX
 		//Set Depth Setting
 		glClearColor(0.0, 0.0, 0.0, 0.0);
 		glDepthFunc(GL_LEQUAL);
@@ -287,9 +319,13 @@ namespace GL
         //Set Auto-Processing Functions
         //glutDisplayFunc(Display);
         glutDisplayFunc(displayAltanative);
+#else
+        glutDisplayFunc(Display);
+#endif
         glutReshapeFunc(Reshape);
         glutMouseFunc(Mouse);
         glutKeyboardFunc(Keyboard);
+        glutSpecialFunc(SpecialKey);
         glutTimerFunc(IntervalUpdate, Timer, 0);
 
         glClearColor(0, 0, 0, 1);
