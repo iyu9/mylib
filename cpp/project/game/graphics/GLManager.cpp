@@ -1,3 +1,4 @@
+#define TEST_TEX
 #include "GLManager.hpp"
 
 /*

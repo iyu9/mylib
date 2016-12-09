@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#define TEST_TEX
-
 /*
  * OpenGL Graphics Control Class
  * Reference:
@@ -18,29 +16,29 @@
 
 static GLubyte image[TEX_HEIGHT][TEX_WIDTH][4];
 
-void InitTexture(void) 
+void InitTexture() 
 {
-  int i, j, c;
-  for (i = 0; i < TEX_HEIGHT; i++) 
+  for (int i = 0; i < TEX_HEIGHT; i++) 
   {
-    for (j = 0; j < TEX_WIDTH; j++)
+    for (int j = 0; j < TEX_WIDTH; j++)
     {
-      c = ( ((i&0x01)==0)^((j&0x01)==0) );
-      image[i][j][0] = image[i][j][1] = image[i][j][2] = c*255;
+	  int color;
+      color = ( ((i&0x01)==0)^((j&0x01)==0) );
+      image[i][j][0] = image[i][j][1] = image[i][j][2] = color*255;
       image[i][j][3] = 255;
     }
   }
 } 
 
-void displayTexPolygon(void)
+void displayTexPolygon()
 {
   glEnable(GL_TEXTURE_2D);
-  glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0); glVertex3f(-5.0,-5.0, 0.0);
-	glTexCoord2f(0.0, 1.0); glVertex3f(-5.0, 5.0, 0.0);
-	glTexCoord2f(1.0, 1.0); glVertex3f( 5.0, 5.0, 0.0);
-	glTexCoord2f(1.0, 0.0); glVertex3f( 5.0,-5.0, 0.0);
-  glEnd();
+	glBegin(GL_QUADS);
+	  glTexCoord2f(0.0, 0.0); glVertex3f(-5.0,-5.0, 0.0);
+	  glTexCoord2f(0.0, 1.0); glVertex3f(-5.0, 5.0, 0.0);
+	  glTexCoord2f(1.0, 1.0); glVertex3f( 5.0, 5.0, 0.0);
+	  glTexCoord2f(1.0, 0.0); glVertex3f( 5.0,-5.0, 0.0);
+	glEnd();
   glDisable(GL_TEXTURE_2D);
 } 
 
@@ -147,6 +145,21 @@ namespace GL
   {
     private:
 
+	  //--------------------------
+	  //Draw Primitive Functions
+	  //--------------------------
+	  static void DrawTexture(float x, float y, float w, float h)
+	  {		
+		glEnable(GL_TEXTURE_2D);
+		  glBegin(GL_QUADS);
+			glTexCoord2f(0.0, 0.0); glVertex3f(x, y, 0.0);
+			glTexCoord2f(0.0, 1.0); glVertex3f(x, y + h, 0.0);
+			glTexCoord2f(1.0, 1.0); glVertex3f(x + w, y + h, 0.0);
+			glTexCoord2f(1.0, 0.0); glVertex3f(x + w, y, 0.0);
+		  glEnd();
+		glDisable(GL_TEXTURE_2D);
+	  } 
+
       static void DrawRect(float x, float y, float w, float h)
       {
         glBegin(GL_POLYGON);
@@ -170,7 +183,9 @@ namespace GL
         //add plugin...  
       }
 
-      //for Auto Handling//
+	  //--------------------------
+      //Auto-processing Functions
+	  //--------------------------
       static void Display()
       {
         glClear(GL_COLOR_BUFFER_BIT);
