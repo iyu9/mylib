@@ -29,25 +29,25 @@ namespace GLCommon
 	IntVector2 operator+(IntVector2 opt)
 	{
 	  IntVector2* vec = new IntVector2(x + opt.x, y + opt.y);
-	  return vec;
+	  return *vec;
 	}
 
 	IntVector2 operator-(IntVector2 opt)
 	{
 	  IntVector2* vec = new IntVector2(x - opt.x, y - opt.y);
-	  return vec;
+	  return *vec;
 	}
 
 	IntVector2 operator*(double opt)
 	{
 	  IntVector2* vec = new IntVector2((int)(x * opt), (int)(y * opt));
-	  return vec;
+	  return *vec;
 	}
 
 	IntVector2 operator/(double opt)
 	{
 	  IntVector2* vec = new IntVector2(int(x / opt), int(y / opt));
-	  return vec;
+	  return *vec;
 	}
   };
 
@@ -74,25 +74,25 @@ namespace GLCommon
 	  return this;
 	}
 
-	Vector2 operator+(Vector2 opt)
+	Vector2* operator+(Vector2 opt)
 	{
 	  Vector2* vec = new Vector2(x + opt.x, y + opt.y);
 	  return vec;
 	}
 
-	Vector2 operator-(Vector2 opt)
+	Vector2* operator-(Vector2 opt)
 	{
 	  Vector2* vec = new Vector2(x - opt.x, y - opt.y);
 	  return vec;
 	}
 
-	Vector2 operator*(double opt)
+	Vector2* operator*(double opt)
 	{
 	  Vector2* vec = new Vector2(x * opt, y * opt);
 	  return vec;
 	}
 
-	Vector2 operator/(double opt)
+	Vector2* operator/(double opt)
 	{
 	  Vector2* vec = new Vector2(x / opt, y / opt);
 	  return vec;
@@ -102,9 +102,7 @@ namespace GLCommon
   class Vector3
   {
   public:
-	double x;
-	double y;
-	double z;
+	double x, y, z;
 
   public:
 	Vector3(double x_, double y_, double z_)
@@ -124,25 +122,25 @@ namespace GLCommon
 	  return this;
 	}
 
-	Vector3 operator+(Vector3 opt)
+	Vector3* operator+(Vector3 opt)
 	{
 	  Vector3* vec = new Vector3(x + opt.x, y + opt.y, z + opt.z);
 	  return vec;
 	}
 
-	Vector3 operator-(Vector3 opt)
+	Vector3* operator-(Vector3 opt)
 	{
 	  Vector3* vec = new Vector3(x - opt.x, y - opt.y, z + opt.z);
 	  return vec;
 	}
 
-	Vector3 operator*(double opt)
+	Vector3* operator*(double opt)
 	{
 	  Vector3* vec = new Vector3(x * opt, y * opt, z * opt);
 	  return vec;
 	}
 
-	Vector3 operator/(double opt)
+	Vector3* operator/(double opt)
 	{
 	  Vector3* vec = new Vector3(x / opt, y / opt, z / opt);
 	  return vec;
@@ -152,10 +150,7 @@ namespace GLCommon
   class Vector4
   {
   public:
-	double x;
-	double y;
-	double z;
-	double w;
+	double x, y, z, w;
 
   public:
 	Vector4(double x_, double y_, double z_, double w_)
@@ -175,27 +170,27 @@ namespace GLCommon
 	  return this;
 	}
 
-	Vectorx4 operator+(Vector4 opt)
+	Vector4* operator+(Vector4 opt)
 	{
 	  Vector4* vec = new Vector4(x + opt.x, y + opt.y, z + opt.z, w + opt.w);
 	  return vec;
 	}
 
-	Vector4 operator-(Vector4 opt)
+	Vector4* operator-(Vector4 opt)
 	{
 	  Vector4* vec = new Vector4(x - opt.x, y - opt.y, z - opt.z, w - opt.w);
 	  return vec;
 	}
 
-	Vector4 operator*(double opt)
+	Vector4* operator*(double opt)
 	{
 	  Vector4* vec = new Vector4(x * opt, y * opt, z * opt, w * opt);
 	  return vec;
 	}
 
-	Vector4 operator/(double opt)
+	Vector4* operator/(double opt)
 	{
-	  Vector4* vec = new Vector2(x / opt, y / opt, z * opt, w * opt);
+	  Vector4* vec = new Vector4(x / opt, y / opt, z / opt, w / opt);
 	  return vec;
 	}
   };
