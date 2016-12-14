@@ -6,7 +6,19 @@ private:
 
 public:
   GLScene(){}
-  GLScene(const char* name_) {name = name_;}
+  GLScene(const char* name_)
+  {
+	name = name_;
+  }
   ~GLScene(){}
-  GetSceneName(){}
+
+  void Start()
+  {
+	//StartCall	
+  }
+  
+  void Update()
+  {
+	//UpdateCall	
+  }
 };
