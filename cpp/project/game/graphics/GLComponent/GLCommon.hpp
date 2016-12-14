@@ -198,23 +198,23 @@ namespace GLCommon
   class Matrix
   {
   public:
-	int x_size;
-	int y_size;
-	double value[4][4];
+	int row;
+	int col;
+	double* value;
 
   public:
 	Matrix(){}
-	Matrix(int x_size_, int y_size_, double value_[4][4])
+	Matrix(int row_, int col_, double* value_)
 	{
-	  x_size = x_size_;
-	  y_size = y_size_;
+	  row = row_;
+	  col = col_;
 
 	  //ARRAY_COPYING
 	  for(int x = 0; x < 4; x++)
 	  {
 		for(int y = 0; y < 4; y++)
 		{
-		  value[x][y] = value_[x][y];
+		  *(value[x])[y] = *(value_[x])[y];
 		}	
 	  }
 	}
@@ -222,25 +222,25 @@ namespace GLCommon
 
 	int GetRank()
 	{
-		int rank = (x_size > y_size) ? x_size : y_size;
+		int rank = (row > col) ? row : col;
 	    return rank;
 	}
 
 	Matrix* operator+(Matrix opt)
 	{
-	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  if (row != opt.row || col != opt.col)
 	  {
 		return 0;
 	  }
 
 	  Matrix* mat = new Matrix();
-	  mat->x_size = x_size;
-	  mat->y_size = y_size;
-	  for(int x = 0; x < x_size; x++)
+	  mat->row = row;
+	  mat->col = col;
+	  for(int x = 0; x < row; x++)
 	  {
-		for(int y = 0; y < y_size; y++)
+		for(int y = 0; y < col; y++)
 		{
-		  mat->value[x][y] = value[x][y] + opt.value[x][y];
+		  //*(mat->value[x] + y * sizeof(double *)) = *(value[x] + y * sizeof(double *)) + *(opt.value[x] + y * sizeof(double *));
 		}
 	  }
 
@@ -249,19 +249,19 @@ namespace GLCommon
 
 	Matrix* operator-(Matrix opt)
 	{
-	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  if (row != opt.row || col != opt.col)
 	  {
 		return 0;	
 	  }
 
 	  Matrix* mat = new Matrix();
-	  mat->x_size = x_size;
-	  mat->y_size = y_size;
-	  for(int x = 0; x < x_size; x++)
+	  mat->row = row;
+	  mat->col = col;
+	  for(int x = 0; x < row; x++)
 	  {
-		for(int y = 0; y < y_size; y++)
+		for(int y = 0; y < col; y++)
 		{
-		  mat->value[x][y] = value[x][y] - opt.value[x][y];
+		  //*(mat->value[x] + y) = *(value[x] + y) - *(opt.value[x] + y);
 		}
 	  }
 	  return mat;
@@ -269,7 +269,7 @@ namespace GLCommon
 	
 	Matrix* operator*(Matrix opt)
 	{
-	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  if (row != opt.row || col != opt.col)
 	  {
 		return 0;	
 	  }
@@ -289,7 +289,7 @@ namespace GLCommon
 		  {1, 1},
 		  {1, 1}
 		};
-		rotateMatrix = new Matrix(2, 2, 0);
+		rotateMatrix = new Matrix(2, 2, rot[0]);
 	  }
 	  else if (GetRank() == 3)
 	  {
@@ -300,7 +300,7 @@ namespace GLCommon
 		  {1, 1, 1},
 		  {1, 1, 1}
 		};
-		rotateMatrix = new Matrix(3, 3, 0);
+		rotateMatrix = new Matrix(3, 3, rot[0]);
 	  }
 
 	  //TBD  
