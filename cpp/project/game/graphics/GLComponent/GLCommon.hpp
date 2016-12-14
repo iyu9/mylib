@@ -46,7 +46,7 @@ namespace GLCommon
 
 	IntVector2 operator/(double opt)
 	{
-	  IntVector2* vec = new IntVector2(int(x / opt), int(y / opt));
+	  IntVector2* vec = new IntVector2((int)(x / opt), (int)(y / opt));
 	  return *vec;
 	}
   };
