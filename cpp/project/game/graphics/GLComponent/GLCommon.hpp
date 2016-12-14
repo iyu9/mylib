@@ -194,6 +194,127 @@ namespace GLCommon
 	  return vec;
 	}
   };
+
+  class Matrix
+  {
+  public:
+	int x_size;
+	int y_size;
+	double value[4][4];
+
+  public:
+	Matrix(){}
+	Matrix(int x_size_, int y_size_, double value_[4][4])
+	{
+	  x_size = x_size_;
+	  y_size = y_size_;
+
+	  //ARRAY_COPYING
+	  for(int x = 0; x < 4; x++)
+	  {
+		for(int y = 0; y < 4; y++)
+		{
+		  value[x][y] = value_[x][y];
+		}	
+	  }
+	}
+	~Matrix(){}
+
+	int GetRank()
+	{
+		int rank = (x_size > y_size) ? x_size : y_size;
+	    return rank;
+	}
+
+	Matrix* operator+(Matrix opt)
+	{
+	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  {
+		return 0;
+	  }
+
+	  Matrix* mat = new Matrix();
+	  mat->x_size = x_size;
+	  mat->y_size = y_size;
+	  for(int x = 0; x < x_size; x++)
+	  {
+		for(int y = 0; y < y_size; y++)
+		{
+		  mat->value[x][y] = value[x][y] + opt.value[x][y];
+		}
+	  }
+
+	  return mat;
+	}
+
+	Matrix* operator-(Matrix opt)
+	{
+	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  {
+		return 0;	
+	  }
+
+	  Matrix* mat = new Matrix();
+	  mat->x_size = x_size;
+	  mat->y_size = y_size;
+	  for(int x = 0; x < x_size; x++)
+	  {
+		for(int y = 0; y < y_size; y++)
+		{
+		  mat->value[x][y] = value[x][y] - opt.value[x][y];
+		}
+	  }
+	  return mat;
+	}
+	
+	Matrix* operator*(Matrix opt)
+	{
+	  if (x_size != opt.x_size || y_size != opt.y_size)
+	  {
+		return 0;	
+	  }
+	  //TBD  
+	  Matrix* mat = new Matrix();
+	  return mat;
+	}
+
+	Matrix* Rotate(double x, double y, double z, double euler)
+	{
+	  Matrix* rotateMatrix;
+	  if (GetRank() == 2)
+	  {
+		double rot[2][2] =
+		{
+		  //TBD
+		  {1, 1},
+		  {1, 1}
+		};
+		rotateMatrix = new Matrix(2, 2, 0);
+	  }
+	  else if (GetRank() == 3)
+	  {
+		double rot[3][3] = 
+		{
+		  //TBD
+		  {1, 1, 1},
+		  {1, 1, 1},
+		  {1, 1, 1}
+		};
+		rotateMatrix = new Matrix(3, 3, 0);
+	  }
+
+	  //TBD  
+	  Matrix* mat = new Matrix();
+	  return mat;
+	}
+
+	Matrix* Translate(double x, double y, double z)
+	{
+	  //TBD  
+	  Matrix* mat = new Matrix();
+	  return mat;
+	}
+  };
 };
 
 #endif
