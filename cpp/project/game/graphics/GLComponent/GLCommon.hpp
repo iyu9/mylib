@@ -1,5 +1,5 @@
-#ifndef ONCE_GLCOMMON
-#define ONCE_GLCOMMON
+#ifndef INCLUDE_ONCE_GLCOMMON_H
+#define INCLUDE_ONCE_GLCOMMON_H
 
 namespace GLCommon
 {
