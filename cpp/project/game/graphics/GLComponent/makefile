@@ -1,0 +1,2 @@
+GLUnitTest:
+		g++ GLUnitTest.cpp
