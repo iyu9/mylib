@@ -1,3 +1,5 @@
+#include "GLCommon.hpp"
+
 class GLObject
 {
 private:
@@ -7,6 +9,16 @@ private:
 
 public:
   GLObject(){}
-  GLObject(int id_){id = id_;}
+  GLObject(int id_)
+  {
+	id = id_;
+  }
+  GLObject(int id_, char* name_)
+  {
+	id = id_;
+	name = name_;
+  }
   ~GLObject(){}
 };
+
+int main (){}
