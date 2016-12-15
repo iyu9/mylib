@@ -200,11 +200,11 @@ namespace GLCommon
   public:
 	int row;
 	int col;
-	double* value;
+	double value[4][4];
 
   public:
 	Matrix(){}
-	Matrix(int row_, int col_, double* value_)
+	Matrix(int row_, int col_, double value_[][4])
 	{
 	  row = row_;
 	  col = col_;
@@ -214,7 +214,7 @@ namespace GLCommon
 	  {
 		for(int y = 0; y < 4; y++)
 		{
-		  *(value[x])[y] = *(value_[x])[y];
+		  value[x][y] = value_[x][y];
 		}	
 	  }
 	}
@@ -283,24 +283,27 @@ namespace GLCommon
 	  Matrix* rotateMatrix;
 	  if (GetRank() == 2)
 	  {
-		double rot[2][2] =
+		double rot[4][4] =
 		{
 		  //TBD
-		  {1, 1},
-		  {1, 1}
+		  {1, 1, 0, 0},
+		  {1, 1, 0, 0},
+		  {0, 0, 0, 0},
+		  {0, 0, 0, 0}
 		};
-		rotateMatrix = new Matrix(2, 2, rot[0]);
+		rotateMatrix = new Matrix(4, 4, rot);
 	  }
 	  else if (GetRank() == 3)
 	  {
-		double rot[3][3] = 
+		double rot[4][4] = 
 		{
 		  //TBD
-		  {1, 1, 1},
-		  {1, 1, 1},
-		  {1, 1, 1}
+		  {1, 1, 1, 0},
+		  {1, 1, 1, 0},
+		  {1, 1, 1, 0},
+		  {0, 0, 0, 0}
 		};
-		rotateMatrix = new Matrix(3, 3, rot[0]);
+		rotateMatrix = new Matrix(4, 4, rot);
 	  }
 
 	  //TBD  
