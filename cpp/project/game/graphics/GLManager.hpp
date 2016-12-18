@@ -1,334 +1,352 @@
-#ifndef INCLUDE_ONCE_GLCOMMON_H
-#define INCLUDE_ONCE_GLCOMMON_H
+#include <GL/glut.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-namespace GLCommon
+/*
+ * OpenGL Graphics Control Class
+ * Reference:
+ * https://tokoik.github.io/opengl/libglut.html#3.1,
+ * http://www.oit.ac.jp
+ */
+
+#ifdef TEST_TEX
+
+#define TEX_HEIGHT 16 
+#define TEX_WIDTH 16 
+
+static GLubyte image[TEX_HEIGHT][TEX_WIDTH][4];
+
+void InitTexture() 
 {
-  class IntVector2
+  for (int i = 0; i < TEX_HEIGHT; i++) 
   {
-  public:
-	int x, y;
+    for (int j = 0; j < TEX_WIDTH; j++)
+    {
+	  int color;
+      color = ( ((i&0x01)==0)^((j&0x01)==0) );
+      image[i][j][0] = image[i][j][1] = image[i][j][2] = color*255;
+      image[i][j][3] = 255;
+    }
+  }
+} 
 
-  public:
-	IntVector2(int x_, int y_)
-	{
-	  x = x_; y = y_;  
-	};
+void displayTexPolygon()
+{
+  glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	  glTexCoord2f(0.0, 0.0); glVertex3f(-5.0,-5.0, 0.0);
+	  glTexCoord2f(0.0, 1.0); glVertex3f(-5.0, 5.0, 0.0);
+	  glTexCoord2f(1.0, 1.0); glVertex3f( 5.0, 5.0, 0.0);
+	  glTexCoord2f(1.0, 0.0); glVertex3f( 5.0,-5.0, 0.0);
+	glEnd();
+  glDisable(GL_TEXTURE_2D);
+} 
 
-	IntVector2* zero()
-	{
-	  x = y = 0;
-	  return this;
-	}
-
-	IntVector2* one()
-	{
-	  x = y = 1;
-	  return this;
-	}
-
-	IntVector2 operator+(IntVector2 opt)
-	{
-	  IntVector2* vec = new IntVector2(x + opt.x, y + opt.y);
-	  return *vec;
-	}
-
-	IntVector2 operator-(IntVector2 opt)
-	{
-	  IntVector2* vec = new IntVector2(x - opt.x, y - opt.y);
-	  return *vec;
-	}
-
-	IntVector2 operator*(double opt)
-	{
-	  IntVector2* vec = new IntVector2((int)(x * opt), (int)(y * opt));
-	  return *vec;
-	}
-
-	IntVector2 operator/(double opt)
-	{
-	  IntVector2* vec = new IntVector2((int)(x / opt), (int)(y / opt));
-	  return *vec;
-	}
-  };
-
-  class Vector2
+void displayAltanative()
+{
+  static float spin = 0.0;
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+  glPushMatrix();
   {
-  public:
-	double x, y;
-
-  public:
-	Vector2(double x_, double y_)
-	{
-	  x = x_; y = y_;  
-	};
-
-	Vector2* zero()
-	{
-	  x = y = 0;
-	  return this;
-	}
-
-	Vector2* one()
-	{
-	  x = y = 1;
-	  return this;
-	}
-
-	Vector2* operator+(Vector2 opt)
-	{
-	  Vector2* vec = new Vector2(x + opt.x, y + opt.y);
-	  return vec;
-	}
-
-	Vector2* operator-(Vector2 opt)
-	{
-	  Vector2* vec = new Vector2(x - opt.x, y - opt.y);
-	  return vec;
-	}
-
-	Vector2* operator*(double opt)
-	{
-	  Vector2* vec = new Vector2(x * opt, y * opt);
-	  return vec;
-	}
-
-	Vector2* operator/(double opt)
-	{
-	  Vector2* vec = new Vector2(x / opt, y / opt);
-	  return vec;
-	}
-  };
-
-  class Vector3
-  {
-  public:
-	double x, y, z;
-
-  public:
-	Vector3(double x_, double y_, double z_)
-	{
-	  x = x_; y = y_; z = z_;  
-	};
-
-	Vector3* zero()
-	{
-	  x = y = z = 0;
-	  return this;
-	}
-
-	Vector3* one()
-	{
-	  x = y = z = 1;
-	  return this;
-	}
-
-	Vector3* operator+(Vector3 opt)
-	{
-	  Vector3* vec = new Vector3(x + opt.x, y + opt.y, z + opt.z);
-	  return vec;
-	}
-
-	Vector3* operator-(Vector3 opt)
-	{
-	  Vector3* vec = new Vector3(x - opt.x, y - opt.y, z + opt.z);
-	  return vec;
-	}
-
-	Vector3* operator*(double opt)
-	{
-	  Vector3* vec = new Vector3(x * opt, y * opt, z * opt);
-	  return vec;
-	}
-
-	Vector3* operator/(double opt)
-	{
-	  Vector3* vec = new Vector3(x / opt, y / opt, z / opt);
-	  return vec;
-	}
-  };
-
-  class Vector4
-  {
-  public:
-	double x, y, z, w;
-
-  public:
-	Vector4(double x_, double y_, double z_, double w_)
-	{
-	  x = x_; y = y_; z = z_; w = w_;
-	};
-
-	Vector4* zero()
-	{
-	  x = y = z = w = 0;
-	  return this;
-	}
-
-	Vector4* one()
-	{
-	  x = y = z = w = 1;
-	  return this;
-	}
-
-	Vector4* operator+(Vector4 opt)
-	{
-	  Vector4* vec = new Vector4(x + opt.x, y + opt.y, z + opt.z, w + opt.w);
-	  return vec;
-	}
-
-	Vector4* operator-(Vector4 opt)
-	{
-	  Vector4* vec = new Vector4(x - opt.x, y - opt.y, z - opt.z, w - opt.w);
-	  return vec;
-	}
-
-	Vector4* operator*(double opt)
-	{
-	  Vector4* vec = new Vector4(x * opt, y * opt, z * opt, w * opt);
-	  return vec;
-	}
-
-	Vector4* operator/(double opt)
-	{
-	  Vector4* vec = new Vector4(x / opt, y / opt, z / opt, w / opt);
-	  return vec;
-	}
-  };
-
-  const int MatrixMaxSize = 4;
-
-  class Matrix
-  {
-  public:
-	int row;
-	int col;
-	double value[MatrixMaxSize][MatrixMaxSize];
-
-  public:
-	Matrix(){}
-	Matrix(int row_, int col_, double value_[MatrixMaxSize][MatrixMaxSize])
-	{
-	  row = row_;
-	  col = col_;
-
-	  //ARRAY_COPYING
-	  for(int x = 0; x < MatrixMaxSize; x++)
-	  {
-		for(int y = 0; y < MatrixMaxSize; y++)
-		{
-		  value[x][y] = value_[x][y];
-		}	
-	  }
-	}
-	~Matrix(){}
-
-	int GetRank()
-	{
-		int rank = (row > col) ? row : col;
-	    return rank;
-	}
-
-	Matrix* operator+(Matrix opt)
-	{
-	  if (row != opt.row || col != opt.col)
-	  {
-		return 0;
-	  }
-
-	  Matrix* mat = new Matrix();
-	  mat->row = row;
-	  mat->col = col;
-	  for(int x = 0; x < row; x++)
-	  {
-		for(int y = 0; y < col; y++)
-		{
-		  //*(mat->value[x] + y * sizeof(double *)) = *(value[x] + y * sizeof(double *)) + *(opt.value[x] + y * sizeof(double *));
-		}
-	  }
-
-	  return mat;
-	}
-
-	Matrix* operator-(Matrix opt)
-	{
-	  if (row != opt.row || col != opt.col)
-	  {
-		return 0;	
-	  }
-
-	  Matrix* mat = new Matrix();
-	  mat->row = row;
-	  mat->col = col;
-	  for(int x = 0; x < row; x++)
-	  {
-		for(int y = 0; y < col; y++)
-		{
-		  //*(mat->value[x] + y) = *(value[x] + y) - *(opt.value[x] + y);
-		}
-	  }
-	  return mat;
-	}
-	
-	Matrix* operator*(Matrix opt)
-	{
-	  if (row != opt.row || col != opt.col)
-	  {
-		return 0;	
-	  }
-
-    //for(int row = 0; i < MatrixMaxSize; i++)
-    //{
-    //    for()
-    //    {
-    //      
-    //    }
-    //}
-
-	  //TBD  
-	  Matrix* mat = new Matrix();
-	  return mat;
-	}
-
-	Matrix* Rotate(double x, double y, double z, double euler)
-	{
-	  Matrix* rotateMatrix;
-	  int rank = GetRank();
-
-	  if (rank == 2)
-	  {
-		double rot[MatrixMaxSize][MatrixMaxSize] =
-		{
-		  {1, 1, 0, 0},
-		  {1, 1, 0, 0},
-		  {0, 0, 0, 0},
-		  {0, 0, 0, 0}
-		};
-		rotateMatrix = new Matrix(2, 2, rot);
-	  }
-	  else if (GetRank() == 3)
-	  {
-		double rot[MatrixMaxSize][MatrixMaxSize] = 
-		{
-		  {1, 1, 1, 0},
-		  {1, 1, 1, 0},
-		  {1, 1, 1, 0},
-		  {0, 0, 0, 0}
-		};
-		rotateMatrix = new Matrix(3, 3, rot);
-	  }
-
-	  //TBD
-	  Matrix* mat = new Matrix();
-	  return mat;
-	}
-
-	Matrix* Translate(double x, double y, double z)
-	{
-	  //TBD  
-	  Matrix* mat = new Matrix();
-	  return mat;
-	}
-  };
-};
+	glTranslatef(0.0, 0.0, -20.0);
+	glRotatef(spin, 0.0, 1.0, 0.0);
+	glColor3f(1,1,1);
+	displayTexPolygon();
+  }
+  spin++;
+  glPopMatrix();
+  glFlush();
+  glutSwapBuffers();
+}
 
 #endif
+
+namespace GL
+{
+  struct Vec2
+  {
+    float x;
+    float y;
+  };
+
+  struct Vec3
+  {
+	float x;
+	float y;
+	float z;
+  };
+
+  enum RenderType
+  {
+    Line,
+    Rect,
+    Poly,
+  };
+
+  class Object
+  {
+	public:
+	  int id;
+	  int renderType;
+
+	  Vec2 verts[99];
+	  Vec2 pos;
+
+	  Object(){}
+	  ~Object(){}
+
+	  int GetID()
+	  {
+      return id;
+	  }
+
+	  int GetRenderType()
+	  {
+      return renderType;
+	  }
+  };
+
+  class Scene
+  {
+	private:
+	  Object object[99];
+
+    public:
+
+	  void Save(const char* fileName)
+	  {
+      //Save Scene File
+	  }
+
+	  void Load(const char* sceneName)
+	  {
+      //Load Scene File	
+	  }
+
+	  //read only pointer ?
+	  const Object* GetObjects()
+	  {
+		return object;
+	  }
+  };
+
+  const Vec2 WindowPos = {100, 100};
+  const Vec2 WindowSize = {320, 240};
+
+  const int IntervalUpdate = 10; //msec
+
+  static Vec2 pos;
+  const float MoveVal = 0.1;
+
+  Object actor;
+  static Scene scene;
+
+  class GLManager
+  {
+    private:
+
+	  //--------------------------
+	  //Draw Primitive Functions
+	  //--------------------------
+	  static void DrawTexture(float x, float y, float w, float h)
+	  {		
+		glEnable(GL_TEXTURE_2D);
+		  glBegin(GL_QUADS);
+			glTexCoord2f(0.0, 0.0); glVertex3f(x, y, 0.0);
+			glTexCoord2f(0.0, 1.0); glVertex3f(x, y + h, 0.0);
+			glTexCoord2f(1.0, 1.0); glVertex3f(x + w, y + h, 0.0);
+			glTexCoord2f(1.0, 0.0); glVertex3f(x + w, y, 0.0);
+		  glEnd();
+		glDisable(GL_TEXTURE_2D);
+	  } 
+
+      static void DrawRect(float x, float y, float w, float h)
+      {
+        glBegin(GL_POLYGON);
+          glVertex2d(x, y);
+          glVertex2d(x + w, y);
+          glVertex2d(x + w, y + h);
+          glVertex2d(x, y + h);
+        glEnd();
+      }
+
+      static void DrawLine(int start_x, int start_y, int end_x, int end_y)
+      {
+        glBegin(GL_LINE);
+          glVertex2d(start_x, start_y);
+          glVertex2d(end_x, end_y);
+        glEnd();  
+      }
+
+      static void DrawText()
+      {
+        //add plugin...  
+      }
+
+	  //--------------------------
+      //Auto-processing Functions
+	  //--------------------------
+      static void Display()
+      {
+        glClear(GL_COLOR_BUFFER_BIT);
+          DrawRect(-0.9 + actor.pos.x, -0.9 + actor.pos.y, 1.8, 1.8);
+        glFlush();
+      } 
+
+      static void Reshape(int w, int h)
+      {
+#ifdef TEST_TEX
+		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glFrustum(-5.0, 5.0, -5.0, 5.0, 5.0, 500.0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+#else
+        glViewport(0, 0, w, h);  
+        glLoadIdentity();
+        glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
+#endif
+      }
+
+      static void Timer(int value)
+      {  
+        //Update//
+        glutPostRedisplay();
+        glutTimerFunc(IntervalUpdate, Timer, 0);
+      }
+
+      static void Keyboard(unsigned char key, int x, int y)
+      {
+        switch (key)
+        {
+		  //Exit
+          case 'q':
+            exit(0);
+            break;
+
+		  //WASD
+          case 'w':
+            actor.pos.y += MoveVal;  
+            break;
+          case 'a':
+            actor.pos.x -= MoveVal;  
+            break;
+          case 's':
+            actor.pos.y -= MoveVal;  
+            break;
+          case 'd':
+            actor.pos.x += MoveVal;  
+            break;
+
+		  //ZXC
+		  case 'z':
+			break;
+		  case 'x':
+			break;
+		  case 'c':
+			break;
+        }
+      }
+
+	  static void SpecialKey(int key, int x, int y)
+	  {
+		switch(key)
+		{
+		  case GLUT_KEY_F1:
+			exit(0);	
+			break;
+
+		  case GLUT_KEY_UP:
+			actor.pos.y += MoveVal;
+			break;
+		  case GLUT_KEY_RIGHT:
+			actor.pos.x += MoveVal;
+			break;
+		  case GLUT_KEY_DOWN:
+			actor.pos.y -= MoveVal;
+			break;
+		  case GLUT_KEY_LEFT:
+			actor.pos.x -= MoveVal;
+			break;
+		}	
+	  }
+
+      static void Mouse(int button, int state, int x, int y)
+      {
+        switch (button)
+        {
+          case GLUT_LEFT_BUTTON:
+            printf("MOUSE_LEFT");
+            break;
+          case GLUT_MIDDLE_BUTTON:
+            printf("MOUSE_MIDDLE");
+            break;
+          case GLUT_RIGHT_BUTTON:
+            printf("MOUSE_RIGHT");
+            break;
+        }
+
+        switch (state)
+        {
+          case GLUT_UP:
+            printf("MOUSE_ON_UP");
+            break;
+          case GLUT_DOWN:
+            printf("MOUSE_ON_DOWN");
+            break;
+        }
+      }
+
+    public:
+      GLManager(){}
+      ~GLManager(){}
+
+      static void Init(int* argc, char* argv[])
+      {
+        //Create Window
+        glutInitWindowPosition(WindowPos.x, WindowPos.y);
+        glutInitWindowSize(WindowSize.x, WindowSize.y);
+        glutInit(argc, argv);
+#ifdef TEST_TEX
+        glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
+#else
+        glutInitDisplayMode(GLUT_RGBA);
+#endif
+        glutCreateWindow(argv[0]);
+
+#ifdef TEST_TEX
+		//Set Depth Setting
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glDepthFunc(GL_LEQUAL);
+		glEnable(GL_DEPTH_TEST);
+
+        //Set Texture Setting
+        InitTexture();
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEX_WIDTH, TEX_HEIGHT, 
+          0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+        //Set Auto-Processing Functions
+        //glutDisplayFunc(Display);
+        glutDisplayFunc(displayAltanative);
+#else
+        glutDisplayFunc(Display);
+#endif
+        glutReshapeFunc(Reshape);
+        glutMouseFunc(Mouse);
+        glutKeyboardFunc(Keyboard);
+        glutSpecialFunc(SpecialKey);
+        glutTimerFunc(IntervalUpdate, Timer, 0);
+
+        glClearColor(0, 0, 0, 1);
+        glutMainLoop();
+      }
+	  
+  };
+}
+
