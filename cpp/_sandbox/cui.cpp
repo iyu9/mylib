@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -8,7 +9,12 @@ using namespace std;
 #define SCREEN_HEIGHT 10
 
 int mode = 0;
+double timer = 0;
+clock_t start;
 
+/*
+ * Render Animation Frame data
+ */
 char a[SCREEN_WIDTH][SCREEN_HEIGHT] =
 {
   {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
@@ -27,12 +33,12 @@ char b[SCREEN_WIDTH][SCREEN_HEIGHT] =
 {
   {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
   {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-  {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-  {'#', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#'},
-  {'#', '#', '#', ' ', '#', '#', ' ', '#', '#', '#'},
-  {'#', '#', '#', ' ', '#', '#', ' ', '#', '#', '#'},
-  {'#', '#', '#', ' ', ' ', ' ', ' ', '#', '#', '#'},
-  {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+  {'#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#'},
+  {'#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'},
+  {'#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'},
+  {'#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'},
+  {'#', '#', ' ', '#', '#', '#', '#', ' ', '#', '#'},
+  {'#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#'},
   {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
   {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
 };
@@ -60,24 +66,34 @@ void clear()
   system("clear");  
 }
 
+#ifdef UNIT_TESTING
 int main()
 {
   while(1)
   {
-	clear();
+	clock_t current = clock();
+	timer = (double)(current - start) / CLOCKS_PER_SEC;
 
-	//Render Animation
-	if (mode == 0)
+	if (timer > 0.25)
 	{
-	  mode = 1;
-	  render(a);
-	}
-	else
-	{
-	  mode = 0;
-	  render(b);
+	  //update
+	  start = current;
+	  clear();
+
+	  //Render Animation
+	  if (mode == 0)
+	  {
+		mode = 1;
+		render(a);
+	  }
+	  else
+	  {
+		mode = 0;
+		render(b);
+	  }
 	}
   }
 
   return 0;  
 }
+#endif
