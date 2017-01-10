@@ -8,7 +8,7 @@ using namespace std;
 #define SCREEN_WIDTH 10
 #define SCREEN_HEIGHT 10
 
-int mode = 0;
+int frame = 0;
 double timer = 0;
 clock_t start;
 
@@ -66,7 +66,7 @@ void clear()
   system("clear");  
 }
 
-#ifdef UNIT_TESTING
+#ifndef DEBUG
 int main()
 {
   while(1)
@@ -81,14 +81,14 @@ int main()
 	  clear();
 
 	  //Render Animation
-	  if (mode == 0)
+	  if (frame == 0)
 	  {
-		mode = 1;
+		frame = 1;
 		render(a);
 	  }
 	  else
 	  {
-		mode = 0;
+		frame = 0;
 		render(b);
 	  }
 	}
