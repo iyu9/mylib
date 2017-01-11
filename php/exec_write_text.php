@@ -1,24 +1,27 @@
 <?php
 
   //sample input param
-  $_POST['cmd'] = "regist";
-  $_POST['txt'] = "submit_something_text";
-  $_POST['usr'] = "test_user";
-  $_POST['pass'] = "password";;
+  $_POST['cmd']  = "regist";
+  $_POST['txt']  = "submit_something_text";
+  $_POST['usr']  = "test_user";
+  $_POST['pass'] = "password";
 
   //post param
-  $cmd = $_POST['cmd'];
-  $txt = $_POST['txt'];
-  $usr = $_POST['usr'];
+  $cmd  = $_POST['cmd'];
+  $txt  = $_POST['txt'];
+  $usr  = $_POST['usr'];
   $pass = $_POST['pass'];
 
-  $log = date(DATE_RSS) .' '. $usr .' '. $cmd .' '. $txt .' '. "\n";
+  $log  = date(DATE_RSS) .' '. $usr .' '. $cmd .' '. $txt .' '. "\n";
 
   //check pass
   if ($pass != "password")
   {
 	exit("invalid password");	
   }
+
+  //action
+  exec('whoami');
 
   //output log
   $fout = fopen("log.txt", 'a');
