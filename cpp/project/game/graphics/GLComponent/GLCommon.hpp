@@ -60,7 +60,7 @@ namespace GLCommon
 	Vector2(double x_, double y_)
 	{
 	  x = x_; y = y_;  
-	};
+	}
 
 	Vector2* zero()
 	{

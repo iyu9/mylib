@@ -44,7 +44,7 @@ vector2* vector2::operator/(float f) {
 }
 
 
-/**/
+/*
 #include <iostream>
 int main ()
 {
@@ -58,4 +58,4 @@ int main ()
 	delete(b);
 	return 0;		
 }
-/**/
+*/

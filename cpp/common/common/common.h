@@ -11,6 +11,7 @@
 
 #define LENGTH(array) (sizeof(array) / sizeof(array[0]) )
 #define FOR(i, until) for(int i = 0; i < until; i++)
+#define REP(i, until) for(int i = 0; i < until; i++)
 
 void clear()
 {

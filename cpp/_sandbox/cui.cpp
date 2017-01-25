@@ -44,6 +44,15 @@ char b[SCREEN_WIDTH][SCREEN_HEIGHT] =
 };
 
 /*
+ * Clear Function
+ */
+char data[SCREEN_WIDTH][SCREEN_HEIGHT] get_clear()
+{
+  char ch[SCREEN_WIDTH][SCREEN_HEIGHT];
+  return ch;  
+}
+
+/*
  * Render Character In CUI Screen
  */
 void render(char data[SCREEN_WIDTH][SCREEN_HEIGHT])
@@ -52,7 +61,7 @@ void render(char data[SCREEN_WIDTH][SCREEN_HEIGHT])
   {
 	for(int x = 0; x < SCREEN_WIDTH; x++)
 	{
-	  cout << data[x][y] << " ";
+	  cout << data[x][y] << ' ';
 	}
 	cout << endl;
   } 
