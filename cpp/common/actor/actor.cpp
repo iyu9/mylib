@@ -27,7 +27,9 @@ actor::actor()
   name = "no_name";
   lv  = 1;
   hp  = 10;
+  max_hp = hp;
   mp  = 10;
+  max_mp = mp;
   atk = 5;
   def = 5;
   spd = 5;
@@ -55,7 +57,9 @@ actor::actor(std::string name_)
 
   lv  = 1;
   hp  = 10;
+  max_hp = hp;
   mp  = 10;
+  max_mp = mp;
   atk = 10;
   def = 5;
   spd = 5;
@@ -90,7 +94,9 @@ actor::actor(int lv)
 
   lv = lv;
   hp  = 10;
+  max_hp = hp; 
   mp  = 10;
+  max_mp = mp;
   atk = 5;
   def = 5;
   spd = 5;
@@ -124,7 +130,9 @@ actor::actor(std::string name_, int type_)
 
   lv  = 1;
   hp  = 10;
+  max_hp = hp;
   mp  = 10;
+  max_mp = mp;
   atk = 5;
   def = 5;
   spd = 5;

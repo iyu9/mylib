@@ -1,0 +1,90 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CON_DEAD	actor.cpp	/^  CON_DEAD,$/;"	e	enum:UnitCondition	file:
+CON_FINE	actor.cpp	/^  CON_FINE,$/;"	e	enum:UnitCondition	file:
+CON_STONE	actor.cpp	/^  CON_STONE$/;"	e	enum:UnitCondition	file:
+DEBUG	actor.cpp	3;"	d	file:
+LIST_SIZE	actor.h	/^const int LIST_SIZE = 10;$/;"	v
+TYPE_ARMOR	actor.cpp	/^  TYPE_ARMOR,$/;"	e	enum:UnitType	file:
+TYPE_DRAGON	actor.cpp	/^  TYPE_DRAGON,$/;"	e	enum:UnitType	file:
+TYPE_HERO	actor.cpp	/^  TYPE_HERO   = 0,$/;"	e	enum:UnitType	file:
+TYPE_KNIGHT	actor.cpp	/^  TYPE_KNIGHT,$/;"	e	enum:UnitType	file:
+TYPE_WITCH	actor.cpp	/^  TYPE_WITCH$/;"	e	enum:UnitType	file:
+UnitCondition	actor.cpp	/^enum UnitCondition$/;"	g	file:
+UnitType	actor.cpp	/^enum UnitType$/;"	g	file:
+WEAK_DEATH	actor.h	/^const int WEAK_DEATH = 2;$/;"	v
+WEAK_NODAMAGE	actor.h	/^const int WEAK_NODAMAGE = 4;$/;"	v
+WEAK_NONE	actor.h	/^const int WEAK_NONE = 0;$/;"	v
+WEAK_REFLECT	actor.h	/^const int WEAK_REFLECT = 5;$/;"	v
+WEAK_STRONG	actor.h	/^const int WEAK_STRONG = 3;$/;"	v
+WEAK_WEAK	actor.h	/^const int WEAK_WEAK = 1;$/;"	v
+action_move	actor.cpp	/^void actor::action_move(vector2 vec)$/;"	f	class:actor
+actor	actor.cpp	/^actor::actor()$/;"	f	class:actor
+actor	actor.cpp	/^actor::actor(int lv)$/;"	f	class:actor
+actor	actor.cpp	/^actor::actor(std::string name_)$/;"	f	class:actor
+actor	actor.cpp	/^actor::actor(std::string name_, int type_)$/;"	f	class:actor
+actor	actor.h	/^class actor$/;"	c
+atk	actor.h	/^	int atk;$/;"	m	class:actor
+attack	actor.cpp	/^void actor::attack(actor* target)$/;"	f	class:actor
+check_weakness	actor.cpp	/^int actor::check_weakness()$/;"	f	class:actor
+condition	actor.h	/^	int condition;$/;"	m	class:actor
+def	actor.h	/^	int def;$/;"	m	class:actor
+equip_list	actor.h	/^	int equip_list[LIST_SIZE];$/;"	m	class:actor
+escape	actor.cpp	/^bool actor::escape()$/;"	f	class:actor
+exp	actor.h	/^	int exp;$/;"	m	class:actor
+get_exp	actor.cpp	/^void actor::get_exp(int exp)$/;"	f	class:actor
+guard	actor.cpp	/^void actor::guard()$/;"	f	class:actor
+hit	actor.h	/^	int hit;$/;"	m	class:actor
+hp	actor.h	/^	int hp;$/;"	m	class:actor
+id	actor.h	/^	int id;$/;"	m	class:actor
+index	actor.h	/^	int index;$/;"	m	class:actor
+is_dead	actor.cpp	/^bool actor::is_dead()$/;"	f	class:actor
+item_list	actor.h	/^	int item_list[LIST_SIZE];$/;"	m	class:actor
+lower_lim	actor.cpp	/^int lower_lim(int val, int lim, int lower_val)$/;"	f
+luk	actor.h	/^	int luk;$/;"	m	class:actor
+lv	actor.h	/^	int lv;$/;"	m	class:actor
+lvup	actor.cpp	/^void actor::lvup()$/;"	f	class:actor
+magic_list	actor.h	/^	int magic_list[LIST_SIZE];$/;"	m	class:actor
+main	actor.cpp	/^int main()$/;"	f
+max_atk	actor.h	/^	int max_atk;	$/;"	m	class:actor
+max_def	actor.h	/^	int max_def;$/;"	m	class:actor
+max_hit	actor.h	/^	int max_hit;$/;"	m	class:actor
+max_hp	actor.h	/^	int max_hp;$/;"	m	class:actor
+max_luk	actor.h	/^	int max_luk;$/;"	m	class:actor
+max_mov	actor.h	/^	int max_mov;		$/;"	m	class:actor
+max_mp	actor.h	/^	int max_mp;$/;"	m	class:actor
+max_range	actor.h	/^	int max_range;$/;"	m	class:actor
+max_spd	actor.h	/^	int max_spd;$/;"	m	class:actor
+max_tec	actor.h	/^	int max_tec;$/;"	m	class:actor
+mov	actor.h	/^	int mov;$/;"	m	class:actor
+move	actor.cpp	/^void actor::move(int x_, int y_)$/;"	f	class:actor
+mp	actor.h	/^	int mp;$/;"	m	class:actor
+name	actor.h	/^	std::string name;$/;"	m	class:actor
+on_damage	actor.cpp	/^void actor::on_damage(actor* atacker)$/;"	f	class:actor
+per_atk	actor.h	/^	float per_atk;$/;"	m	class:actor
+per_def	actor.h	/^	float per_def;$/;"	m	class:actor
+per_hp	actor.h	/^	float per_hp;$/;"	m	class:actor
+per_luk	actor.h	/^	float per_luk;$/;"	m	class:actor
+per_mp	actor.h	/^	float per_mp;$/;"	m	class:actor
+per_spd	actor.h	/^	float per_spd;$/;"	m	class:actor
+per_tec	actor.h	/^	float per_tec;$/;"	m	class:actor
+pos	actor.h	/^	vector2 pos;$/;"	m	class:actor
+print_battle_status	actor.cpp	/^void actor::print_battle_status()$/;"	f	class:actor
+print_status	actor.cpp	/^void actor::print_status()$/;"	f	class:actor
+rand_prob	actor.cpp	/^float rand_prob()$/;"	f
+range	actor.h	/^	int range;$/;"	m	class:actor
+refresh	actor.cpp	/^void actor::refresh()$/;"	f	class:actor
+set_item	actor.cpp	/^void actor::set_item(item* it)$/;"	f	class:actor
+skill_list	actor.h	/^	int skill_list[LIST_SIZE];$/;"	m	class:actor
+spd	actor.h	/^	int spd;$/;"	m	class:actor
+tec	actor.h	/^	int tec;		$/;"	m	class:actor
+type	actor.h	/^	int type;$/;"	m	class:actor
+upper_lim	actor.cpp	/^int upper_lim(int val, int lim, int upper_val)$/;"	f
+use_item	actor.cpp	/^void actor::use_item(item* it)$/;"	f	class:actor
+use_skill	actor.cpp	/^void actor::use_skill(skill* sk)$/;"	f	class:actor
+weakness_list	actor.h	/^	int weakness_list[LIST_SIZE];$/;"	m	class:actor
+~actor	actor.cpp	/^actor::~actor(){}$/;"	f	class:actor

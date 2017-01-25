@@ -1,0 +1,72 @@
+LVUP: 1 -> 2
+LUK UP: 6
+MP UP: 11
+
+LVUP: 2 -> 3
+TEC UP: 6
+HP UP: 11
+
+LVUP: 3 -> 4
+ATK UP: 11
+SPD UP: 6
+LUK UP: 7
+MP UP: 12
+
+LVUP: 4 -> 5
+DEF UP: 6
+SPD UP: 7
+TEC UP: 7
+MP UP: 13
+HP UP: 12
+
+LVUP: 5 -> 6
+SPD UP: 8
+LUK UP: 8
+HP UP: 13
+
+LVUP: 6 -> 7
+ATK UP: 12
+TEC UP: 8
+LUK UP: 9
+MP UP: 14
+HP UP: 14
+
+LVUP: 7 -> 8
+
+LVUP: 8 -> 9
+DEF UP: 7
+TEC UP: 9
+HP UP: 15
+
+LVUP: 9 -> 10
+LUK UP: 10
+MP UP: 15
+HP UP: 16
+
+LVUP: 10 -> 11
+MP UP: 16
+
+STATUS::
+LV: 11
+TYPE: 0
+NAME: tom
+MAXHP: 0
+HP: 16
+MAXMP: 0
+MP: 16
+ATK: 12
+DEF: 7
+SPD: 8
+TEC: 9
+LUK: 10
+MOV: 5
+POS: (0, 0)
+
+
+hit_percent: 118
+cri_percent: 0
+damage: 7
+NAME: tom
+HP: 16
+MP: 16
+
