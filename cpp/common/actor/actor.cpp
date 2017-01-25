@@ -242,65 +242,6 @@ void actor::lvup()
   std::cout << std::endl;
 }
 
-/*
-   void actor::lvdn() {
-
-   if(lv <= 1) {
-   std::cout << "already 0..." << std::endl;
-   return;
-   }
-
-   lv--;
-   std::cout << "LVDOWN: " << lv+1 << " -> " << lv << std::endl;
-
-   float percent = (float) rand() / RAND_MAX;
-   if(percent <= per_atk) {
-   atk--;	
-   std::cout << "ATK DOWN: " << atk << std::endl;
-   }
-
-
-   percent = (float) rand() / RAND_MAX;
-   if(percent <= per_def) {
-   def--;	
-   std::cout << "DEF DOWN: " << def << std::endl;
-   }
-
-
-   percent = (float) rand() / RAND_MAX;
-   if(percent <= per_spd) {
-   spd--;	
-   std::cout << "SPD DOWN: " << spd << std::endl;
-   }
-
-   percent = (float) rand() / RAND_MAX;
-   if(percent <= per_tec) {
-   tec--;	
-   std::cout << "TEC DOWN: " << tec << std::endl;
-   }
-
-   percent = (float) rand() / RAND_MAX;
-   if(percent <= per_luk) {
-   luk--;	
-   std::cout << "LUK DOWN: " << luk << std::endl;
-   }
-
-
-   percent = (float) rand() / RAND_MAX;
-   if(percent <= per_mp) {
-   mp--;	
-   std::cout << "MP DOWN: " << mp << std::endl;
-   }
-
-   percent = (float) rand() / (float )RAND_MAX;
-   if(percent <= per_hp) {
-   hp--;	
-   std::cout << "HP DOWN: " << hp << std::endl;
-   }
-
-   std::cout << std::endl;
-   }
- */
 int actor::check_weakness()
 {
   int count = 1;
@@ -360,7 +301,7 @@ void actor::on_damage(actor* atacker)
   }
 
   hp -= damage;	
-  if (hp <= 0)
+  if (is_dead())
   {
 	hp = 0;
   }
@@ -375,6 +316,17 @@ void actor::attack(actor* target)
 {
   target->on_damage(this);		
 }
+
+void actor::fixed_damage(actor* target, int damage)
+{
+  target->hp -= damage;
+  if (target->is_dead())
+  {
+	target->hp = 0;	
+  }
+
+  std::cout << "fixed_damage: " << damage << std::endl;	
+}	
 
 void actor::guard()
 {
@@ -475,7 +427,12 @@ void actor::print_battle_status()
 {
   std::cout << "NAME: " << name << std::endl;		
   std::cout << "HP: " << hp << std::endl;		
-  std::cout << "MP: " << mp << std::endl << std::endl;		
+  std::cout << "MP: " << mp << std::endl;
+  if (is_dead())
+  {
+	std::cout << "DEAD" << std::endl;
+  }
+  std::cout << std::endl;
 }
 
 float rand_prob()
@@ -497,7 +454,9 @@ int main()
   player->print_status();	
 
   //damage test
-  player->attack(enemy);
+  //player->attack(enemy);
+  player->fixed_damage(enemy, 20);
+  enemy->print_battle_status();
   player->print_battle_status();
 
   delete(player);

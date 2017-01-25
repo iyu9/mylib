@@ -91,6 +91,7 @@ public:
 	void use_skill(skill* skill);
 	void use_magic(magic* magic);
 	void on_damage(actor* attacker);
+	void fixed_damage(actor* target, int damage);
 	int check_weakness();
 	void get_exp(int exp);
 
