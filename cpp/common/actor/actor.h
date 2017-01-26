@@ -10,12 +10,16 @@
 #include "../vector/vector2.cpp"
 
 const int LIST_SIZE = 10;
-const int WEAK_NONE = 0;
-const int WEAK_WEAK = 1;
-const int WEAK_DEATH = 2;
-const int WEAK_STRONG = 3;
-const int WEAK_NODAMAGE = 4;
-const int WEAK_REFLECT = 5;
+
+enum Weakness
+{
+  WEAK_NONE,
+  WEAK_WEAK,
+  WEAK_DEATH,
+  WEAK_STRONG,
+  WEAK_NODAMAGE,
+  WEAK_REFLECT,
+};
 
 class actor
 {
