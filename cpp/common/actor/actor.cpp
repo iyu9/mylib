@@ -41,13 +41,20 @@ actor::actor()
   mov = 5;
   range = 2;
 
-  per_hp  = 0.80;
-  per_mp  = 0.80;
-  per_atk = 0.30;
-  per_def = 0.30;
-  per_spd = 0.30;
-  per_tec = 0.30;
-  per_luk = 0.30;
+  grow_hp  = 0.80;
+  grow_mp  = 0.80;
+  grow_atk = 0.30;
+  grow_def = 0.30;
+  grow_spd = 0.30;
+  grow_tec = 0.30;
+  grow_luk = 0.30;
+
+  max_atk = atk;
+  max_def = def;
+  max_spd = spd;
+  max_tec = tec;
+  max_luk = luk;
+  max_mov = mov;
   max_range = range;
 }
 
@@ -71,13 +78,13 @@ actor::actor(std::string name_)
   mov = 5;
   range = 2;
 
-  per_hp  = 0.80;
-  per_mp  = 0.80;
-  per_atk = 0.30;
-  per_def = 0.30;
-  per_spd = 0.30;
-  per_tec = 0.30;
-  per_luk = 0.30;
+  grow_hp  = 0.80;
+  grow_mp  = 0.80;
+  grow_atk = 0.30;
+  grow_def = 0.30;
+  grow_spd = 0.30;
+  grow_tec = 0.30;
+  grow_luk = 0.30;
 
   max_atk = atk;
   max_def = def;
@@ -108,12 +115,12 @@ actor::actor(int lv)
   mov = 5;
   range = 2;
 
-  per_hp  = 0.80;
-  per_mp  = 0.80;
-  per_atk = 0.30;
-  per_def = 0.30;
-  per_spd = 0.30;
-  per_tec = 0.30;
+  grow_hp  = 0.80;
+  grow_mp  = 0.80;
+  grow_atk = 0.30;
+  grow_def = 0.30;
+  grow_spd = 0.30;
+  grow_tec = 0.30;
 
   max_atk = atk;
   max_def = def;
@@ -145,12 +152,12 @@ actor::actor(std::string name_, int type_)
   mov = 5;
   range = 2;
 
-  per_hp  = 0.80;
-  per_mp  = 0.80;
-  per_atk = 0.30;
-  per_def = 0.30;
-  per_spd = 0.30;
-  per_tec = 0.30;
+  grow_hp  = 0.80;
+  grow_mp  = 0.80;
+  grow_atk = 0.30;
+  grow_def = 0.30;
+  grow_spd = 0.30;
+  grow_tec = 0.30;
 
   max_atk = atk;
   max_def = def;
@@ -191,7 +198,7 @@ void actor::lv_up()
   std::cout << "LVUP: " << lv-1 << " -> " << lv << std::endl;
 
   float percent = (float) rand() / RAND_MAX;
-  if (percent <= per_atk)
+  if (percent <= grow_atk)
   {
 	atk++;	
 	std::cout << "ATK UP: " << atk << std::endl;
@@ -199,7 +206,7 @@ void actor::lv_up()
 
 
   percent = (float) rand() / RAND_MAX;
-  if(percent <= per_def)
+  if (percent <= grow_def)
   {
 	def++;	
 	std::cout << "DEF UP: " << def << std::endl;
@@ -207,21 +214,21 @@ void actor::lv_up()
 
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_spd)
+  if (percent <= grow_spd)
   {
 	spd++;	
 	std::cout << "SPD UP: " << spd << std::endl;
   }
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_tec)
+  if (percent <= grow_tec)
   {
 	tec++;	
 	std::cout << "TEC UP: " << tec << std::endl;
   }
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_luk)
+  if (percent <= grow_luk)
   {
 	luk++;	
 	std::cout << "LUK UP: " << luk << std::endl;
@@ -229,14 +236,14 @@ void actor::lv_up()
 
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_mp)
+  if (percent <= grow_mp)
   {
 	mp++;	
 	std::cout << "MP UP: " << mp << std::endl;
   }
 
   percent = (float) rand() / (float )RAND_MAX;
-  if (percent <= per_hp)
+  if (percent <= grow_hp)
   {
 	hp++;	
 	std::cout << "HP UP: " << hp << std::endl;
@@ -257,7 +264,7 @@ void actor::lv_down()
   std::cout << "LVDOWN: " << lv-1 << " -> " << lv << std::endl;
 
   float percent = (float) rand() / RAND_MAX;
-  if (percent <= per_atk)
+  if (percent <= grow_atk)
   {
 	atk--;	
 	std::cout << "ATK DOWN: " << atk << std::endl;
@@ -265,7 +272,7 @@ void actor::lv_down()
 
 
   percent = (float) rand() / RAND_MAX;
-  if(percent <= per_def)
+  if (percent <= grow_def)
   {
 	def--;	
 	std::cout << "DEF DOWN: " << def << std::endl;
@@ -273,21 +280,21 @@ void actor::lv_down()
 
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_spd)
+  if (percent <= grow_spd)
   {
 	spd--;	
 	std::cout << "SPD DOWN: " << spd << std::endl;
   }
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_tec)
+  if (percent <= grow_tec)
   {
 	tec--;	
 	std::cout << "TEC DOWN: " << tec << std::endl;
   }
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_luk)
+  if (percent <= grow_luk)
   {
 	luk--;	
 	std::cout << "LUK DOWN: " << luk << std::endl;
@@ -295,14 +302,14 @@ void actor::lv_down()
 
 
   percent = (float) rand() / RAND_MAX;
-  if (percent <= per_mp)
+  if (percent <= grow_mp)
   {
 	mp--;	
 	std::cout << "MP DOWN: " << mp << std::endl;
   }
 
   percent = (float) rand() / (float )RAND_MAX;
-  if (percent <= per_hp)
+  if (percent <= grow_hp)
   {
 	hp--;	
 	std::cout << "HP DOWN: " << hp << std::endl;
@@ -490,6 +497,15 @@ void actor::jump()
 void actor::shot()
 {
   
+}
+
+bool actor::acquire_skill(actor target)
+{
+  if (lv < target.lv)
+  {
+	return true;
+  }
+  return false;
 }
 
 int actor::draw_card()

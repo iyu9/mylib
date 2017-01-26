@@ -74,6 +74,14 @@ public:
 	int max_range;
 	int range;
 
+	//physics
+	double vx;
+	double vy;
+	double vz;
+
+	double ax;
+	double ay;
+	double az;
 	
 	//liste
 	int weakness_list[LIST_SIZE];
@@ -83,13 +91,13 @@ public:
 	int magic_list[LIST_SIZE];
 
 	//grows
-	float per_hp;
-	float per_mp;
-	float per_atk;
-	float per_def;
-	float per_spd;
-	float per_tec;
-	float per_luk;
+	float grow_hp;
+	float grow_mp;
+	float grow_atk;
+	float grow_def;
+	float grow_spd;
+	float grow_tec;
+	float grow_luk;
 
 	actor();
 	actor(std::string name_);
@@ -118,6 +126,7 @@ public:
 	int calc_damage(actor attacker, actor target);
 	int check_weakness();
 	void get_exp(int exp);
+	bool acquire_skill(actor target);
 
 	//for card game
 	int hands[HAND_SIZE];
