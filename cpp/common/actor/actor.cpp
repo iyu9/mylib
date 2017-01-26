@@ -244,7 +244,7 @@ void actor::lvup()
 
 int actor::check_weakness()
 {
-  int count = 1;
+  int count = 0;
 
   REP(i, LIST_SIZE)
   {
@@ -282,7 +282,7 @@ void actor::on_damage(actor* atacker)
 
   //weakness phase
   int weak_factor = check_weakness();
-  if (weak_factor > 1)
+  if (weak_factor > 0)
   {
 	std::cout << "weak" << std::endl;
   }
@@ -326,11 +326,21 @@ void actor::fixed_damage(actor* target, int damage)
   }
 
   std::cout << "fixed_damage: " << damage << std::endl;	
-}	
+}
+
+int actor::calc_damage(actor atacker, actor target)
+{
+  int atk = atacker.atk;
+  int def = target.def;
+
+  int damage = atk - def;
+  damage = (damage > 0) ? damage : 0;
+  return atk - def;
+}
 
 void actor::guard()
 {
-  def *= 2;		
+  def *= 2;
 }
 
 void actor::refresh()
@@ -343,9 +353,9 @@ void actor::refresh()
 
 bool actor::escape()
 {
-  float r = rand_prob();
+  float prob = rand_prob();
 
-  if (r > 0.5)
+  if (prob > 0.5)
   {
 	return true;
   }
@@ -471,7 +481,7 @@ int main()
   player->print_status();	
 
   //damage test
-  //player->attack(enemy);
+  player->attack(enemy);
   player->fixed_damage(enemy, 20);
   enemy->print_battle_status();
   player->print_battle_status();

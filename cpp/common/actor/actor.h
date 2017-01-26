@@ -115,6 +115,7 @@ public:
 	void use_magic(magic* magic);
 	void on_damage(actor* attacker);
 	void fixed_damage(actor* target, int damage);
+	int calc_damage(actor attacker, actor target);
 	int check_weakness();
 	void get_exp(int exp);
 
