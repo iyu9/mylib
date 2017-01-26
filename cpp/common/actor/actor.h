@@ -53,6 +53,7 @@ public:
 	int hit;
 	int max_range;
 	int range;
+
 	
 	//liste
 	int weakness_list[LIST_SIZE];
@@ -78,6 +79,8 @@ public:
 
 	void action_move(vector2 vec);
 	void move(int x_, int y_);
+	void shot();
+	void jump();
 	void lvup();
 	//void lvdn();
 	void attack(actor* target);
@@ -94,6 +97,11 @@ public:
 	void fixed_damage(actor* target, int damage);
 	int check_weakness();
 	void get_exp(int exp);
+
+	//for card game
+	int deck_idx;
+	int deck[LIST_SIZE];
+	int draw_card();
 
 	void print_status();
 	void print_battle_status();

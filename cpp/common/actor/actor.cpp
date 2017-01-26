@@ -403,6 +403,23 @@ void actor::move(int x_, int y_)
   pos.y += y_;
 }
 
+void actor::jump()
+{
+  
+}
+
+void actor::shot()
+{
+  
+}
+
+int actor::draw_card()
+{
+  int card = deck[deck_idx];
+  deck_idx++;
+  return deck[deck_idx];
+}
+
 void actor::print_status()
 {		
   std::cout << "STATUS::" << std::endl;
