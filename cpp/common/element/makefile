@@ -1,0 +1,2 @@
+element:
+	g++ element.cpp
