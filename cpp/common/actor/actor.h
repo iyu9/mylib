@@ -11,6 +11,19 @@
 
 const int LIST_SIZE = 10;
 
+const int HAND_SIZE = 5;
+const int DECK_SIZE = 30;
+
+enum Command
+{
+  CMD_NONE,
+  CMD_ATTACK,
+  CMD_DEFECNCE,
+  CMD_MAGIC,
+  CMD_SKILL,
+  CMD_ESCAPE,
+};
+
 enum Weakness
 {
   WEAK_NONE,
@@ -31,6 +44,9 @@ public:
 	int type;
 	int condition;
 	vector2 pos;
+
+	int priority;
+	int command;
 
 	//params
 	int lv;
@@ -103,8 +119,9 @@ public:
 	void get_exp(int exp);
 
 	//for card game
+	int hands[HAND_SIZE];
 	int deck_idx;
-	int deck[LIST_SIZE];
+	int deck[DECK_SIZE];
 	int draw_card();
 
 	void print_status();
