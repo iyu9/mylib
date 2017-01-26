@@ -16,8 +16,11 @@ enum UnitType
 enum UnitCondition
 {
   CON_FINE,
-  CON_DEAD,
-  CON_STONE
+  CON_POISON,
+  CON_CONFUSE,
+  CON_STAN,
+  CON_STONE,
+  CON_DEAD
 };
 
 actor::actor()
@@ -176,7 +179,7 @@ int lower_lim(int val, int lim, int lower_val)
   return val;
 }
 
-void actor::lvup()
+void actor::lv_up()
 {
   if (lv >= 99)
   {
@@ -242,11 +245,77 @@ void actor::lvup()
   std::cout << std::endl;
 }
 
+void actor::lv_down()
+{
+  if (lv <= 1)
+  {
+	std::cout << "already 1..." << std::endl;
+	return;
+  }
+
+  lv--;
+  std::cout << "LVDOWN: " << lv-1 << " -> " << lv << std::endl;
+
+  float percent = (float) rand() / RAND_MAX;
+  if (percent <= per_atk)
+  {
+	atk--;	
+	std::cout << "ATK DOWN: " << atk << std::endl;
+  }
+
+
+  percent = (float) rand() / RAND_MAX;
+  if(percent <= per_def)
+  {
+	def--;	
+	std::cout << "DEF DOWN: " << def << std::endl;
+  }
+
+
+  percent = (float) rand() / RAND_MAX;
+  if (percent <= per_spd)
+  {
+	spd--;	
+	std::cout << "SPD DOWN: " << spd << std::endl;
+  }
+
+  percent = (float) rand() / RAND_MAX;
+  if (percent <= per_tec)
+  {
+	tec--;	
+	std::cout << "TEC DOWN: " << tec << std::endl;
+  }
+
+  percent = (float) rand() / RAND_MAX;
+  if (percent <= per_luk)
+  {
+	luk--;	
+	std::cout << "LUK DOWN: " << luk << std::endl;
+  }
+
+
+  percent = (float) rand() / RAND_MAX;
+  if (percent <= per_mp)
+  {
+	mp--;	
+	std::cout << "MP DOWN: " << mp << std::endl;
+  }
+
+  percent = (float) rand() / (float )RAND_MAX;
+  if (percent <= per_hp)
+  {
+	hp--;	
+	std::cout << "HP DOWN: " << hp << std::endl;
+  }
+
+  std::cout << std::endl;
+}
+
 int actor::check_weakness()
 {
   int count = 0;
 
-  REP(i, LIST_SIZE)
+  REP (i, LIST_SIZE)
   {
 	if (weakness_list[i] == WEAK_WEAK)
 	{
@@ -476,7 +545,7 @@ int main()
   //lvup test
   REP (i, 10)
   {
-	player->lvup();
+	player->lv_up();
   }	
   player->print_status();	
 

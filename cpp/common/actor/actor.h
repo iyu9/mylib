@@ -101,8 +101,8 @@ public:
 	void move(int x_, int y_);
 	void shot();
 	void jump();
-	void lvup();
-	//void lvdn();
+	void lv_up();
+	void lv_down();
 	void attack(actor* target);
 	void guard();
 	void refresh();
