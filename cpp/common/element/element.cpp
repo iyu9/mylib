@@ -2,11 +2,11 @@
 #define __ELEMENT__HPP__
 
 #include "../common/common.h"
-#define DEBUG
 
-namespace Elements
+#define DEBUG
+namespace Element
 {
-  enum ElementID
+  enum ElementType
   {
 	FLAME,
 	ICE,
@@ -26,7 +26,7 @@ namespace Elements
 #ifdef DEBUG
 int main()
 {
-  println(Elements::name[Elements::EVIL]);
+  println(Element::name[Element::EVIL]);
 
   return 0;  
 }

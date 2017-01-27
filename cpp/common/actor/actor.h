@@ -136,4 +136,6 @@ public:
 
 	void print_status();
 	void print_battle_status();
+	void print_skills();
+	void print_magics();
 };

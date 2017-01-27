@@ -1,6 +1,6 @@
 #include "actor.h"
 
-#define DEBUG 
+//#define DEBUG 
 
 float rand_prob();
 
@@ -517,7 +517,7 @@ int actor::draw_card()
 
 void actor::print_status()
 {		
-  std::cout << "STATUS::" << std::endl;
+  std::cout << "-------------"      << std::endl;
   std::cout << "LV: "     << lv     << std::endl;
   std::cout << "TYPE: "   << type   << std::endl;
   std::cout << "NAME: "   << name   << std::endl;
@@ -532,11 +532,14 @@ void actor::print_status()
   std::cout << "LUK: "    << luk    << std::endl;
   std::cout << "MOV: "    << mov    << std::endl;
   std::cout << "POS: "    << "(" << pos.x << ", " << pos.y << ")"
-	<< std::endl << std::endl << std::endl;
+	<< std::endl;
+  std::cout << "-------------"      << std::endl;
+  std::cout << std::endl << std::endl;
 }
 
 void actor::print_battle_status()
 {
+  std::cout << "-------------" << std::endl;
   std::cout << "NAME: " << name << std::endl;		
   std::cout << "HP: " << hp << std::endl;		
   std::cout << "MP: " << mp << std::endl;
@@ -544,7 +547,16 @@ void actor::print_battle_status()
   {
 	std::cout << "DEAD" << std::endl;
   }
+  std::cout << "-------------" << std::endl;
   std::cout << std::endl;
+}
+
+void actor::print_skills()
+{  
+}
+
+void actor::print_magics()
+{  
 }
 
 float rand_prob()

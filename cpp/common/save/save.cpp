@@ -1,3 +1,6 @@
+#ifndef __SAVE_H__
+#define __SAVE_H__
+
 #include "save.h"
 
 save_manager::save_manager()
@@ -60,7 +63,7 @@ int save_manager::load(const char* file)
 	return 0;	
 }
 
-/**/
+#ifdef DEBUG
 int main()
 {
 	save_manager* s = new save_manager();
@@ -71,4 +74,6 @@ int main()
 	delete(s);
 	return 0;
 }
-/**/
+#endif
+
+#endif

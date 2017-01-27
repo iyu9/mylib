@@ -1,5 +1,5 @@
-#ifndef INCLUDE_GUARD
-#define INCLUDE_GUARD
+#ifndef __COMMON_H__
+#define __COMMON_H__
 
 #include <fstream>
 #include <iostream>
@@ -9,7 +9,8 @@
 #include <time.h>
 #include <math.h>
 
-#define LENGTH(array) (sizeof(array) / sizeof(array[0]) )
+#define SIZE(array)   ( sizeof(array) / sizeof(array[0]) )
+#define LENGTH(array) ( sizeof(array) / sizeof(array[0]) )
 #define FOR(i, until) for(int i = 0; i < until; i++)
 #define REP(i, until) for(int i = 0; i < until; i++)
 
@@ -41,4 +42,5 @@ void print(float f_msg) {
 void println(float f_msg) {
    std::cout << f_msg << std::endl;
 }
+
 #endif
