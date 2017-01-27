@@ -1,0 +1,2 @@
+cui:
+	g++ cui.cpp
