@@ -2,9 +2,10 @@
 import os
 import os.path
 
+FILE_PATH = "sample.txt"
 DIR_PATH = "hogepiyo"
 
-fileHandler = open('sample.txt', 'r')
+fileHandler = open(FILE_PATH, 'r')
 
 for row in fileHandler:
   print row
