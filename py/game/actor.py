@@ -4,7 +4,6 @@
 class Actor:
 
   def __init__(self):
-	self.id = 1
 	self.name = "hoge"
 	self.lv = 1
 	self.hp = 10
@@ -15,13 +14,13 @@ class Actor:
 	self.spd = 1
 	self.luk = 1
 
-	self.x = self.y = 0
+	self.x = 0
+	self.y = 0
 	self.stat = 0
-	self.is_dead = 0
 
   def ShuffleStatus(self):
-	self.hp      = random.randint(10, 20)
 	self.lv      = 1
+	self.hp      = random.randint(10, 20)
 	self.atk     = random.randint(5, 8) 	
 	self.defence = random.randint(5, 8) 	
 	self.spd     = random.randint(5, 8)
@@ -49,6 +48,7 @@ class Actor:
 	self.y = y_
 	print(self.name + " Moved =>" 
 	+ " (" + str(self.x)  + ", " + str(self.y) + ")")
+	self.wait = True
 
   def SetDebugSetting(self):
 	self.atk = 999
