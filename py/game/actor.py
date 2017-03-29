@@ -10,7 +10,10 @@ class Actor:
 	self.mp = 10
 
 	self.atk = 2
+	self.mgc = 2
 	self.defence = 1
+	self.mgc_defence = 1
+	self.skl = 1
 	self.spd = 1
 	self.luk = 1
 
