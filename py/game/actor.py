@@ -15,14 +15,13 @@ class Actor:
 	self.spd = 1
 	self.luk = 1
 
-	self.x = 0
-	self.y = 0
+	self.x = self.y = 0
 	self.stat = 0
 	self.is_dead = 0
 
   def ShuffleStatus(self):
 	self.hp      = random.randint(10, 20)
-	slef.lv      = 1
+	self.lv      = 1
 	self.atk     = random.randint(5, 8) 	
 	self.defence = random.randint(5, 8) 	
 	self.spd     = random.randint(5, 8)
@@ -30,9 +29,9 @@ class Actor:
 
   def PrintStatus(self):
 	print(self.name + " Status")
-	print("name => " + str(self.name))
-	print("hp => " + str(self.hp))
-	print("atk => "  + str(self.atk))
+	print("name => "    + self.name)
+	print("hp => "      + str(self.hp))
+	print("atk => "     + str(self.atk))
 	print("defence => " + str(self.defence))
 
   def Attack(self, target):
@@ -41,11 +40,18 @@ class Actor:
 	print(self.name + " Attacked => " + target.name)
 	print(target.name + " Damaged => " + str(damage))
 
+	if target.hp <= 0:
+	  target.hp = 0
+	  print("Defeat " + target.name)
+
   def Move(self, x_, y_):
 	self.x = x_
 	self.y = y_
 	print(self.name + " Moved =>" 
 	+ " (" + str(self.x)  + ", " + str(self.y) + ")")
+
+  def SetDebugSetting(self):
+	self.atk = 999
 
 if __name__ == '__main__':
   player = Actor()
