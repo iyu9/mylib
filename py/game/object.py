@@ -1,5 +1,12 @@
+#!/usr/bin/py
+  
 
 class Object:
+
+  (
+	PLANE,
+	POLYGON,
+  ) = range(0,2)
 
   def __init__(self):
 	self.id = 0

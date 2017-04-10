@@ -33,4 +33,3 @@ if __name__ == "__main__":
   print str(timer.getDays())    + " days"
 
   print str(timer.getDelta())   + " from Prev Frame"
-
