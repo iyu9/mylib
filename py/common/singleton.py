@@ -1,5 +1,6 @@
-import threading
+#!/usr/bin/python
 
+import threading
 
 class ThreadingSingleton:
   _instance = None

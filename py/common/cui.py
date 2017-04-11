@@ -1,25 +1,32 @@
 #!/usr/bin/python
 
-class CUIScreen:
-  w = 40
-  h = 20
-  lines = ['aaaaa','bbbbb','ccccc']
-  inputValue = "hoge"
+import sys
+sys.path.append('../game')
 
-  def __init__(self):
-	print("__init__")
+from timer import Timer
+
+class Screen:
+  inputValue = "hoge"
+  timer = Timer()
+  is_exit = False
 
   def update(self):
-    for line in self.lines:
-	  print(line)
+	print("update")
 
   def input(self):
 	inputValue = raw_input()
-	print inputValue
+	self.decode(inputValue)
+
+  def decode(self, cmd):
+	if cmd == "clock":
+	  print screen.timer.getDelta()
+	if cmd == "exit" or cmd == "bye":
+	  print "byebye"
+	  self.is_exit = True 
 
 if __name__ == '__main__':
-  screen = CUIScreen()
+  screen = Screen()
 
-  while True:
+  while screen.is_exit == False:
 	screen.update()
 	screen.input()
