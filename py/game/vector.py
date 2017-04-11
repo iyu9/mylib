@@ -7,7 +7,7 @@ class Vector2:
 	self.x = 0
 	self.y = 0
 
-  def Add(self, v):
+  def Plus(self, v):
 	self.x += v.x
 	self.y += v.y
 
@@ -15,11 +15,11 @@ class Vector2:
 	self.x -= v.x
 	self.y -= v.y
 
-  def Multiply(self, v):
+  def Times(self, v):
 	self.x *= v.x
 	self.y *= v.y
 
-  def Division(self, v):
+  def Divs(self, v):
 	self.x /= v.x
 	self.y /= v.y
 
@@ -40,12 +40,12 @@ class Vector3:
 	self.y -= v.y
 	self.z -= v.z
 
-  def Multiply(self, v):
+  def Times(self, v):
 	self.x *= v.x
 	self.y *= v.y
 	self.z *= v.z
 
-  def Division(self, v):
+  def Divs(self, v):
 	self.x /= v.x
 	self.y /= v.y
 	self.z /= v.z
