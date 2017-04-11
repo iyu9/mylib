@@ -3,6 +3,9 @@ import time
 
 class Timer:
 
+  startSeconds = 0
+  lastSeconds = 0
+
   def __init__(self):
 	self.startSeconds = self.getSeconds()
 	self.lastSeconds = self.startSeconds

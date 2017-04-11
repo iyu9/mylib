@@ -19,5 +19,7 @@ class Scene:
 	
 if __name__ == '__main__':
   scene = Scene()
-  scene.Update()
-  scene.Render()
+
+  while 1:
+	scene.Update()
+	scene.Render()
