@@ -34,6 +34,9 @@ class Timer:
 	self.startTimer = self.getSeconds()
 	self.finishTimer = finishSeconds
 
+  def stop(self):
+	self.finishTimer = 0
+
   def is_finish(self):
 	return self.getSeconds() >= self.finishTimer
 
