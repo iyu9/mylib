@@ -30,11 +30,11 @@ class Timer:
 	self.lastSeconds = self.getSeconds()
 	return res
 
-  def startTimer(self, finishSeconds):
+  def start(self, finishSeconds):
 	self.startTimer = self.getSeconds()
 	self.finishTimer = finishSeconds
 
-  def isFinish(self):
+  def is_finish(self):
 	return self.getSeconds() >= self.finishTimer
 
 if __name__ == "__main__":
@@ -46,6 +46,6 @@ if __name__ == "__main__":
   print str(timer.getDays())    + " days"
   print str(timer.getDelta())   + " from Prev Frame"
 
-  timer.startTimer(1.0)
-  while timer.isFinish() == False:
+  timer.start(1.0)
+  while timer.is_finish() == False:
 	print timer.getSeconds()
