@@ -2,6 +2,7 @@
 import time
 
 class Timer:
+  is_update_frame = False
 
   startSeconds = 0
   lastSeconds = 0
@@ -27,7 +28,11 @@ class Timer:
 
   def getDelta(self):
 	res = self.getSeconds() - self.lastSeconds
-	self.lastSeconds = self.getSeconds()
+
+	if self.is_update_frame == False:
+	  # for check frame loop check
+	  self.is_update_frame = True
+	  self.lastSeconds = self.getSeconds()
 	return res
 
   def start(self, finishSeconds):
