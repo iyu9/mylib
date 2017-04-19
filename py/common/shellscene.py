@@ -1,12 +1,13 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import sys
 sys.path.append('../game')
 
 from timer import Timer
 
-class Screen:
-  inputValue = "hoge"
+class ShellScene:
+  inputValue = ""
   timer = Timer()
   is_exit = False
 
@@ -15,18 +16,20 @@ class Screen:
 
   def input(self):
 	inputValue = raw_input()
-	self.decode(inputValue)
+	self.decode_input(inputValue)
 
-  def decode(self, cmd):
+  def decode_input(self, cmd):
 	if cmd == "clock":
-	  print screen.timer.getDelta()
+	  print screen.timer.get_delta()
 	if cmd == "exit" or cmd == "bye":
-	  print "byebye"
+	  print "Bye!"
 	  self.is_exit = True 
+	else:
+	  print "UNDEFINED_COMMAND"
 
 if __name__ == '__main__':
-  screen = Screen()
+  screen = ShellScene()
 
   while screen.is_exit == False:
-	screen.update()
 	screen.input()
+	screen.update()
