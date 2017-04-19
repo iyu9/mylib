@@ -7,21 +7,27 @@ sys.path.append('../game')
 from timer import Timer
 
 class ShellScene:
-  is_interrupted = True
-  input_value = ""
   timer = Timer()
-  is_exit = False
 
-  def update(self):
-	print("update")
+  is_interrupted = True
+  is_accepted = False
+  is_exit = False
+  input_value = None
+
+  # @Override
+  def check_update(self):
+	if self.is_accepted:
+	  print("update")
 
   def check_input(self):
 	if self.is_interrupted:
 	  self.input_value = raw_input()
 	  self.decode_input(self.input_value)
 
+  # @Override
   def decode_input(self, cmd):
 	if cmd == "clock":
+	  self.is_accepted = True
 	  print screen.timer.get_delta()
 	if cmd == "exit" or cmd == "bye":
 	  print "Bye!"
@@ -34,4 +40,4 @@ if __name__ == '__main__':
 
   while screen.is_exit == False:
 	screen.check_input();
-	screen.update()
+	screen.check_update()
