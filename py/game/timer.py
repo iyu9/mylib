@@ -47,7 +47,7 @@ class Timer:
   def is_finish(self):
 	return self.get_seconds() >= self.finish_timer
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   timer = Timer()
 
   print str(timer.get_seconds()) + " secs"
@@ -59,3 +59,4 @@ if __name__ == "__main__":
   timer.start(1.0)
   while timer.is_finish() == False:
 	print timer.get_seconds()
+  print 'finished'
