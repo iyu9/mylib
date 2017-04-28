@@ -2,7 +2,7 @@
 
 corpus = "hoge piyo hoge fuga"
 
-def CreateTermDoc(corpus):
+def CreateTermText(corpus):
   dict = {}
   terms = corpus.split()
 
@@ -14,6 +14,4 @@ def CreateTermDoc(corpus):
 	  dict[term] = 1
 	  print('add: ' + term + '=' + str(dict[term]))
 
-CreateTermDoc(corpus)
-
-
+CreateTermText(corpus)
