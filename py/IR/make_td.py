@@ -49,7 +49,6 @@ def CreateTerms(filename, text):
 	  print('add: ' + term + '=' + str(dict[term]))
 
 def Log():
-  print("")
   print('--- RESULT ---')
   for g_term in g_terms:
 	print(g_term + ' = ' + str(g_terms[g_term]))
@@ -60,5 +59,4 @@ if __name__ == '__main__':
   for filename in textfiles:
 	text = OpenFileToText(filename)
 	CreateGlobalTerms(filename, text)
-
   Log()
