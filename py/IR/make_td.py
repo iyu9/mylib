@@ -12,8 +12,18 @@ def OpenFileToText(filename):
 	fin.close()
   except IOError as e:
 	print('fileopen error')
-
   return text
+
+def CreateGlobalTerms(corpus):
+  terms = corpus.split()
+
+  for term in terms:
+	if term in g_terms:
+	  g_terms[term] += 1
+	  print('updated: ' + term + '=' + str(g_terms[term]))
+	else:
+	  g_terms[term] = 1
+	  print('add: ' + term + '=' + str(g_terms[term]))
 
 def CreateTermText(corpus):
   dict = {}
@@ -30,4 +40,4 @@ def CreateTermText(corpus):
 if __name__ == '__main__':
   for filename in textfiles:
 	text = OpenFileToText(filename)
-	CreateTermText(text)
+	CreateGlobalTerms(text)
