@@ -1,41 +1,33 @@
-#!/usr/bin/python
 
-# Prepare Basic Info
-termList = {"hello", "term", "doc", "matrix"}
-docList = {"doc1.csv", "doc2.csv", "doc3.csv", "doc4.csv"}
+textfiles = ["sample1.txt", "sample2.txt"]
+g_terms = {}
+corpus = "hoge piyo hoge fuga"
 
-termDoc = {"hello":1, "term":2, "doc":3, "matrix":4}
-termDocList = []
-termDocList.append(termDoc)
-termDocList.append(termDoc)
+def OpenFileToText(filename):
+  text = ''
+  try:
+	fin = open(filename, 'r')
+	for row in fin:
+	  text += row
+	fin.close()
+  except IOError as e:
+	print('fileopen error')
 
-# Create Term-Doc Matrix
-for termDoc in termDocList:
-  for x in termDoc:
-	print x
-	print termDoc[x]
+  return text
 
-def GetTermSum(termDocList, key):
-  termSum = 0
-  for termDoc in termDocList:
-	termSum += termDoc[key]
-  return termSum
+def CreateTermText(corpus):
+  dict = {}
+  terms = corpus.split()
 
-def GetTermSumList(termDocList):
-  termList = []
-  sumList = []
-  dictionary = {}
+  for term in terms:
+	if term in dict:
+	  dict[term] += 1
+	  print('updated: ' + term + '=' + str(dict[term]))
+	else:
+	  dict[term] = 1
+	  print('add: ' + term + '=' + str(dict[term]))
 
-  # GET TERMS
-  for termDoc in termDocList:
-	for key in termDoc:
-	  termList.append(key)
-
-  # GET SUMS
-  for term in termList:
-	print GetTermSum(termDocList, term)
-	dictionary[term] = GetTermSum(termDocList, term);
-
-  print dictionary
-
-GetTermSumList(termDocList);
+if __name__ == '__main__':
+  for filename in textfiles:
+	text = OpenFileToText(filename)
+	CreateTermText(text)
