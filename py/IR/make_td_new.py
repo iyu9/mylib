@@ -1,6 +1,19 @@
 
-
+textfiles = ["sample1.txt", "sample2.txt"]
+g_terms = {}
 corpus = "hoge piyo hoge fuga"
+
+def OpenFileToText(filename):
+  text = ''
+  try:
+	fin = open(filename, 'r')
+	for row in fin:
+	  text += row
+	fin.close()
+  except IOError as e:
+	print('fileopen error')
+
+  return text
 
 def CreateTermText(corpus):
   dict = {}
@@ -14,4 +27,7 @@ def CreateTermText(corpus):
 	  dict[term] = 1
 	  print('add: ' + term + '=' + str(dict[term]))
 
-CreateTermText(corpus)
+if __name__ == '__main__':
+  for filename in textfiles:
+	text = OpenFileToText(filename)
+	CreateTermText(text)
