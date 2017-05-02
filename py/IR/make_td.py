@@ -1,10 +1,18 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-textfiles = ["sample1.txt", "sample2.txt"]
+#inputs
+textfiles = [
+  "sample1.txt",
+  "sample2.txt",
+]
+
+#outputs
 g_terms = {}
-corpus = "hoge piyo hoge fuga"
+g_docs = {}
 
 def OpenFileToText(filename):
-  text = ''
+  text = ""
   try:
 	fin = open(filename, 'r')
 	for row in fin:
@@ -12,10 +20,13 @@ def OpenFileToText(filename):
 	fin.close()
   except IOError as e:
 	print('fileopen error')
+	text = 'FOPEN_ERROR'
   return text
 
-def CreateGlobalTerms(corpus):
+def CreateGlobalTerms(filename, corpus):
   terms = corpus.split()
+
+  g_docs[filename] = 1
 
   for term in terms:
 	if term in g_terms:
@@ -25,9 +36,9 @@ def CreateGlobalTerms(corpus):
 	  g_terms[term] = 1
 	  print('add: ' + term + '=' + str(g_terms[term]))
 
-def CreateTermText(corpus):
+def CreateTerms(filename, text):
   dict = {}
-  terms = corpus.split()
+  terms = text.split()
 
   for term in terms:
 	if term in dict:
@@ -37,7 +48,17 @@ def CreateTermText(corpus):
 	  dict[term] = 1
 	  print('add: ' + term + '=' + str(dict[term]))
 
+def Log():
+  print("")
+  print('--- RESULT ---')
+  for g_term in g_terms:
+	print(g_term + ' = ' + str(g_terms[g_term]))
+  for g_doc in g_docs:
+	print(g_doc + ' = ' + str(g_docs[g_doc]))
+
 if __name__ == '__main__':
   for filename in textfiles:
 	text = OpenFileToText(filename)
-	CreateGlobalTerms(text)
+	CreateGlobalTerms(filename, text)
+
+  Log()
