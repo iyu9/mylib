@@ -15,7 +15,7 @@ class Object:
 	self.x = self.y = self.z = 0
 	self.vertices = []
 
-  def destroy():
+  def destroy(self):
 	print("destroy")
 
   def render(self):
@@ -28,13 +28,13 @@ class Object2D:
 	self.w = w
 	self.h = h
 
-  def create(x, y, w, h):
+  def create(self, x, y, w, h):
 	self.x = x
 	self.y = y
 	self.w = w
 	self.h = h
 
-  def destroy():
+  def destroy(self):
 	print("destroy")
 
   def render(self):
