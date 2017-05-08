@@ -8,20 +8,21 @@ class Actor:
   mp = 10
 
   rank = 1
-  atk = 2
-  mgc = 2
-  dfc = 1
-  mgc_dfc = 1
-  skl = 1
-  spd = 1
-  luk = 1
+  atk = 5
+  mgc = 3
+  dfc = 3
+  mgc_dfc = 3
+  skl = 3
+  spd = 3
+  luk = 3
+  mov = 5
 
   stat = 'None'
 
   x = 0
   y = 0
 
-  def ShuffleStatus(self):
+  def shuffle_status(self):
 	self.lv      = 1
 	self.hp      = random.randint(10, 20)
 	self.atk     = random.randint(5, 8) 	
@@ -29,7 +30,7 @@ class Actor:
 	self.spd     = random.randint(5, 8)
 	self.luk     = random.randint(5, 8)
 
-  def PrintStatus(self):
+  def print_status(self):
 	print("")
 	print(self.name + " Status")
 	print("name => "    + self.name)
@@ -38,7 +39,7 @@ class Actor:
 	print("atk => "     + str(self.atk))
 	print("dfc => "     + str(self.dfc))
 
-  def Attack(self, target):
+  def attack(self, target):
 	self.stat = 'ATACK'
 	damage = self.atk - target.dfc
 	target.hp -= damage
@@ -49,10 +50,10 @@ class Actor:
 	  target.hp = 0
 	  print("Defeat " + target.name)
 
-  def Guard(self):
+  def guard(self):
 	self.stat = 'GUARD'
 
-  def Move(self, x_, y_):
+  def move(self, x_, y_):
 	self.stat = 'MOVE'
 	self.x = x_
 	self.y = y_
@@ -60,18 +61,18 @@ class Actor:
 	+ " (" + str(self.x)  + ", " + str(self.y) + ")")
 	self.wait = True
 
-  def SetDebugSetting(self):
+  def set_debug_setting(self):
 	self.atk = 999
 
 if __name__ == '__main__':
   player = Actor()
   enemy = Actor()
 
-  player.Attack(enemy)
-  player.Move(2, 2)
-  player.PrintStatus()
+  player.attack(enemy)
+  player.move(2, 2)
+  player.print_status()
 
-  enemy.Attack(player)
-  enemy.Move(2, 2)
-  enemy.PrintStatus()
+  enemy.attack(player)
+  enemy.move(2, 2)
+  enemy.print_status()
 

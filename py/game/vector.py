@@ -7,19 +7,19 @@ class Vector2:
 	self.x = 0
 	self.y = 0
 
-  def Plus(self, v):
+  def add(self, v):
 	self.x += v.x
 	self.y += v.y
 
-  def Minus(self, v):
+  def minus(self, v):
 	self.x -= v.x
 	self.y -= v.y
 
-  def Times(self, v):
+  def times(self, v):
 	self.x *= v.x
 	self.y *= v.y
 
-  def Divs(self, v):
+  def divs(self, v):
 	self.x /= v.x
 	self.y /= v.y
 
@@ -30,22 +30,22 @@ class Vector3:
 	self.y = 0
 	self.z = 0
 
-  def Add(self, v):
+  def add(self, v):
 	self.x += v.x
 	self.y += v.y
 	self.z += v.z
 
-  def Minus(self, v):
+  def minus(self, v):
 	self.x -= v.x
 	self.y -= v.y
 	self.z -= v.z
 
-  def Times(self, v):
+  def times(self, v):
 	self.x *= v.x
 	self.y *= v.y
 	self.z *= v.z
 
-  def Divs(self, v):
+  def divs(self, v):
 	self.x /= v.x
 	self.y /= v.y
 	self.z /= v.z

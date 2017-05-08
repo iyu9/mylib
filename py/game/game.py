@@ -4,7 +4,7 @@
 import random
 import actor
 
-def calcDamage(attacker, defencer):
+def calc_damage(attacker, defencer):
 
   hit = 100
 
@@ -30,9 +30,9 @@ if __name__ == '__main__':
   player = actor.Actor()
   enemy  = actor.Actor()
 
-  player.SetDebugSetting()
+  player.set_debug_setting()
 
-  player.PrintStatus()
-  enemy.PrintStatus()
+  player.print_status()
+  enemy.print_status()
 
-  player.Attack(enemy)
+  player.attack(enemy)

@@ -4,22 +4,22 @@
 from timer import Timer
 
 class Scene:
-
-  def __init__(self):
 	self.is_finished = False
 	self.ObjectManager = None
+
+  def __init__(self):
 	self.timer = Timer()
 	print("initialize")
 
-  def Update(self):
+  def update(self):
 	print("Updated" + str(self.timer.getDelta()))
 
-  def Render(self):
+  def render(self):
 	print("Render")
 	
 if __name__ == '__main__':
   scene = Scene()
 
-  while 1:
-	scene.Update()
-	scene.Render()
+  while True:
+	scene.update()
+	scene.render()
