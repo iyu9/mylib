@@ -16,6 +16,9 @@ class HelloWorld(cocos.layer.Layer):
 	label.position = 320,240
 	self.add(label)
 
+    image = cocos.sprite.Sprite("sample.png")
+	self.add(image)
+
 if __name__ == '__main__':
   cocos.director.director.init()
   hello_layer = HelloWorld()
