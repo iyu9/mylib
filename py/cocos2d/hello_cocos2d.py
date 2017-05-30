@@ -21,12 +21,11 @@ class HelloWorld(cocos.layer.Layer):
 	self.add(label)
 
 	# sprite
-	image = cocos.sprite.Sprite('sample.png')
-	image.position = 100,100
-	self.add(image)
+	#image = cocos.sprite.Sprite('sample.png')
+	#image.position = 100,100
+	#self.add(image)
 
 	# key event
-
 	self.text = cocos.text.Label("", x=100, y=200)
 	self.keys_pressed = set()
 	self.update_text()
