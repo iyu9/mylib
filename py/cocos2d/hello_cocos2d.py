@@ -16,7 +16,8 @@ class HelloWorld(cocos.layer.Layer):
 	label.position = 320,240
 	self.add(label)
 
-    image = cocos.sprite.Sprite("sample.png")
+    image = cocos.sprite.Sprite('sample.png')
+	image.position = 100,100
 	self.add(image)
 
 if __name__ == '__main__':
