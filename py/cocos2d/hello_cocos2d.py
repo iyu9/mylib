@@ -27,7 +27,7 @@ class HelloWorld(cocos.layer.Layer):
 	# key event
 
 	self.text = cocos.text.Label("", x=100, y=200)
-	self.key_pressed = set()
+	self.keys_pressed = set()
 	self.update_text()
 	self.add(self.text)
 
