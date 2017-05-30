@@ -1,4 +1,5 @@
 import cocos
+import pyglet
 
 class HelloWorld(cocos.layer.Layer):
 
