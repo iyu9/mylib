@@ -25,6 +25,9 @@ class HelloWorld(cocos.layer.Layer):
 	#image.position = 100,100
 	#self.add(image)
 
+	self.pos_x = 0
+	self.pos_y = 0
+
 	# key event
 	self.text = cocos.text.Label("", x=100, y=200)
 	self.keys_pressed = set()
@@ -35,6 +38,17 @@ class HelloWorld(cocos.layer.Layer):
 	key_names = [pyglet.window.key.symbol_string(k) for k in self.keys_pressed]
 	text = 'keys: ' + ','.join(key_names)
 	self.text.element.text = text
+
+	if 'RIGHT' in key_names:
+	  self.pos_x += 10
+	if 'LEFT' in key_names:
+	  self.pos_x -= 10
+	if 'UP' in key_names:
+	  self.pos_y += 10
+	if 'DOWN' in key_names:
+	  self.pos_y -= 10
+
+	self.text.position = self.pos_x, self.pos_y
 
   def on_key_press(self, key, modifiers):
 	self.keys_pressed.add(key)
