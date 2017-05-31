@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import socket
 
-host = "localhost"
+host = "153.126.153.59"
 port = 11451
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
