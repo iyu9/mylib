@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 import socket
 
-host = "ik1-312-16305.vs.sakura.ne.jp" #お使いのサーバーのホスト名を入れます
-port = 11451 #クライアントと同じPORTをしてあげます
+host = "ik1-312-16305.vs.sakura.ne.jp"
+port = 11451
 
 serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
