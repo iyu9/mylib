@@ -1,7 +1,10 @@
+#!/usr/bin/python
+# -*- coding utf-8
+
 import pyglet
 
-pos_x = 0
-pos_y = 0
+x = 0
+y = 0
 
 # for Initializeing
 window = pyglet.window.Window()
@@ -10,17 +13,17 @@ sprite = pyglet.sprite.Sprite(image)
 
 @window.event
 def on_draw():
-  image.blit(pos_x, pos_y)
-  # sprite.draw()
+  window.clear()
+  image.blit(x, y)
 
 @window.event
 def on_key_press(symbol, modifiers):
-  global pos_x
-  pos_x += 10
+  global x
+  x += 10
 
 @window.event
 def on_key_release(symbol, modifiers):
-  global pos_y
-  pos_y += 10
+  global y
+  y += 10
 
 pyglet.app.run()
