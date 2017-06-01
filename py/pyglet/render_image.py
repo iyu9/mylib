@@ -1,7 +1,7 @@
 import pyglet
 
-x = 0
-y = 0
+pos_x = 0
+pos_y = 0
 
 # for Initializeing
 window = pyglet.window.Window()
@@ -14,12 +14,13 @@ def on_draw():
   # sprite.draw()
 
 @window.event
-def on_key_press():
-  x+=1
+def on_key_press(symbol, modifiers):
+  pos_x += 1
   pass
 
 @window.event
-def on_key_release():
+def on_key_release(symbol, modifiers):
+  pos_y += 1
   pass
 
 pyglet.app.run()
