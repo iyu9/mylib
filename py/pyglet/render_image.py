@@ -10,17 +10,17 @@ sprite = pyglet.sprite.Sprite(image)
 
 @window.event
 def on_draw():
-  image.blit(x, y)
+  image.blit(pos_x, pos_y)
   # sprite.draw()
 
 @window.event
 def on_key_press(symbol, modifiers):
-  pos_x += 1
-  pass
+  global pos_x
+  pos_x += 10
 
 @window.event
 def on_key_release(symbol, modifiers):
-  pos_y += 1
-  pass
+  global pos_y
+  pos_y += 10
 
 pyglet.app.run()
