@@ -1,0 +1,35 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BattleStep	battle.h	/^    enum BattleStep$/;"	g	class:battle
+ENEMY_COUNT	battle.cpp	/^const int ENEMY_COUNT  = 1;$/;"	v
+PLAYER_COUNT	battle.cpp	/^const int PLAYER_COUNT = 1;$/;"	v
+STEP_CMD	battle.h	/^       STEP_CMD,$/;"	e	enum:battle::BattleStep
+STEP_ENEMY	battle.h	/^       STEP_ENEMY,$/;"	e	enum:battle::BattleStep
+STEP_FIN	battle.h	/^       STEP_FIN,$/;"	e	enum:battle::BattleStep
+STEP_INIT	battle.h	/^       STEP_INIT,$/;"	e	enum:battle::BattleStep
+STEP_LOSE	battle.h	/^	   STEP_LOSE,$/;"	e	enum:battle::BattleStep
+STEP_USE	battle.h	/^	   STEP_USE,$/;"	e	enum:battle::BattleStep
+STEP_WIN	battle.h	/^	   STEP_WIN,$/;"	e	enum:battle::BattleStep
+battle	battle.cpp	/^battle::battle(): scene::scene()$/;"	f	class:battle
+battle	battle.cpp	/^battle::battle(actor* player, actor* enemy)$/;"	f	class:battle
+battle	battle.cpp	/^battle::battle(actor* players[], actor* enemies[])$/;"	f	class:battle
+battle	battle.h	/^class battle: public scene$/;"	c
+battle_map	battle.h	/^	map* battle_map;$/;"	m	class:battle
+em_idx	battle.h	/^	int em_idx;$/;"	m	class:battle
+enemies	battle.h	/^	actor** enemies;$/;"	m	class:battle
+enemy	battle.h	/^	actor* enemy;$/;"	m	class:battle
+input	battle.cpp	/^void battle::input()$/;"	f	class:battle
+main	battle.cpp	/^int main()$/;"	f
+pl_idx	battle.h	/^    int pl_idx;$/;"	m	class:battle
+player	battle.h	/^	actor* player;$/;"	m	class:battle
+players	battle.h	/^	actor** players;$/;"	m	class:battle
+render	battle.cpp	/^void battle::render()$/;"	f	class:battle
+step	battle.h	/^    int step;$/;"	m	class:battle
+step_name	battle.h	/^std::string step_name[] =$/;"	v
+turn	battle.h	/^	int turn;$/;"	m	class:battle
+update	battle.cpp	/^void battle::update()$/;"	f	class:battle
+~battle	battle.cpp	/^battle::~battle()$/;"	f	class:battle
