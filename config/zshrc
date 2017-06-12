@@ -1,0 +1,30 @@
+# Created by newuser for 5.0.2
+# ref
+# https://h2ham.net/zsh-prompt-color
+
+# カラー設定
+autoload colors
+colors
+PROMPT="%{$fg[green]%}%m%(!.#.$) %{$reset_color%}"
+PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
+
+# コマンドエイリアス
+alias la='ls -a'
+alias ll='ls -l'
+
+alias -g G='| grep'
+alias -g L='| less'
+
+# コマンド履歴
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# コマンド履歴検索
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
