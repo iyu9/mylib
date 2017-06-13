@@ -1,39 +1,40 @@
 # Vim Tips
 
-# Modify
+## Modify
 
-## diw
+### diw
 normal mode, delete word on the cursor
 
-## di"
+### di"
 normal mode, delete between "
 
-# Search
+## Search
 
-## *
+### *
 search word FORWARD on the cursor
 
-## \#
+### \#
 search word BACKWARD on the cursor
 
-## g;
+### g;
 goto prev change
 
-## g*
+### g*
 search substring FORWARD on the cursor
 
-## g#
+### g#
 search substring BACKWARD on the cursor
 
-# Window
+## Window
 
-## sp
+### sp
 split window horizontal
 
-## vs
+### vs
 split window vertical
 
 ---
 
-## hoge
-description
+## category
+### command
+explain
