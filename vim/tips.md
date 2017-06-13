@@ -32,9 +32,3 @@ split window horizontal
 
 ### vs
 split window vertical
-
----
-
-## category
-### command
-explain
