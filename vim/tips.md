@@ -42,8 +42,19 @@ prev window
 ## Tab
 
 ### :tabnew
+open new tab
+
 ### :tabclose
+close current tab
+
 ### :tabnext
+goto next tab
+
 ### :tabfirst
+goto first tab
+
 ### :tablast
+goto last tab
+
 ### gt, gT
+goto next, goto prev tab
