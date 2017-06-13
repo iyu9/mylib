@@ -9,7 +9,7 @@ normal mode, delete between "
 ## *
 search word FORWARD on the cursor
 
-## #
+## \#
 search word BACKWARD on the cursor
 
 ## g;
