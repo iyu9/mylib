@@ -1,5 +1,6 @@
 # Vim Tips
 
+
 ## Modify
 
 ### diw
@@ -7,6 +8,22 @@ normal mode, delete word on the cursor
 
 ### di"
 normal mode, delete between "
+
+
+## Move
+
+### f [CHAR]
+goto next char
+
+### F [CHAR]
+goto prev char
+
+### ;
+repeat goto FORWARD
+
+### ,
+repeat goto BACKWARD
+
 
 ## Search
 
@@ -25,6 +42,7 @@ search substring FORWARD on the cursor
 ### g#
 search substring BACKWARD on the cursor
 
+
 ## Window
 
 ### :sp
@@ -38,6 +56,7 @@ next window
 
 ### C-w p
 prev window
+
 
 ## Tab
 
