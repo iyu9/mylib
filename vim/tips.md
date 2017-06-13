@@ -27,10 +27,10 @@ search substring BACKWARD on the cursor
 
 ## Window
 
-### sp
+### :sp
 split window horizontal
 
-### vs
+### :vs
 split window vertical
 
 ### C-w w
@@ -38,3 +38,12 @@ next window
 
 ### C-w p
 prev window
+
+## Tab
+
+### :tabnew
+### :tabclose
+### :tabnext
+### :tabfirst
+### :tablast
+### gt, gT
