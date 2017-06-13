@@ -13,10 +13,10 @@ normal mode, delete between "
 ## Move
 
 ### f [CHAR]
-goto next char
+goto next char in line
 
 ### F [CHAR]
-goto prev char
+goto prev char in line
 
 ### ;
 repeat goto FORWARD
