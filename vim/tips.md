@@ -32,3 +32,9 @@ split window horizontal
 
 ### vs
 split window vertical
+
+### C-w w
+next window
+
+### C-w p
+prev window
