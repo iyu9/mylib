@@ -4,13 +4,18 @@
 normal mode, delete word under the cursor
 
 ## di"
-normal mode, delete between ""
+normal mode, delete between "
 
 ## *
-find under the cursor
+search word FORWARD under the cursor
+
+## #
+search word BACKWARD under the cursor
 
 ## g;
 go to prev change
 
-## C-h
-backspace
+---
+
+## hoge
+description
