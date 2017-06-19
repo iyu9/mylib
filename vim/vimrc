@@ -1,6 +1,8 @@
 " vim tips 参考サイト様
 " http://vimblog.hatenablog.com/entry/vimrc_set_recommended_options
 
+colorscheme murphy 
+
 set number			" 行番号表示
 set tabstop=4		" タブの領域
 set shiftwidth=2	" 自動インデン幅
