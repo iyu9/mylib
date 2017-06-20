@@ -3,6 +3,8 @@
 
 import vector
 
+G = 9.8;
+
 class Physics:
 
   def __init__(self):
@@ -10,8 +12,12 @@ class Physics:
 	self.v   = vector.Vector2()
 	self.a   = vector.Vector2()
 
+  def add_force(self, vec):
+	self.v.x = vec.x
+	self.v.y = vec.y
+
   def fall(self, t):
-	self.pos.y += -0.5 * 9.8 * t * t
+	self.pos.y += -0.5 * G * t * t
 
   def move(self, t):
 	self.pos.x += self.v.x * t 
