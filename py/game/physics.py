@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import vector
+import timer
 
 G = 9.8;
 
@@ -23,12 +24,15 @@ class Physics:
 	self.pos.x += self.v.x * t 
 
   def is_collision(self, target):
-	x_element = (self.pos.x - target.pos.x) * (self.pos.x - target.pos.x)
-	y_element = (self.pos.y - target.pos.y) * (self.pos.y - target.pos.y)
-	return (x_element + y_element) > 10
+	x = (self.pos.x - target.pos.x) * (self.pos.x - target.pos.x)
+	y = (self.pos.y - target.pos.y) * (self.pos.y - target.pos.y)
+	return (x + y) > 10
 
 if __name__ == '__main__':
 	p = Physics()
-	p.fall(1)
-	p.move(1)
-	print p.pos.x, p.pos.y
+
+	t = 1000.0
+	while t > 0:
+	  p.fall(t)
+	  t -= 0.01
+	  print p.pos.x, p.pos.y

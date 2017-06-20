@@ -1,12 +1,12 @@
 #!/usr/bin/python
-# -*- coding -*-
+# -*- coding: utf-8 -*-
 
-from scene import Scene
+import scene
 
-class TitleScene(Scene):
+class TitleScene(scene.Scene):
 
   def __init__(self):
-	Scene.__init__(self)
+	scene.Scene.__init__(self)
 	print("TitleScene initialize")
 
   def update(self):

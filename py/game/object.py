@@ -1,5 +1,5 @@
 #!/usr/bin/py
-  
+# -*- coding: utf-8 -*-
 
 class Object:
 
