@@ -1,6 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/sh
 
-sudo pip install pillow
-sudo pip install pygame
-sudo pip install requests
-sudo pip install cocos2d
+# Install useful python frameworks
+sudo pip install pillow pygame requests cocos2d numpy django
