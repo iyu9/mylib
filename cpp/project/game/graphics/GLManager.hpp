@@ -16,49 +16,6 @@
 
 static GLubyte image[TEX_HEIGHT][TEX_WIDTH][4];
 
-int LoadShader(char *vtxShdName, char *frgShdName, GLuint *lpProg)
-{
-/*
-    GLuint vtxShader;
-    GLuint frgShader;
-    GLuint prog;
-    GLint linked;
-
-    //シェーダオブジェクトの作成
-    vtxShader = glCreateShader(GL_VERTEX_SHADER);
-    frgShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    //バーテックスシェーダのロードとコンパイル
-    if (loadShader(vtxShader, vtxShdName) < 0)
-        return -1;
-
-    //フラグメントシェーダのロードとコンパイル
-    if (loadShader(frgShader, frgShdName) < 0)
-        return -1;
-
-    //プログラムオブジェクトの作成
-    prog = glCreateProgram();
-
-    //シェーダオブジェクトのシェーダプログラムへの登録
-    glAttachShader(prog, vtxShader);
-    glAttachShader(prog, frgShader);
-
-    //シェーダオブジェクトの削除
-    glDeleteShader(vtxShader);
-    glDeleteShader(frgShader);
-
-    //シェーダプログラムのリンク
-    glLinkProgram(prog);
-    glGetProgramiv(prog, GL_LINK_STATUS, &linked);
-    printProgramInfoLog(prog);
-    if (linked == GL_FALSE)
-        return -1;
-
-    *lpProg = prog;
-*/
-    return 0;
-}
-
 void InitTexture() 
 {
   for (int i = 0; i < TEX_HEIGHT; i++) 
