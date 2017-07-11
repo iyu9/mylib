@@ -1,3 +1,6 @@
+#ifndef __ONCE_GL__
+#define __ONCE_GL__
+
 namespace GL
 {
   class Vec2
@@ -15,3 +18,5 @@ namespace GL
 	  float z;
   };
 };
+
+#endif

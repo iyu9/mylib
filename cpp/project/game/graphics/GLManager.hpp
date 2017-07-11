@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "GLComponent/GLVec.hpp"
+#include "GLComponent/GLObject.hpp"
 
 /*
  * OpenGL Graphics Control Class
@@ -10,8 +11,6 @@
  * https://tokoik.github.io/opengl/libglut.html#3.1,
  * http://www.oit.ac.jp
  */
-
-#ifdef TEST_TEX
 
 #define TEX_HEIGHT 16 
 #define TEX_WIDTH 16 
@@ -44,7 +43,7 @@ void displayTexPolygon()
   glDisable(GL_TEXTURE_2D);
 } 
 
-void displayAltanative()
+void display()
 {
   static float spin = 0.0;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -61,74 +60,17 @@ void displayAltanative()
   glutSwapBuffers();
 }
 
-#endif
-
 namespace GL
 {
-  enum RenderType
-  {
-    Line,
-    Rect,
-    Poly,
-  };
-
-  class Object
-  {
-	public:
-	  int id;
-	  int renderType;
-
-	  Vec2 verts[99];
-	  Vec2 pos;
-
-	  Object(){}
-	  ~Object(){}
-
-	  int GetID()
-	  {
-      return id;
-	  }
-
-	  int GetRenderType()
-	  {
-      return renderType;
-	  }
-  };
-
-  class Scene
-  {
-	private:
-	  Object object[99];
-
-    public:
-
-	  void Save(const char* fileName)
-	  {
-      //Save Scene File
-	  }
-
-	  void Load(const char* sceneName)
-	  {
-      //Load Scene File	
-	  }
-
-	  //read only pointer ?
-	  const Object* GetObjects()
-	  {
-		return object;
-	  }
-  };
-
   const Vec2 WindowPos = {100, 100};
   const Vec2 WindowSize = {320, 240};
 
   const int IntervalUpdate = 10; //msec
-
-  static Vec2 pos;
   const float MoveVal = 0.1;
 
-  Object actor;
-  static Scene scene;
+  static Vec2 pos;
+
+  GLObject actor;
 
   class GLManager
   {
@@ -184,23 +126,16 @@ namespace GL
 
       static void Reshape(int w, int h)
       {
-#ifdef TEST_TEX
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glFrustum(-5.0, 5.0, -5.0, 5.0, 5.0, 500.0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-#else
-        glViewport(0, 0, w, h);  
-        glLoadIdentity();
-        glOrtho(-w / 200.0, w / 200.0, -h / 200.0, h / 200.0, -1.0, 1.0);
-#endif
       }
 
       static void Timer(int value)
       {  
-        //Update//
         glutPostRedisplay();
         glutTimerFunc(IntervalUpdate, Timer, 0);
       }
@@ -297,14 +232,9 @@ namespace GL
         glutInitWindowPosition(WindowPos.x, WindowPos.y);
         glutInitWindowSize(WindowSize.x, WindowSize.y);
         glutInit(argc, argv);
-#ifdef TEST_TEX
         glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
-#else
-        glutInitDisplayMode(GLUT_RGBA);
-#endif
         glutCreateWindow(argv[0]);
 
-#ifdef TEST_TEX
 		//Set Depth Setting
 		glClearColor(0.0, 0.0, 0.0, 0.0);
 		glDepthFunc(GL_LEQUAL);
@@ -321,11 +251,7 @@ namespace GL
           0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
         //Set Auto-Processing Functions
-        //glutDisplayFunc(Display);
-        glutDisplayFunc(displayAltanative);
-#else
-        glutDisplayFunc(Display);
-#endif
+        glutDisplayFunc(display);
         glutReshapeFunc(Reshape);
         glutMouseFunc(Mouse);
         glutKeyboardFunc(Keyboard);

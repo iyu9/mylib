@@ -1,22 +1,22 @@
 #include "GLCommon.hpp"
 
+#ifndef __ONCE_GLOBJ__
+#define __ONCE_GLOBJ__
 class GLObject
 {
 private:
   int id;
-  char* name;
-  float x, y, z, w;
 
 public:
-  GLObject(){}
+  GL::Vec2 pos;
+
+  GLObject()
+  {
+	
+  }
   GLObject(int id_)
   {
 	id = id_;
   }
-  GLObject(int id_, char* name_)
-  {
-	id = id_;
-	name = name_;
-  }
-  ~GLObject(){}
 };
+#endif
