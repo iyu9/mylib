@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "GLComponent/GLVec.hpp"
+
 /*
  * OpenGL Graphics Control Class
  * Reference:
@@ -63,19 +65,6 @@ void displayAltanative()
 
 namespace GL
 {
-  struct Vec2
-  {
-    float x;
-    float y;
-  };
-
-  struct Vec3
-  {
-	float x;
-	float y;
-	float z;
-  };
-
   enum RenderType
   {
     Line,
@@ -233,7 +222,7 @@ namespace GL
             actor.pos.x -= MoveVal;  
             break;
           case 's':
-            actor.pos.y -= MoveVal;  
+
             break;
           case 'd':
             actor.pos.x += MoveVal;  
