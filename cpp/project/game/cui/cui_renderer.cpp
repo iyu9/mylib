@@ -8,14 +8,13 @@
 
 using namespace std;
 
-//for Screen
+const double UPDATE_FPS = 0.033;
+
 char buffer[SCREEN_WIDTH][SCREEN_HEIGHT];
 double timer_secs = 0;
 clock_t start;
 long frame = 0;
 bool is_exit = false;
-
-const double UPDATE_FPS = 1.00000 / 30.00000;
 
 struct Vec2
 {
@@ -110,21 +109,73 @@ void draw_point(int x, int y, char ch)
   }
 }
 
+void draw_character(int x, int y, char ch)
+{
+  switch (ch)
+  {
+	case 'a':
+	  draw_point(0, 0, ch);
+	  draw_point(1, 0, ch);
+	  draw_point(2, 0, ch);
+	  draw_point(3, 0, ch);
+
+	  draw_point(3, 1, ch);
+
+	  draw_point(0, 2, ch);
+	  draw_point(1, 2, ch);
+	  draw_point(2, 2, ch);
+	  draw_point(3, 2, ch);
+
+	  draw_point(0, 3, ch);
+	  draw_point(3, 3, ch);
+
+	  draw_point(0, 4, ch);
+	  draw_point(1, 4, ch);
+	  draw_point(2, 4, ch);
+	  draw_point(3, 4, ch);
+	  break;
+
+	default:
+	  draw_point(x, y, ch);
+	  break;
+  }
+}
+
+void store_buffer()
+{
+  draw_rect(0, 0, frame % SCREEN_WIDTH, frame, '@');
+ 
+  //SNOW
+  //for (int i = 0; i < SCREEN_WIDTH; i++)
+  //{
+  //	draw_point(i, (frame + 4 * i) % SCREEN_HEIGHT, '*');
+  //}
+}
+
 void clear()
 {
   clear_buffer();
   system("clear");  
 }
 
+//--------------------------
+//Game Proc
+//--------------------------
+
+int mode = 0;
+const int Title  = 0;
+const int Main   = 1;
+const int Result = 2;
+
+//--------------------------
+
 #ifndef DEBUG
-
-
 int main()
 {
-  while(!is_exit)
+  while (!is_exit)
   {
 	clock_t current = clock();
-	timer_secs = (double)(current - start) / CLOCKS_PER_SEC;
+	timer_secs = (double)(current - start) / CLOCKS_PER_SEC; 
 
 	if (timer_secs > UPDATE_FPS)
 	{
@@ -132,12 +183,7 @@ int main()
 	  frame++;
 
 	  clear();
-	  //draw_rect(0, 0, frame % SCREEN_WIDTH, frame, '@');
-
-	  for(int i = 0; i < 10; i++)
-	  {
-		draw_point(i, (frame + i) % SCREEN_HEIGHT, '*');
-	  } 
+	  store_buffer();
 	  render(buffer);
 	}
   }
