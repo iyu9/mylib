@@ -187,7 +187,6 @@ int main()
 	  render(buffer);
 	}
   }
-
   return 0;  
 }
 #endif
