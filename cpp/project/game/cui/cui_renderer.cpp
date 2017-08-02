@@ -3,12 +3,19 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SCREEN_WIDTH 10
-#define SCREEN_HEIGHT 10
+#define SCREEN_WIDTH 86 
+#define SCREEN_HEIGHT 28
 
 using namespace std;
 
+//for Screen
 char buffer[SCREEN_WIDTH][SCREEN_HEIGHT];
+double timer_secs = 0;
+clock_t start;
+long frame = 0;
+bool is_exit = false;
+
+const double UPDATE_FPS = 1.00000 / 30.00000;
 
 struct Vec2
 {
@@ -53,6 +60,17 @@ void render(char data[SCREEN_WIDTH][SCREEN_HEIGHT])
   } 
 }
 
+void clear_buffer()
+{
+  for (int x = 0; x < SCREEN_WIDTH; x++)
+  {
+	for (int y = 0; y < SCREEN_HEIGHT; y++)
+	{
+	  buffer[x][y] = ' ';
+	}
+  } 
+}
+
 void draw_rect(int x1, int y1, int x2, int y2, char ch)
 {
   for (int x = x1; x < x2; x++)
@@ -64,7 +82,7 @@ void draw_rect(int x1, int y1, int x2, int y2, char ch)
   }  
 }
 
-void set_line(int x0, int y0, int x1, int y1, char ch)
+void draw_line(int x0, int y0, int x1, int y1, char ch)
 {
   int dx = x1 - x0;
   int dy = y1 - y0;
@@ -84,19 +102,22 @@ void set_line(int x0, int y0, int x1, int y1, char ch)
   }
 }
 
+void draw_point(int x, int y, char ch)
+{
+  if (x <= SCREEN_WIDTH && y <= SCREEN_HEIGHT)
+  {
+	buffer[x][y] = ch;
+  }
+}
+
 void clear()
 {
+  clear_buffer();
   system("clear");  
 }
 
 #ifndef DEBUG
 
-double timer_secs = 0;
-clock_t start;
-long frame = 0;
-bool is_exit = false;
-
-const double UPDATE_FPS = 0.033;
 
 int main()
 {
@@ -111,7 +132,12 @@ int main()
 	  frame++;
 
 	  clear();
-	  draw_rect(0, 0, frame % 10, frame % 10, '@');
+	  //draw_rect(0, 0, frame % SCREEN_WIDTH, frame, '@');
+
+	  for(int i = 0; i < 10; i++)
+	  {
+		draw_point(i, (frame + i) % SCREEN_HEIGHT, '*');
+	  } 
 	  render(buffer);
 	}
   }
