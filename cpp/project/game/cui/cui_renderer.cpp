@@ -4,26 +4,26 @@
 #include <time.h>
 
 #define SCREEN_WIDTH 86 
-#define SCREEN_HEIGHT 28
+#define SCREEN_HEIGHT 70
 
 #include "common.hpp"
 
 using namespace std;
 
 //--------------------------
-// Game variables
+// Game Setting
 //--------------------------
 
 int game_mode = 0;
 const int Title  = 0;
-const int Option = 1;
+const int Config = 1;
 const int Main   = 2;
 const int Result = 3;
 
 //--------------------------
 // CUI Screen Setting
 //--------------------------
-const double UPDATE_FPS = 0.1;
+const double UPDATE_FPS = 0.033;
 
 char buf[SCREEN_WIDTH][SCREEN_HEIGHT];
 double timer_secs = 0;
@@ -45,9 +45,9 @@ void render(char data[SCREEN_WIDTH][SCREEN_HEIGHT])
 
 void clear_buf()
 {
-  for (int x = 0; x < SCREEN_WIDTH; x++)
+  for (int y = 0; y < SCREEN_HEIGHT; y++)
   {
-	for (int y = 0; y < SCREEN_HEIGHT; y++)
+	for (int x = 0; x < SCREEN_WIDTH; x++)
 	{
 	  buf[x][y] = ' ';
 	}
@@ -56,9 +56,9 @@ void clear_buf()
 
 void draw_rect(int start_x, int start_y, int end_x, int end_y, char ch)
 {
-  for (int x = start_x; x < end_x; x++)
+  for (int y = start_y; y < end_y; y++)
   {
-	for (int y = start_y; y < end_y; y++)
+	for (int x = start_x; x < end_x; x++)
 	{
 	  buf[x][y] = ch;
 	}
@@ -66,30 +66,20 @@ void draw_rect(int start_x, int start_y, int end_x, int end_y, char ch)
 }
 void draw_rect(Vec2 start_pos, Vec2 end_pos, char ch)
 {
-  for (int x = start_pos.x; x < end_pos.x; x++)
+  for (int y = start_pos.y; y < end_pos.y; y++)
   {
-	for (int y = start_pos.y; y < end_pos.y; y++)
+	for (int x = start_pos.x; x < end_pos.x; x++)
 	{
 	  buf[x][y] = ch;
 	}
   }  
 }
 
-void draw_rectsize(int start_x, int start_y, int size_x, int size_y, char ch)
+void draw_rect(Rect rect, char ch)
 {
-  for (int x = start_x; x < start_x + size_x; x++)
+  for (int y = rect.position.y; y < rect.position.y + rect.size.y; y++)
   {
-	for (int y = start_y; y < start_y + size_y; y++)
-	{
-	  buf[x][y] = ch;
-	}
-  }  
-}
-void draw_rectsize(Vec2 pos, Vec2 size, char ch)
-{
-  for (int x = pos.x; x < pos.x + size.x; x++)
-  {
-	for (int y = pos.y; y < pos.y + size.y; y++)
+	for (int x = rect.position.x; x < rect.position.x + rect.size.x; x++)
 	{
 	  buf[x][y] = ch;
 	}
@@ -118,7 +108,9 @@ void draw_line(int x0, int y0, int x1, int y1, char ch)
 
 void draw_point(int x, int y, char ch)
 {
-  if (x <= SCREEN_WIDTH && y <= SCREEN_HEIGHT)
+  if (
+	0 <= x && 0 <= y &&
+	x < SCREEN_WIDTH && y < SCREEN_HEIGHT)
   {
 	buf[x][y] = ch;
   }
@@ -182,27 +174,45 @@ void update()
   switch(game_mode)
   {
 	case Title:
-	  draw_character(0, 0, 't');
-	  //draw_rect(0, 0, frame % SCREEN_WIDTH, frame, '@');
-
-	  if (frame > 20)
+	  //OP_EFFECT
+	  /*
+	  draw_rect(0, 0, frame % SCREEN_HEIGHT, frame, '@');
+	  if (frame > SCREEN_HEIGHT)
 	  {
 		game_mode = Main;
 	  }
+	  */
+
+	  Rect mino;
+	  
+	  mino.position.x = 5; //frame % SCREEN_WIDTH;
+	  mino.position.y = frame % SCREEN_HEIGHT;
+	  mino.size.x = 4;
+	  mino.size.y = 4;
+	 
+	  draw_rect(mino, '#');
 	  break;
 
 	case Main:
-	  //SNOW
-	  for (int i = 0; i < SCREEN_WIDTH; i++)
+	  //SNOW_EFFECT
+	  for (int i = 0; i < SCREEN_WIDTH; i += 2)
 	  {
-	  	draw_point(i, (frame + 4 * i) % SCREEN_HEIGHT, '*');
+		int sgn = (i % 2) ? 1 : -1;
+		const int SpaceX = 3;
+		const int SpaceY = 4;
+
+		const int Amp = 3;
+	  	draw_point(i + SpaceX * sgn, (frame + SpaceY * i + Amp * sgn) % SCREEN_HEIGHT -10, '*');
 	  }
+	  break;
+
+	case Config:
 	  break;
   }
 }
 
 //--------------------------
-// For UnitTesting
+// UnitTest
 //--------------------------
 
 #ifndef DEBUG
