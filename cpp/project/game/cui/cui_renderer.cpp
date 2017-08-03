@@ -6,6 +6,8 @@
 #define SCREEN_WIDTH 86 
 #define SCREEN_HEIGHT 28
 
+#include "common.hpp"
+
 using namespace std;
 
 //--------------------------
@@ -28,37 +30,6 @@ double timer_secs = 0;
 clock_t start;
 long frame = 0;
 bool is_exit = false;
-
-struct Vec2
-{
-  double x, y;
-};
-
-class Rect
-{
-public:
-  Vec2 position;
-  Vec2 size;
-
-  void set_center(Vec2 center_pos)
-  {
-	double x = center_pos.x - 0.5f * size.x;
-	double y = center_pos.y - 0.5f * size.y;
-
-	position.x = x;
-	position.y = y;
-  }
-
-  void get_center()
-  {
-	double x = position.x + 0.5f * size.x;
-	double y = position.y + 0.5f * size.y;
-
-	Vec2 center_pos;
-	center_pos.x = x;
-	center_pos.y = y;
-  }
-};
 
 void render(char data[SCREEN_WIDTH][SCREEN_HEIGHT])
 {
@@ -181,14 +152,14 @@ void draw_character(int x, int y, char ch)
 
 	case 't':
 	  //T
-	  draw_rect(0, 0, 9, 5, '*');
-	  draw_rect(3, 2, 6, 10, '*');
+	  draw_rect(0, 0, 9, 5, '#');
+	  draw_rect(3, 2, 6, 10, '#');
 
 	  //O
-	  draw_rect(10, 0,  20,  3, '*');
-	  draw_rect(17, 0,  20, 10, '*');
-	  draw_rect(10, 8,  20, 10, '*');
-	  draw_rect(10, 0,  13, 10, '*');
+	  draw_rect(10, 0,  20,  3, '#');
+	  draw_rect(17, 0,  20, 10, '#');
+	  draw_rect(10, 8,  20, 10, '#');
+	  draw_rect(10, 0,  13, 10, '#');
 	  break;
 
 	default:
@@ -197,9 +168,15 @@ void draw_character(int x, int y, char ch)
   }
 }
 
-/*
-** App Main Procedure
-*/
+void clear()
+{
+  clear_buf();
+  system("clear");  
+}
+
+//--------------------------
+// App Main Procedure
+//--------------------------
 void update()
 {
   switch(game_mode)
@@ -223,13 +200,6 @@ void update()
 	  break;
   }
 }
-
-void clear()
-{
-  clear_buf();
-  system("clear");  
-}
-
 
 //--------------------------
 // For UnitTesting
