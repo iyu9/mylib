@@ -2,6 +2,7 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
 
 #define SCREEN_WIDTH 86 
 #define SCREEN_HEIGHT 27
@@ -14,8 +15,7 @@ using namespace std;
 // Game Setting
 //--------------------------
 
-
-int game_mode = 0;
+int game_mode = 2;
 const int Title  = 0;
 const int Config = 1;
 const int Main   = 2;
@@ -24,7 +24,7 @@ const int Result = 3;
 //--------------------------
 // CUI Screen Setting
 //--------------------------
-const double UPDATE_FPS = 0.033;
+const double UpdateFPS = 0.1;//0.033;
 
 char buf[SCREEN_WIDTH][SCREEN_HEIGHT];
 double timer_secs = 0;
@@ -164,8 +164,8 @@ void draw_character(int x, int y, char ch)
 void clear()
 {
   clear_buf();
-  //system("clear");
-  draw_rect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, ' ');
+  system("clear");
+  //draw_rect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, ' ');
 }
 
 //--------------------------
@@ -186,22 +186,23 @@ void update()
 	  }
 	  */
 
-	  Rect mino(5, frame % SCREEN_HEIGHT, 4, 4);
+	  Rect mino(5 + rand() % 3, frame % SCREEN_HEIGHT, 4, 4);
 	  draw_rect(mino, '#');
 	}
 	  break;
 
 	case Main:
 	{
-	  //SNOW_EFFECT
+	  //it snows
 	  for (int i = 0; i < SCREEN_WIDTH; i += 2)
 	  {
 		int sgn = (i % 2) ? 1 : -1;
-		const int SpaceX = 3;
-		const int SpaceY = 4;
-
+		const int Interval = 4;
 		const int Amp = 3;
-	  	draw_point(i + SpaceX * sgn, (frame + SpaceY * i + Amp * sgn) % SCREEN_HEIGHT -10, '*');
+
+		int x = (i + Interval) + (Amp * sgn);
+		int y = ((frame + Interval * i) + Amp * sgn ) % SCREEN_HEIGHT; 
+	  	draw_point(x, y, '*');
 	  }
 	}
 	  break;
@@ -216,14 +217,16 @@ void update()
 //--------------------------
 
 #ifndef DEBUG
+
 int main()
 {
+  srand((unsigned)time(NULL));
   while (!is_exit)
   {
 	clock_t current = clock();
 	timer_secs = (double)(current - start) / CLOCKS_PER_SEC; 
 
-	if (timer_secs > UPDATE_FPS)
+	if (timer_secs > UpdateFPS)
 	{
 	  start = current;
 	  frame++;
