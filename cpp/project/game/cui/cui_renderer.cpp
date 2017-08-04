@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define SCREEN_WIDTH 86 
-#define SCREEN_HEIGHT 70
+#define SCREEN_HEIGHT 27
 
 #include "common.hpp"
 
@@ -13,6 +13,7 @@ using namespace std;
 //--------------------------
 // Game Setting
 //--------------------------
+
 
 int game_mode = 0;
 const int Title  = 0;
@@ -163,7 +164,8 @@ void draw_character(int x, int y, char ch)
 void clear()
 {
   clear_buf();
-  system("clear");  
+  //system("clear");
+  draw_rect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT, ' ');
 }
 
 //--------------------------
@@ -174,6 +176,7 @@ void update()
   switch(game_mode)
   {
 	case Title:
+	{
 	  //OP_EFFECT
 	  /*
 	  draw_rect(0, 0, frame % SCREEN_HEIGHT, frame, '@');
@@ -183,17 +186,13 @@ void update()
 	  }
 	  */
 
-	  Rect mino;
-	  
-	  mino.position.x = 5; //frame % SCREEN_WIDTH;
-	  mino.position.y = frame % SCREEN_HEIGHT;
-	  mino.size.x = 4;
-	  mino.size.y = 4;
-	 
+	  Rect mino(5, frame % SCREEN_HEIGHT, 4, 4);
 	  draw_rect(mino, '#');
+	}
 	  break;
 
 	case Main:
+	{
 	  //SNOW_EFFECT
 	  for (int i = 0; i < SCREEN_WIDTH; i += 2)
 	  {
@@ -204,6 +203,7 @@ void update()
 		const int Amp = 3;
 	  	draw_point(i + SpaceX * sgn, (frame + SpaceY * i + Amp * sgn) % SCREEN_HEIGHT -10, '*');
 	  }
+	}
 	  break;
 
 	case Config:
