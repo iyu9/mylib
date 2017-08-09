@@ -1,5 +1,12 @@
-# Vim Tips
+# Vim Reminder
 
+## Move
+
+### c+f
+move forward a page
+
+### c+b
+move backward a page
 
 ## Modify
 
