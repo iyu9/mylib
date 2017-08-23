@@ -2,6 +2,8 @@
 # ref
 # https://h2ham.net/zsh-prompt-color
 
+export DISPLAY=localhost:0.0
+
 # カラー設定
 autoload colors
 colors
@@ -11,6 +13,8 @@ SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
 # コマンドエイリアス
+alias ls='ls --color=auto'
+alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
 
