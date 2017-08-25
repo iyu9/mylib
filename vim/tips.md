@@ -84,3 +84,8 @@ goto last tab
 
 ### gt, gT
 goto next, goto prev tab
+
+## Formating
+
+##auto document format
+gg, Shift+v, G, =
