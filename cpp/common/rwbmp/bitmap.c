@@ -3,16 +3,16 @@
 #include<math.h>
 #include"bitmap.h"
 
-//filename¤ÎBitmap¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹ş¤ß¡¢¹â¤µ¤ÈÉı¡¢RGB¾ğÊó¤òimg¹½Â¤ÂÎ¤ËÆş¤ì¤ë
+//filenameã®Bitmapãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã€é«˜ã•ã¨å¹…ã€RGBæƒ…å ±ã‚’imgæ§‹é€ ä½“ã«å…¥ã‚Œã‚‹
 Image *Read_Bmp(char *filename)
 {
 	int i, j;
-	int real_width;					//¥Ç¡¼¥¿¾å¤Î1¹ÔÊ¬¤Î¥Ğ¥¤¥È¿ô
-	unsigned int width, height;			//²èÁü¤Î²£¤È½Ä¤Î¥Ô¥¯¥»¥ë¿ô
-	unsigned int color;			//²¿bit¤ÎBitmap¥Õ¥¡¥¤¥ë¤Ç¤¢¤ë¤«
+	int real_width;					//ãƒ‡ãƒ¼ã‚¿ä¸Šã®1è¡Œåˆ†ã®ãƒã‚¤ãƒˆæ•°
+	unsigned int width, height;			//ç”»åƒã®æ¨ªã¨ç¸¦ã®ãƒ”ã‚¯ã‚»ãƒ«æ•°
+	unsigned int color;			//ä½•bitã®Bitmapãƒ•ã‚¡ã‚¤ãƒ«ã§ã‚ã‚‹ã‹
 	FILE *fp;
-	unsigned char header_buf[HEADERSIZE];	//¥Ø¥Ã¥À¾ğÊó¤ò¼è¤ê¹ş¤à
-	unsigned char *bmp_line_data;  //²èÁü¥Ç¡¼¥¿1¹ÔÊ¬
+	unsigned char header_buf[HEADERSIZE];	//ãƒ˜ãƒƒãƒ€æƒ…å ±ã‚’å–ã‚Šè¾¼ã‚€
+	unsigned char *bmp_line_data;  //ç”»åƒãƒ‡ãƒ¼ã‚¿1è¡Œåˆ†
 	Image *img;
 
 	if((fp = fopen(filename, "rb")) == NULL){
@@ -20,41 +20,41 @@ Image *Read_Bmp(char *filename)
 		return NULL;
 	}
 
-	fread(header_buf, sizeof(unsigned char), HEADERSIZE, fp); //¥Ø¥Ã¥ÀÉôÊ¬Á´¤Æ¤ò¼è¤ê¹ş¤à
+	fread(header_buf, sizeof(unsigned char), HEADERSIZE, fp); //ãƒ˜ãƒƒãƒ€éƒ¨åˆ†å…¨ã¦ã‚’å–ã‚Šè¾¼ã‚€
 
-	//ºÇ½é¤Î2¥Ğ¥¤¥È¤¬BM(Bitmap¥Õ¥¡¥¤¥ë¤Î°õ)¤Ç¤¢¤ë¤«
+	//æœ€åˆã®2ãƒã‚¤ãƒˆãŒBM(Bitmapãƒ•ã‚¡ã‚¤ãƒ«ã®å°)ã§ã‚ã‚‹ã‹
 	if(strncmp(header_buf, "BM", 2)){
 		fprintf(stderr, "Error: %s is not Bitmap file.", filename);
 		return NULL;
 	}
 
-	memcpy(&width, header_buf + 18, sizeof(width)); //²èÁü¤Î¸«¤¿ÌÜ¾å¤ÎÉı¤ò¼èÆÀ
-	memcpy(&height, header_buf + 22, sizeof(height)); //²èÁü¤Î¹â¤µ¤ò¼èÆÀ
-	memcpy(&color, header_buf + 28, sizeof(unsigned int)); //²¿bit¤ÎBitmap¤Ç¤¢¤ë¤«¤ò¼èÆÀ
+	memcpy(&width, header_buf + 18, sizeof(width)); //ç”»åƒã®è¦‹ãŸç›®ä¸Šã®å¹…ã‚’å–å¾—
+	memcpy(&height, header_buf + 22, sizeof(height)); //ç”»åƒã®é«˜ã•ã‚’å–å¾—
+	memcpy(&color, header_buf + 28, sizeof(unsigned int)); //ä½•bitã®Bitmapã§ã‚ã‚‹ã‹ã‚’å–å¾—
 
-	//24bit¤ÇÌµ¤±¤ì¤Ğ½ªÎ»
+	//24bitã§ç„¡ã‘ã‚Œã°çµ‚äº†
 	if(color != 24){
 		fprintf(stderr, "Error: %s is not 24bit color image", filename);
 		return NULL;
 	}
 
-	//RGB¾ğÊó¤Ï²èÁü¤Î1¹ÔÊ¬¤¬4byte¤ÎÇÜ¿ô¤ÇÌµ¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¤¿¤á¤½¤ì¤Ë¹ç¤ï¤»¤Æ¤¤¤ë
+	//RGBæƒ…å ±ã¯ç”»åƒã®1è¡Œåˆ†ãŒ4byteã®å€æ•°ã§ç„¡ã‘ã‚Œã°ãªã‚‰ãªã„ãŸã‚ãã‚Œã«åˆã‚ã›ã¦ã„ã‚‹
 	real_width = width*3 + width%4;
 
-	//²èÁü¤Î1¹ÔÊ¬¤ÎRGB¾ğÊó¤ò¼è¤Ã¤Æ¤¯¤ë¤¿¤á¤Î¥Ğ¥Ã¥Õ¥¡¤òÆ°Åª¤Ë¼èÆÀ
+	//ç”»åƒã®1è¡Œåˆ†ã®RGBæƒ…å ±ã‚’å–ã£ã¦ãã‚‹ãŸã‚ã®ãƒãƒƒãƒ•ã‚¡ã‚’å‹•çš„ã«å–å¾—
 	if((bmp_line_data = (unsigned char *)malloc(sizeof(unsigned char)*real_width)) == NULL){
 		fprintf(stderr, "Error: Allocation error.\n");
 		return NULL;
 	}
 
-	//RGB¾ğÊó¤ò¼è¤ê¹ş¤à¤¿¤á¤Î¥Ğ¥Ã¥Õ¥¡¤òÆ°Åª¤Ë¼èÆÀ
+	//RGBæƒ…å ±ã‚’å–ã‚Šè¾¼ã‚€ãŸã‚ã®ãƒãƒƒãƒ•ã‚¡ã‚’å‹•çš„ã«å–å¾—
 	if((img = Create_Image(width, height)) == NULL){
 		free(bmp_line_data);
 		fclose(fp);
 		return NULL;
 	}
 
-	//Bitmap¥Õ¥¡¥¤¥ë¤ÎRGB¾ğÊó¤Ïº¸²¼¤«¤é±¦¤Ø¡¢²¼¤«¤é¾å¤ËÊÂ¤ó¤Ç¤¤¤ë
+	//Bitmapãƒ•ã‚¡ã‚¤ãƒ«ã®RGBæƒ…å ±ã¯å·¦ä¸‹ã‹ã‚‰å³ã¸ã€ä¸‹ã‹ã‚‰ä¸Šã«ä¸¦ã‚“ã§ã„ã‚‹
 	for(i=0; i<height; i++){
 		fread(bmp_line_data, 1, real_width, fp);
 		for(j=0; j<width; j++){
@@ -76,8 +76,8 @@ int Write_Bmp(char *filename, Image *img)
 	int i, j;
 	FILE *fp;
 	int real_width;
-	unsigned char *bmp_line_data; //²èÁü1¹ÔÊ¬¤ÎRGB¾ğÊó¤ò³ÊÇ¼¤¹¤ë
-	unsigned char header_buf[HEADERSIZE]; //¥Ø¥Ã¥À¤ò³ÊÇ¼¤¹¤ë
+	unsigned char *bmp_line_data; //ç”»åƒ1è¡Œåˆ†ã®RGBæƒ…å ±ã‚’æ ¼ç´ã™ã‚‹
+	unsigned char header_buf[HEADERSIZE]; //ãƒ˜ãƒƒãƒ€ã‚’æ ¼ç´ã™ã‚‹
 	unsigned int file_size;
 	unsigned int offset_to_data;
 	unsigned long info_header_size;
@@ -95,7 +95,7 @@ int Write_Bmp(char *filename, Image *img)
 
 	real_width = img->width*3 + img->width%4;
 
-	//¤³¤³¤«¤é¥Ø¥Ã¥ÀºîÀ®
+	//ã“ã“ã‹ã‚‰ãƒ˜ãƒƒãƒ€ä½œæˆ
 	file_size = img->height * real_width + HEADERSIZE;
 	offset_to_data = HEADERSIZE;
 	info_header_size = INFOHEADERSIZE;
@@ -139,7 +139,7 @@ int Write_Bmp(char *filename, Image *img)
 	header_buf[52] = 0;
 	header_buf[53] = 0;
 
-	//¥Ø¥Ã¥À¤Î½ñ¤­¹ş¤ß
+	//ãƒ˜ãƒƒãƒ€ã®æ›¸ãè¾¼ã¿
 	fwrite(header_buf, sizeof(unsigned char), HEADERSIZE, fp);
 	
 	if((bmp_line_data = (unsigned char *)malloc(sizeof(unsigned char)*real_width)) == NULL){
@@ -148,14 +148,14 @@ int Write_Bmp(char *filename, Image *img)
 		return 1;
 	}
 
-	//RGB¾ğÊó¤Î½ñ¤­¹ş¤ß
+	//RGBæƒ…å ±ã®æ›¸ãè¾¼ã¿
 	for(i=0; i<img->height; i++){
 		for(j=0; j<img->width; j++){
 			bmp_line_data[j*3]			=	img->data[(img->height - i - 1)*img->width + j].b;
 			bmp_line_data[j*3 + 1]	=	img->data[(img->height - i - 1)*img->width + j].g;
 			bmp_line_data[j*3 + 2]			=	img->data[(img->height - i - 1)*img->width + j].r;
 		}
-		//RGB¾ğÊó¤ò4¥Ğ¥¤¥È¤ÎÇÜ¿ô¤Ë¹ç¤ï¤»¤Æ¤¤¤ë
+		//RGBæƒ…å ±ã‚’4ãƒã‚¤ãƒˆã®å€æ•°ã«åˆã‚ã›ã¦ã„ã‚‹
 		for(j=img->width*3; j<real_width; j++){
 			bmp_line_data[j] = 0;
 		}
@@ -190,7 +190,7 @@ Image *Create_Image(int width, int height)
 	return img;
 }
 
-//Æ°Åª¤Ë¼èÆÀ¤·¤¿RGB¾ğÊó¤Î³«Êü
+//å‹•çš„ã«å–å¾—ã—ãŸRGBæƒ…å ±ã®é–‹æ”¾
 void Free_Image(Image *img)
 {
 	free(img->data);
