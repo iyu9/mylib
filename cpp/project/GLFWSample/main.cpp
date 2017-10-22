@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static void DrawRect(float x, float y, float w, float h)
+{
+  glBegin(GL_POLYGON);
+	glVertex2d(x, y);
+    glVertex2d(x + w, y);
+    glVertex2d(x + w, y + h);
+    glVertex2d(x, y + h);
+  glEnd();
+}
+
 static void error_callback(int error, const char* description)
 {
   fputs(description, stderr);
@@ -36,6 +46,7 @@ int main()
   while (!glfwWindowShouldClose(window))
   {
     glClear(GL_COLOR_BUFFER_BIT);
+	DrawRect(0,0,1,1);
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
