@@ -1,34 +1,34 @@
 #include <GLFW/glfw3.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
 
-static void DrawRect(float x, float y, float w, float h)
-{
-  glBegin(GL_POLYGON);
-	glVertex2d(x, y);
-    glVertex2d(x + w, y);
-    glVertex2d(x + w, y + h);
-    glVertex2d(x, y + h);
-  glEnd();
-}
+#include "GLVec.h"
+#include "GLSL.h"
+#include "GLUtils.h"
+#include "GLBuiltInCallback.h"
 
-static void error_callback(int error, const char* description)
-{
-  fputs(description, stderr);
-}
+GLVec2 pos;
 
-static void key_callback(GLFWwindow* window, int key, int scanmode, int action, int mods)
+static void MainLoop()
 {
-  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-  {
-	glfwSetWindowShouldClose(window, GL_TRUE);
-  }
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  //2dRect
+  glColor3f(1, 0, 0);
+  GLUtils::DrawRect(pos.x, pos.y, 1.0f, 1.0f);
+
+  //2dLine
+  glColor3f(0, 1, 0);
+  GLUtils::DrawLine(pos.x, pos.y, 1.0f, 1.0f, 20);
+
+  glFlush();
 }
 
 int main()
 {
+  glfwSetErrorCallback(error_callback);
   if (!glfwInit())
   {
+    std::cout << "init failed";
     return 1;
   }
 
@@ -36,17 +36,18 @@ int main()
 
   if (!window)
   {
+    std::cout << "create window failed";
     glfwTerminate();
     return 1;
   }
 
   glfwMakeContextCurrent(window);
   glfwSetKeyCallback(window, key_callback);
+  glfwSetCursorPosCallback(window, cursor_pos_callback);
 
   while (!glfwWindowShouldClose(window))
   {
-    glClear(GL_COLOR_BUFFER_BIT);
-	DrawRect(0,0,1,1);
+    MainLoop();
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
