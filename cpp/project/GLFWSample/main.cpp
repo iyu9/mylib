@@ -1,10 +1,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-#include "GLVec.h"
-#include "GLSL.h"
-#include "GLUtils.h"
-#include "GLBuiltInCallback.h"
+#include "GLVec.hpp"
+#include "GLUtils.hpp"
+#include "GLBuiltInCallback.hpp"
 
 GLVec2 pos;
 
