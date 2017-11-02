@@ -1,3 +1,4 @@
+#include <gl/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -7,18 +8,22 @@
 #include "GLBuiltInCallback.h"
 #include "GLBmpLoader.hpp"
 
-const int g_windowWidth = 640;
-const int g_windowHeight = 480;
+const int g_windowWidth = 200;
+const int g_windowHeight = 200;
 
 GLVec2 pos;
 BMP *bmp;
 
+//GLSLより
+extern GLuint shader_program;
+
 void CustomInit()
 {
-  GLUtils::CheckRenderTexture();
+  //GLUtils::CheckRenderTexture();
+  CompileAndLinkShader();
 
-  bmp = new BMP("sample.bmp");
-  glBindTexture(GL_TEXTURE_2D, bmp->texture);
+  //bmp = new BMP("sample.bmp");
+  //glBindTexture(GL_TEXTURE_2D, bmp->texture);
 }
 
 void MainLoop()
@@ -26,13 +31,14 @@ void MainLoop()
   glClear(GL_COLOR_BUFFER_BIT);
 
   //2dRect
-  //glColor3f(0, 1, 0);
-  //GLUtils::DrawRect(pos.x, pos.y, 0.5f, 0.5f);
+  glUseProgram(shader_program);
+  glColor3f(1, 1, 1);
+  GLUtils::DrawRect(-0.25f + pos.x, -0.25f + pos.y, 0.5f, 0.5f);
+  glUseProgram(0);
 
   //2dTexture
-  glColor3f(1, 1, 1);
-  GLUtils::DrawTexture(-0.8f + pos.x, -0.8f + pos.y, 1.6f, 1.6f);
-
+  //glColor3f(1, 1, 1);
+  //GLUtils::DrawTexture(-0.8f + pos.x, -0.8f + pos.y, 1.6f, 1.6f);
   glFlush();
 }
 
