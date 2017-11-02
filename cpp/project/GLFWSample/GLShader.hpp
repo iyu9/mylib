@@ -1,21 +1,56 @@
-const char *vertex_shader =
-"void main(void){ \n"
-  "gl_Position = gl_ModelViewMatrix * gl_Vertex; \n"
-  "gl_FrontColor = vec4(1.0) - gl_Color; \n"
-"}";
-
-const char *fragment_shader =
-"void main(){ \n"
-"  gl_FragColor = vec4(1.0) - gl_Color; \n"
-"}";
 GLuint shader_program;
 
-//リンクする
+void ReadShaderFileCompile(GLuint Shader, const char *File)
+{
+  FILE *fp;
+  char *buf;
+  GLsizei size, len;
+  GLint compiled;
+
+  fopen_s(&fp, File, "rb");
+  if (!fp)
+  {
+    printf("ファイルを開くことができません %s\n", File);
+  }
+
+  fseek(fp, 0, SEEK_END);
+  size = ftell(fp);
+
+  buf = (GLchar *)malloc(size);
+  if (buf == NULL)
+  {
+    printf("メモリが確保できませんでした \n");
+  }
+
+  fseek(fp, 0, SEEK_SET);
+  fread(buf, 1, size, fp);
+  glShaderSource(Shader, 1, (const GLchar **)&buf, &size);
+  free(buf);
+  fclose(fp);
+
+  glCompileShader(Shader);
+  glGetShaderiv(Shader, GL_COMPILE_STATUS, &compiled);
+
+  if (compiled == GL_FALSE)
+  {
+    printf("コンパイルできませんでした!!: %s \n ", File);
+    glGetProgramiv(Shader, GL_INFO_LOG_LENGTH, &size);
+    if (size > 0)
+    {
+      buf = (char *)malloc(size);
+      glGetShaderInfoLog(Shader, size, &len, buf);
+      printf(buf);
+      free(buf);
+    }
+  }
+}
+
 void Link(GLuint prog)
 {
   GLsizei size, len;
   GLint linked;
   char *infoLog;
+
   glLinkProgram(prog);
   glGetProgramiv(prog, GL_LINK_STATUS, &linked);
 
@@ -49,13 +84,11 @@ void CompileAndLinkShader()
   printf("GLSL= %s \n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
   GLuint vshader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vshader, 1, &vertex_shader, 0);
+  ReadShaderFileCompile(vshader, "vshader.txt");
 
-  // Compile the fragment shader.
   GLuint fshader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fshader, 1, &fragment_shader, 0);
+  ReadShaderFileCompile(fshader, "fshader.txt");
 
-  // Create a program that stitches the two shader stages together.
   shader_program = glCreateProgram();
   glAttachShader(shader_program, vshader);
   glAttachShader(shader_program, fshader);
