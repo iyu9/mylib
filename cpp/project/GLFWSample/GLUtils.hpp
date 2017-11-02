@@ -71,6 +71,13 @@ namespace GLUtils
 
   static void DrawText(float start_x, float start_y, float end_x, float end_y)
   {
-    // TWD
+    //TWD
+  }
+
+  static void DrawShader(float x, float y, float w, float h)
+  {
+    glUseProgram(shader_program);
+      DrawRect(x, y, w, h);
+    glUseProgram(0);
   }
 };
