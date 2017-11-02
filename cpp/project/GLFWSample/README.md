@@ -1,4 +1,4 @@
-OpenGLプログラミングメモ
+# OpenGLプログラミングメモ
 
-予定
-・OpenAL追加
+*予定
+**OpenAL追加
