@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "GLVec.hpp"
-#include "GLSL.hpp"
+#include "GLShader.hpp"
 #include "GLUtils.hpp"
 #include "GLBuiltInCallback.hpp"
 #include "GLBmpLoader.hpp"
