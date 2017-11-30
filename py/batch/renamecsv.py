@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*- #
+
 import re
 import os
 import shutil
+import sys
 
 from prefdef import prefcode
+
+args = sys.argv
+if len(args) != 4:
+  print("Usage: python renamecsv.py <Prefecturename> <InputDir> <OutDir>")
+  exit()
 
 if __name__ == '__main__':
 
   # Setting
-  prefID = prefcode["Kumamoto"] # for outputfile
-  indir = "csvdir"				# read directory
-  outdir = "bf_" + prefID		# write directory
+  prefname = "Kagoshima"        # modify this
+
+  prefID = prefcode[args[2]]    # for outputfile
+  indir = args[3]				# read directory
+  outdir = args[4] + "bf_" + prefID		# write directory
   csvfile = r"^\d\d_.*\.csv$"	# read ??_*.csv
   mapIDFormat = r"^\d\d"        # extract ??
 

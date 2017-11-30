@@ -12,8 +12,9 @@ PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
+alias cdesk='cd /mnt/c/Users/mobiledev/Desktop'
 # コマンドエイリアス
-alias ls='ls --color=auto'
+# alias ls='ls --color=auto'
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
@@ -41,3 +42,7 @@ function dict() {
     w3m "http://www.alc.co.jp/"
   fi
 }
+
+# BoWショートカット
+export WIN_USER=/mnt/c/Users/mobile
+export WIN_DESKTOP=/mnt/c/Users/mobiledev/Desktop
