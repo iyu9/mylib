@@ -44,5 +44,5 @@ function dict() {
 }
 
 # BoWショートカット
-export WIN_USER=/mnt/c/Users/mobile
+export WIN_USER=/mnt/c/Users/mobiledev
 export WIN_DESKTOP=/mnt/c/Users/mobiledev/Desktop
