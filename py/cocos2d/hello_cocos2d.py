@@ -21,9 +21,9 @@ class HelloWorld(cocos.layer.Layer):
 	self.add(label)
 
 	# sprite
-	#image = cocos.sprite.Sprite('sample.png')
-	#image.position = 100,100
-	#self.add(image)
+	image = cocos.sprite.Sprite('sample.png')
+	image.position = 100,100
+	self.add(image)
 
 	self.pos_x = 0
 	self.pos_y = 0
