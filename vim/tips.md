@@ -89,3 +89,10 @@ goto next, goto prev tab
 
 ##auto document format
 gg, Shift+v, G, =
+
+## vim boot option
+## -b
+edit Binary file
+
+## -x
+edit with encrypto/decrypto
