@@ -87,7 +87,7 @@ goto next, goto prev tab
 
 ## Formating
 
-##auto document format
+## auto document format
 gg, Shift+v, G, =
 
 ## vim boot option
