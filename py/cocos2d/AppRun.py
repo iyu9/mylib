@@ -1,12 +1,12 @@
 import cocos
 import pyglet
 
-class HelloWorld(cocos.layer.Layer):
+class TitleLayer(cocos.layer.Layer):
 
   is_event_handler = True
 
   def __init__(self):
-	super(HelloWorld, self).__init__()
+	super(TitleLayer, self).__init__()
 
 	# sprite
 	image = cocos.sprite.Sprite('gakuenmap.jpg', scale=2)
@@ -60,6 +60,6 @@ class HelloWorld(cocos.layer.Layer):
 
 if __name__ == '__main__':
   cocos.director.director.init()
-  hello_layer = HelloWorld()
-  main_scene = cocos.scene.Scene(hello_layer)
+  title_layer = TitleLayer()
+  main_scene = cocos.scene.Scene(title_layer)
   cocos.director.director.run(main_scene)
