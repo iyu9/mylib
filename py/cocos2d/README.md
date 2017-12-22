@@ -13,3 +13,8 @@ http://masato.ciao.jp/haikei/furemu.html
 ※お借り先の利用規約に準じます。  
 
 ※記載された素材の二次配布を禁止いたします。  
+
+* INSTALL
+
++ pip install cocos2d
++ pyhon AppRun.py
