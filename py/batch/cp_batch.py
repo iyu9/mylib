@@ -35,6 +35,6 @@ pfsuffixes = [
 idx = 0
 for pfdir in pfdirs:
   cmd = "cp " + inputfilepath + " " + basedir + subdir + "bg/" + filename + pfsuffixes[idx] + "." + filetype
-	check = commands.getoutput(cmd)
-	print(cmd)
-	idx += 1
+  check = commands.getoutput(cmd)
+  print(cmd)
+  idx += 1

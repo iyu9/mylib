@@ -8,9 +8,21 @@ class HelloWorld(cocos.layer.Layer):
   def __init__(self):
 	super(HelloWorld, self).__init__()
 
+	# sprite
+	image = cocos.sprite.Sprite('gakuenmap.jpg', scale=2)
+	image.position = 0,0
+	self.add(image)
+
+	image = cocos.sprite.Sprite('santa.png')
+	image.position = 100,100
+	self.add(image)
+
+	self.pos_x = 0
+	self.pos_y = 0
+
 	# label
 	label = cocos.text.Label(
-	  'Hello,World',
+	  'Title Your Name',
 	  font_name='Times New Roman',
 	  font_size=32,
 	  anchor_x='center',
@@ -20,16 +32,8 @@ class HelloWorld(cocos.layer.Layer):
 	label.position = 320,240
 	self.add(label)
 
-	# sprite
-	image = cocos.sprite.Sprite('sample.png')
-	image.position = 100,100
-	self.add(image)
-
-	self.pos_x = 0
-	self.pos_y = 0
-
 	# key event
-	self.text = cocos.text.Label("", x=100, y=200)
+	self.text = cocos.text.Label("Input:", x=20, y=460)
 	self.keys_pressed = set()
 	self.update_text()
 	self.add(self.text)
@@ -39,14 +43,10 @@ class HelloWorld(cocos.layer.Layer):
 	text = 'keys: ' + ','.join(key_names)
 	self.text.element.text = text
 
-	if 'RIGHT' in key_names:
-	  self.pos_x += 10
-	if 'LEFT' in key_names:
-	  self.pos_x -= 10
-	if 'UP' in key_names:
-	  self.pos_y += 10
-	if 'DOWN' in key_names:
-	  self.pos_y -= 10
+	# if 'RIGHT' in key_names:
+	# if 'LEFT' in key_names:
+	# if 'UP' in key_names:
+	# if 'DOWN' in key_names:
 
 	self.text.position = self.pos_x, self.pos_y
 
