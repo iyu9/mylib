@@ -2,6 +2,7 @@
 # ref
 # https://h2ham.net/zsh-prompt-color
 
+# Xming設定
 export DISPLAY=localhost:0.0
 
 # カラー設定
@@ -12,7 +13,6 @@ PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
-alias cdesk='cd /mnt/c/Users/mobiledev/Desktop'
 # コマンドエイリアス
 # alias ls='ls --color=auto'
 alias l='ls'
