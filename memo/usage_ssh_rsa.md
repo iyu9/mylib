@@ -1,4 +1,4 @@
-## RSA public key  
+### SSH using RSA  
   
 1. ssh-keygen -t rsa -f hoge_rsa  
 > hoge_rsa(secret key)  
