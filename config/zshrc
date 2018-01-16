@@ -62,4 +62,4 @@ export WIN_WORKSPACE=$WIN_USER/Source/Repos/
 alias cdesk="cd $WIN_DESKTOP"
 
 # Git
-alias git_all="git add -A && git commit -m update_all && git push"
+alias git_allpush="git add -A && git commit -m update_all && git push"
