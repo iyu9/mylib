@@ -57,5 +57,6 @@ function dict() {
 
 # BoWショートカット
 export WIN_USER=/mnt/c/Users/mobiledev
-export WIN_DESKTOP=/mnt/c/Users/mobiledev/Desktop
-alias cdesk='cd /mnt/c/Users/mobiledev/Desktop'
+export WIN_DESKTOP=$WIN_USER/Desktop
+export WIN_WORKSPACE=$WIN_USER/Source/Repos/
+alias cdesk="cd $WIN_DESKTOP"
