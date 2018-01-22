@@ -1,4 +1,4 @@
-#include "../../common_class/common/common.h"
+#include "../../common/common/common.h"
 
 #include "./common/time.hpp"
 #include "./common/scene.hpp"
