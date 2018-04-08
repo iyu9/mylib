@@ -1,25 +1,22 @@
-#define WIDTH 320
-#define HEIGHT 240
-
 class BMP
 {
 public:
   unsigned long sizeX;  //横
   unsigned long sizeY;  //縦
   char *Data;           //画像データ格納
-  bool Load(char *filename);
+  bool Load(const char *filename);
   GLuint texture;
   void SetTexture();
-  BMP(char *FileName);
+  BMP(const char *FileName);
 };
 
-BMP::BMP(char *FileName)
+BMP::BMP(const char *FileName)
 {
   Load(FileName);
   SetTexture();
 }
 
-bool BMP::Load(char *FileName)
+bool BMP::Load(const char *FileName)
 {
   FILE *File;
   unsigned long size;// イメージのバイトサイズ
@@ -27,23 +24,28 @@ bool BMP::Load(char *FileName)
   unsigned short int planes;        //デバイス面数
   unsigned short int bpp;            // ピクセル数
   char temp;                         // カラー関係作業用
+
   //ファイルオープン
-  if ((fopen_s(&File, FileName, "rb")) != 0){
+  if ((File = fopen(FileName, "rb")) == NULL){
     printf("ファイルがありません");
     return false;
   }
+
   //ビットマップの幅データ部分へ移動
   fseek(File, 18, SEEK_CUR);
+
   //横幅を読み込む
   if ((i = fread(&sizeX, 4, 1, File)) != 1) {
     printf("読み込みエラー");
     return false;
   }
+
   //縦幅を読み込む
   if ((i = fread(&sizeY, 4, 1, File)) != 1) {
     printf("読み込みエラー");
     return false;
   }
+
   //画像サイズの計算
   size = sizeX * sizeY * 3;//プレーン数を読み込む
   if ((fread(&planes, 2, 1, File)) != 1) {   //bmpは「1」になる
@@ -54,6 +56,7 @@ bool BMP::Load(char *FileName)
     printf("プレーン数が1以外です");
     return false;
   }
+
   //ピクセル値を読み込む
   if ((i = fread(&bpp, 2, 1, File)) != 1) {
     printf("ビット数が読めません");
@@ -63,8 +66,10 @@ bool BMP::Load(char *FileName)
     printf("24ビット画像ではありません");
     return false;
   }
+
   //24ビット飛ばして、カラーデータ(RGB)部分へ
   fseek(File, 24, SEEK_CUR);    //データ読み込み
+  printf("memory allocated = %lu", size);
   Data = (char *)malloc(size);
   if (Data == NULL) {
     printf("メモリが確保できません");
@@ -84,11 +89,9 @@ bool BMP::Load(char *FileName)
 
 void BMP::SetTexture()
 {
-  glEnable(GL_TEXTURE_2D);
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D, 0, 3, sizeX, sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, Data);
-  glBindTexture(GL_TEXTURE_2D, 0);
 }

@@ -7,8 +7,8 @@ void ReadShaderFileCompile(GLuint Shader, const char *File)
   GLsizei size, len;
   GLint compiled;
 
-  fopen_s(&fp, File, "rb");
-  if (!fp)
+  fp = fopen(File, "rb");
+  if (fp == NULL)
   {
     printf("ファイルを開くことができません %s\n", File);
   }
@@ -33,13 +33,13 @@ void ReadShaderFileCompile(GLuint Shader, const char *File)
 
   if (compiled == GL_FALSE)
   {
-    printf("コンパイルできませんでした!!: %s \n ", File);
+    printf("コンパイルできませんでした: %s \n ", File);
     glGetProgramiv(Shader, GL_INFO_LOG_LENGTH, &size);
     if (size > 0)
     {
       buf = (char *)malloc(size);
       glGetShaderInfoLog(Shader, size, &len, buf);
-      printf(buf);
+      printf("%s", buf);
       free(buf);
     }
   }
@@ -62,7 +62,7 @@ void Link(GLuint prog)
     {
       infoLog = (char *)malloc(size);
       glGetProgramInfoLog(prog, size, &len, infoLog);
-      printf(infoLog);
+      printf("%s", infoLog);
       free(infoLog);
     }
   }
@@ -70,13 +70,14 @@ void Link(GLuint prog)
 
 void CompileAndLinkShader()
 {
+/*
   //glewの初期化
   GLenum err = glewInit();
   if (err != GLEW_OK)
   {
     printf("Error: %s\n", glewGetErrorString(err));
   }
-
+*/
   // GPU,OpenGL情報
   printf("VENDOR= %s \n", glGetString(GL_VENDOR));
   printf("GPU= %s \n", glGetString(GL_RENDERER));
