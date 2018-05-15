@@ -31,7 +31,7 @@ if __name__ == '__main__':
   PrintHTMLBegin()
   print 'Please Input And Send Under.'
   print '<form action="write_three_req.cgi" method="POST">'
-  PrintFile("sample.txt")
+  # PrintFile("sample.txt")
   print '</textarea>'
   print '<br/><br/>'
   print '<input type="submit" value="SEND">'

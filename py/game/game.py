@@ -4,7 +4,7 @@
 import random
 import actor
 
-def calc_damage(attacker, defencer):
+def calc_damage(attacker, target):
 
   hit = 100
 
@@ -13,11 +13,11 @@ def calc_damage(attacker, defencer):
 	is_hit = False
 	return 0
 
-  dfc = defencer.dfc
-  if defencer.stat == 'GUARD':
-	dfc = 2 * defencer.dfc
+  dfc = target.dfc
+  if target.stat == 'GUARD':
+	dfc = 2 * target.dfc
 
-  baseDamage = attacker.atk - defencer.dfc
+  baseDamage = attacker.atk - target.dfc
 
   is_critical = False
   if attacker.skl <= randint(0, 100):

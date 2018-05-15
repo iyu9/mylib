@@ -5,8 +5,8 @@ from email.MIMEText import MIMEText
 from email.Header import Header
 from email.Utils import formatdate
 
-from_address = 'FROM_ADDR'
-to_address   = 'DEST_ADDR'
+from_address = ''
+to_address   = 'tomii.yuto@gmail.com'
 
 charset = 'ISO-2022-JP'
 subject = u'メールの件名です'

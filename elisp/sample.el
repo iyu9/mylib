@@ -1,0 +1,2 @@
+(message "hoge")
+(message "test")
