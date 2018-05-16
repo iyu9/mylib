@@ -1,0 +1,19 @@
+* Cancel
+C-g
+
+* FIlE I/O
+C-x C-s -> save
+C-x C-f -> file open
+C-x C-w -> write
+C-x i -> insert file
+
+* Exit
+C-x C-c -> close
+
+* DELETE
+C-space Mark Space
+C-w Cut
+C-y Yank
+
+* Tutorial
+C-h T
