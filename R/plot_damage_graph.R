@@ -1,4 +1,3 @@
-# ‚è‚Á‚­ƒ_ƒ[ƒWŒvZ®
 calc_damage <- function(atk, def)
 {
 	rand_def <- runif(1, min=0.25, max=1) * def
@@ -8,7 +7,7 @@ calc_damage <- function(atk, def)
 sampleAtks <- seq(0, 200, length=20)
 sampleDefs <- seq(0, 200, length=20)
 
-#³”ä—á
+#æ­£æ¯”ä¾‹
 damages <- c(0)
 for(i in 1:20)
 {
@@ -17,7 +16,7 @@ for(i in 1:20)
 }
 print(damages);
 
-#UŒ‚‚Ì‚İ”ä—á
+#æ”»æ’ƒã®ã¿æ¯”ä¾‹
 atkDamages <- c(0)
 for(i in 1:20)
 {
@@ -25,7 +24,7 @@ for(i in 1:20)
   atkDamages <- append(atkDamages, node)
 }
 
-#–hŒä‚Ì‚İ”ä—á
+#é˜²å¾¡ã®ã¿æ¯”ä¾‹
 defDamages <- c(0)
 for(i in 1:20)
 {
