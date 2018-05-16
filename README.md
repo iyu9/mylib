@@ -2,4 +2,4 @@
 
 - my (terrible) sample codes
 - write faster on shell
-- some languages and setting
+- kind of languages and setting
