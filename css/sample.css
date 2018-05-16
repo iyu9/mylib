@@ -1,3 +1,4 @@
+//Class
 .square_btn{
     display: inline-block;
     padding: 0.5em 1em;
@@ -13,3 +14,10 @@
     transform: translateY(4px);/*下に動く*/
     border-bottom: none;/*線を消す*/
 }
+
+//ID
+#test:{}
+
+//ALL
+*{}
+
