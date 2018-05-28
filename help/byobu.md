@@ -1,4 +1,4 @@
-** Easy Byobu **
+# Easy Byobu
 
 - F1: Help  
 - F2: Create Session  
