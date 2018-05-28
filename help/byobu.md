@@ -1,4 +1,4 @@
-# Easy Help byobu
+# Simple Help byobu
 
 - F1: Help
 - F2: Create Session  
