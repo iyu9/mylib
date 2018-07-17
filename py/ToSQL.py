@@ -3,34 +3,39 @@ import sys
 import csv
 
 """""""""""""""""""""""
-CsvFile => UPSERT CSV
+" Tsv, CsvFile => UPSERT CSV
 """""""""""""""""""""""
 
+ParamDelim = ','
 IsUseHeader = False
-Comment = '-- comment'
-TableName = 'm_TABLENAME'
-SchemeName = []
+TableName = 'm_test'
+SchemeName = [
+	'id',
+	'val'
+]
 
 # Check Args
 argvs = sys.argv
 argc = len(argvs)
 
 if argc < 2:
-  print "Usage: python CSVtoSQL.py Csvfile [H]"
+  print "Usage: python CSVtoSQL.py Csvfile [header=T] or [de]"
   quit()
 
-# CHECK USE HEADER
+# Arg Option
 if argc == 3:
-  print argvs[2]
-  if argvs[2] == 'H':
-	IsUseHeader = True 
+  if argvs[2] == 'header=T':
+	IsUseHeader = True
+  if argvs[2] == 'delim=tsv':
+	ParamDelim = '\t'
 
-# ADD COMMNET
-print Comment
+if argc == 4:
+  if argvs[3] == 'delim=tsv':
+	ParamDelim = '\t'
 
-# READ CSV 
+# READ CSV
 csvfile = open(argvs[1], 'r');
-reader = csv.reader(csvfile)
+reader = csv.reader(csvfile, delimiter=ParamDelim)
 
 # CheckReadHeader
 if IsUseHeader == True:
@@ -55,7 +60,7 @@ for row in reader:
 	idx += 1
   print ")",
   print "VALUES (",
-  
+
   # Print Insert Values
   idx = 0
   for val in row:

@@ -1,5 +1,3 @@
 ## mylib  
 
-- my (terrible) sample codes
-- write faster on shell
-- kind of languages and setting
+- my (terrible) sample code set
